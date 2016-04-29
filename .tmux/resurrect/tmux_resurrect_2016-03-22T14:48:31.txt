@@ -1,0 +1,5 @@
+pane	0	0	:[tmux]	1	:*	0	:/home/mateuszorzol/Temp/stm32l4	0	sh	:-sh
+pane	0	0	:[tmux]	1	:*	1	:/home/mateuszorzol	1	sh	:
+pane	0	0	:[tmux]	1	:*	2	:/home/mateuszorzol	0	mc	:mc
+window	0	0	1	:*	3160,180x65,0,0[180x40,0,0{87x40,0,0,0,92x40,88,0,3},180x24,0,41,2]
+state	0	

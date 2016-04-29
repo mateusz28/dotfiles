@@ -1,0 +1,5 @@
+pane	0	0	:[tmux]	1	:*	0	:/home/mateuszorzol/coreboot/repo/coreboot/build (deleted)	0	sh	:
+pane	0	0	:[tmux]	1	:*	1	:/home/mateuszorzol/coreboot/repo/coreboot/payloads/coreinfo	1	sh	:
+pane	0	0	:[tmux]	1	:*	2	:/home/mateuszorzol/coreboot/repo/coreboot	0	make	:make nconfig
+window	0	0	1	:*	e2a2,146x70,0,0[146x45,0,0{70x45,0,0,2,75x45,71,0,7},146x24,0,46,6]
+state	0	

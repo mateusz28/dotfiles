@@ -1,0 +1,8 @@
+pane	0	1	:klop	1	:*	0	:/home/mateuszorzol/project/LEANTECH0001/firmware/branches/#2548_unitTests	0	vim	:/home/mateuszorzol/bin/vim/bin/vim
+pane	0	1	:klop	1	:*	1	:/home/mateuszorzol/project/LEANTECH0001/firmware/branches/#2548_unitTests	1	sh	:-sh
+pane	0	1	:klop	1	:*	2	:/home/mateuszorzol	0	tail	:tail -f Temp/stm32l4.log
+pane	0	2	:eko	0	:-	0	:/home/mateuszorzol/project/fwTrunk	1	vim	:/home/mateuszorzol/bin/vim/bin/vim
+pane	0	2	:eko	0	:-	1	:/home/mateuszorzol/project/fwTrunk	0	sh	:
+window	0	1	1	:*	d001,217x54,0,0{164x54,0,0,3,52x54,165,0[52x27,165,0,4,52x26,165,28,5]}
+window	0	2	0	:-	7da9,262x68,0,0{154x68,0,0,6,107x68,155,0,7}
+state	0	

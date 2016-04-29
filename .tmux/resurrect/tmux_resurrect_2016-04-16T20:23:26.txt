@@ -1,0 +1,8 @@
+pane	0	1	:sh	0	:-	1	:/home/mateuszorzol/project/#2552_fwUpgrade	0	vim	:/home/mateuszorzol/bin/vim/bin/vim
+pane	0	1	:sh	0	:-	2	:/home/mateuszorzol/project/LEANTECH0001/firmware/branches/#2548_unitTests	1	sh	:
+pane	0	1	:sh	0	:-	3	:/home/mateuszorzol/Temp	0	tail	:tail stm32l4.log -f
+pane	0	2	:vim	1	:*	1	:/home/mateuszorzol	1	vim	:/home/mateuszorzol/bin/vim/bin/vim .tmux.conf
+pane	0	2	:vim	1	:*	2	:/home/mateuszorzol/project/fwTrunk	0	sh	:
+window	0	1	0	:-	b2a0,262x68,0,0{191x68,0,0,0,70x68,192,0[70x54,192,0,3,70x13,192,55,1]}
+window	0	2	1	:*	fda3,262x68,0,0{154x68,0,0,2,107x68,155,0,4}
+state	0	
