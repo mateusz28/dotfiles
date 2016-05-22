@@ -44,8 +44,8 @@ filetype plugin indent on    " required
 
 set splitright
 set t_Co=256
-colorscheme lucius
-LuciusDark
+colorscheme gruvbox
+:set background=dark
 set t_ut=
 let g:statline_syntastic = 0
 " Press F7 to toggle highlighting on/off, and show current value.
@@ -62,7 +62,6 @@ no <down> <Nop>
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 nnoremap <F10> :b <C-Z>
-nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
@@ -197,7 +196,8 @@ let g:multi_cursor_exit_from_visual_mode=0
 set fillchars+=vert:│
 "hi! VertSplit ctermfg=fg ctermbg=bg term=NONE
 
-
+set ignorecase
+set incsearch
 
 nnoremap <Leader>[ :bp<CR>
 nnoremap <Leader>] :bn<CR>
@@ -205,7 +205,10 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <leader>b :CtrlPBufTag<CR>
 nnoremap <leader>a :CtrlPTag<CR>
 nnoremap <leader>t :CtrlPBuffer<CR>
-
+nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
+nnoremap <Leader>o mao<Esc>`a
+nnoremap <Leader>O maO<Esc>`a
+nnoremap <c-]> <c-]>z.
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
 "nnoremap / /\c
@@ -216,5 +219,6 @@ set omnifunc=syntaxcomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt-=preview
 set completeopt+=longest
+let g:SuperTabLongestHighlight = 1 
 
 let g:move_key_modifier = 'C'
