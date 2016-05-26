@@ -17,7 +17,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'bling/vim-airline'
-Plugin 'ervandew/supertab'
 Plugin 'matze/vim-move'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
@@ -25,6 +24,7 @@ Plugin 'bufkill.vim'
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'ervandew/supertab'
 "Plugin 'camelcasemotion'
 
 " All of your Plugins must be added before the following line
@@ -217,8 +217,8 @@ filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 "set clipboard=unnamedplus
 let g:SuperTabDefaultCompletionType = "context"
-set completeopt-=preview
-set completeopt+=longest
-let g:SuperTabLongestHighlight = 1 
+"set completeopt-=preview
+"set completeopt+=longest
+"let g:SuperTabLongestHighlight = 1 
 
 let g:move_key_modifier = 'C'
