@@ -10,14 +10,14 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'terryma/vim-multiple-cursors'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'bling/vim-airline'
-Plugin 'matze/vim-move'
+"Plugin 'matze/vim-move'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
 " Track the engine.
@@ -44,8 +44,10 @@ filetype plugin indent on    " required
 
 set splitright
 set t_Co=256
-colorscheme gruvbox
-:set background=dark
+"colorscheme gruvbox
+":set background=dark
+colorscheme lucius
+LuciusBlack
 set t_ut=
 let g:statline_syntastic = 0
 " Press F7 to toggle highlighting on/off, and show current value.
@@ -111,6 +113,7 @@ set autoindent
 set cindent
 set tabstop=2 shiftwidth=2 expandtab
 set number
+set noswapfile
 
 syntax on
 
@@ -161,6 +164,24 @@ function! s:DiffWithSVNCheckedOut()
   endif
 endfunction
 com! DiffSVN call s:DiffWithSVNCheckedOut()
+map <F9> :DiffSVN<CR>
+
+function! s:DiffWithSaved()
+  if exists('b:savediffflag')
+    exe "diffoff"
+    exe "q"
+    exe "bd | e#"
+  else
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    let b:savediffflag = 1
+  endif
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+map <F10> :DiffSaved<CR>
 
 set tags=./tags;/
 set laststatus=2
@@ -170,7 +191,7 @@ let g:airline#extensions#tabline#enabled = 1
 "nmap <CR> o<Esc>
 
 nnoremap <F3> :Autoformat<CR>
-
+set pastetoggle=<Leader>y
 
 function! GetVisualSelection()
   " Why is this not a built-in Vim script function?!
@@ -185,7 +206,6 @@ endfunction
 map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
 "map <F6> :execute "vimgrep /" . call GetVisualSelection()  . "/gj ./**/*.[ch]" <Bar> cw<CR>
 " :vimgrep /word/gj ./**/*.c | cw
-map <F9> :DiffSVN<CR>
 
 set hidden
 set confirm
@@ -209,8 +229,13 @@ nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
 nnoremap <Leader>o mao<Esc>`a
 nnoremap <Leader>O maO<Esc>`a
 nnoremap <c-]> <c-]>z.
+nnoremap <c-o> <c-o>z.
+nnoremap <c-i> <c-i>z.
+nnoremap <n> <n>z.
+nnoremap <N> <N>z.
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
+cnoremap <c-g> <CR>n/<c-p>
 "nnoremap / /\c
 "nnoremap ? ?\c
 filetype plugin on
@@ -219,6 +244,6 @@ set omnifunc=syntaxcomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 "set completeopt-=preview
 "set completeopt+=longest
-"let g:SuperTabLongestHighlight = 1 
+"let g:SuperTabLongestHighlight = 1
 
 let g:move_key_modifier = 'C'
