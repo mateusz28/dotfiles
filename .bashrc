@@ -92,6 +92,8 @@ alias l='ls -CF'
 
 alias sublime='sublime_text'
 alias vim='~/bin/vim/bin/vim'
+alias vimdiff='~/bin/vim/bin/vimdiff'
+alias cmake='~/bin/bin/cmake'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

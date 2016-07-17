@@ -17,7 +17,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'bling/vim-airline'
-"Plugin 'matze/vim-move'
+Plugin 'matze/vim-move'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
 " Track the engine.
@@ -55,6 +55,8 @@ let g:statline_syntastic = 0
 " remap <silent> <Leader>+ :exe "resize " . (winwidth(0) * 9/10)
 noremap <F7> :set hlsearch! hlsearch?<CR>
 noremap <F2> :NERDTreeToggle<CR>
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 no <left> <Nop>
@@ -78,7 +80,7 @@ filetype plugin on
 
 let g:ctrlp_map = '<c-p>'
 "let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(o|disasm|hex|readelf|ioc|bin|exe|so|dll)$'}
 let g:ctrlp_working_path_mode = 'wr'
@@ -187,11 +189,36 @@ set tags=./tags;/
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 
-"nmap <CR><CR> O<Esc>
-"nmap <CR> o<Esc>
+""nmap <CR><CR> O<Esc>
+""nmap <CR> o<Esc>
+"if exists('$TMUX')
+  "function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    "let previous_winnr = winnr()
+    "silent! execute "wincmd " . a:wincmd
+    "if previous_winnr == winnr()
+      "call system("tmux select-pane -" . a:tmuxdir)
+      "redraw!
+    "endif
+  "endfunction
+
+  "let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  "let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  "let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  "nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  "nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  "nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  "nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+"else
+  "map <C-h> <C-w>h
+  "map <C-j> <C-w>j
+  "map <C-k> <C-w>k
+  "map <C-l> <C-w>l
+"endif
 
 nnoremap <F3> :Autoformat<CR>
-set pastetoggle=<Leader>y
+nnoremap <Leader>p :set invpaste paste? <CR>
+
 
 function! GetVisualSelection()
   " Why is this not a built-in Vim script function?!
@@ -225,6 +252,7 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <leader>b :CtrlPBufTag<CR>
 nnoremap <leader>a :CtrlPTag<CR>
 nnoremap <leader>t :CtrlPBuffer<CR>
+nnoremap <leader>m :CtrlPMRU<CR>
 nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
 nnoremap <Leader>o mao<Esc>`a
 nnoremap <Leader>O maO<Esc>`a
@@ -239,11 +267,13 @@ cnoremap <c-g> <CR>n/<c-p>
 "nnoremap / /\c
 "nnoremap ? ?\c
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-"set clipboard=unnamedplus
-let g:SuperTabDefaultCompletionType = "context"
+"set omnifunc=syntaxcomplete#Complete
+
+"let g:SuperTabDefaultCompletionType = "context"
 "set completeopt-=preview
-"set completeopt+=longest
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
 "let g:SuperTabLongestHighlight = 1
+set completeopt=longest,menuone 
+set completeopt-=preview
 
 let g:move_key_modifier = 'C'

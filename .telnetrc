@@ -1,4 +1,4 @@
 # Beginning of telnetrc file
 # Default subcommands that apply to all systems
-192.168.11.148
+10.8.0.146
   mode character
