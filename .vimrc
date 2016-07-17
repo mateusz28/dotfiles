@@ -10,7 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'terryma/vim-multiple-cursors'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -20,76 +19,102 @@ Plugin 'bling/vim-airline'
 Plugin 'matze/vim-move'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
-" Track the engine.
 Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
-"Plugin 'camelcasemotion'
+Plugin 'drn/zoomwin-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
+"Display settings
 set splitright
+" set terminal 256 color version
 set t_Co=256
-"colorscheme gruvbox
-":set background=dark
+" colorscheme settings
 colorscheme lucius
 LuciusBlack
+"Needed to preserve background color
 set t_ut=
-let g:statline_syntastic = 0
-" Press F7 to toggle highlighting on/off, and show current value.
-" remap <silent> <Leader>+ :exe "resize " . (winwidth(0) * 11/10)
-" remap <silent> <Leader>+ :exe "resize " . (winwidth(0) * 9/10)
-noremap <F7> :set hlsearch! hlsearch?<CR>
-noremap <F2> :NERDTreeToggle<CR>
-set colorcolumn=110
-highlight ColorColumn ctermbg=darkgray
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
+" column coloring facility
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
+"Default vertical separator
+set fillchars+=vert:│
+
+"enabe project specified vimrc files
+set exrc
+
+"When next buffer is opened the currently modified one goes into background
+set hidden
+
+"Enable exit/write confirmation 
+set confirm
+
+"Search options
+" Press F7 to toggle highlighting on/off, and show current value.
+noremap <F7> :set hlsearch! hlsearch?<CR>
+set ignorecase
+set incsearch
+nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
+cnoremap <c-g> <CR>n/<c-p>
+nnoremap <n> <n>z.
+nnoremap <N> <N>z.
+"Map key for quicksearch in project
+map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
+
+" turn of arrows in normal mode
 no <left> <Nop>
 no <up> <Nop>
 no <right> <Nop>
 no <down> <Nop>
+
+" start wildcard expansion in command mode
 set wildchar=<Tab> wildmenu wildmode=full
+" same as abowe but recognized in a macro
 set wildcharm=<C-Z>
-nnoremap <F10> :b <C-Z>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
+"allow backspace to remove neline and indentation in insert mode
 set backspace=indent,eol,start
-filetype plugin on
 
-"let g:ctrlp_custom_ignore = {\
-"   'dir':  '\v[\/]\.(git|hg|svn)$',\
-"   'file': '\v\.(bin|exe|so|dll)$',\
-"   'link': 'some_bad_symbolic_links',\
-"   }
+"Set - as default leader character
+let mapleader = "-"
 
+"Autocomplete options
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
+set completeopt=longest,menuone 
+set completeopt-=preview
+
+"Vim move options
+let g:move_key_modifier = 'C'
+
+" ctrl-p options
 let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
+" start ctrl-p in file mode
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(o|disasm|hex|readelf|ioc|bin|exe|so|dll)$'}
+let g:ctrlp_custom_ignore = { 
+      \'dir':  '\v[\/]\.(git|hg|svn)$',
+      \'file': '\v\.(o|disasm|hex|readelf|ioc|bin|exe|so|dll)$'
+      \}
+" set working path as the first ancestor with subversion file
 let g:ctrlp_working_path_mode = 'wr'
-"let g:ctrlp_user_command = 'find %s -name *.[ch] -o -name *.mk -o -name Makefile -o -name *.ld -o -name *.sh -o -name *.sym -o -name *.readelf -type f'
-let g:NERDTreeChDirMode       = 2
+nnoremap <leader>b :CtrlPBufTag<CR>
+nnoremap <leader>a :CtrlPTag<CR>
+nnoremap <leader>t :CtrlPBuffer<CR>
+nnoremap <leader>m :CtrlPMRU<CR>
 
+" nerdTree options
+"nerd tree never changes root directory except when decides differnetly
+let g:NERDTreeChDirMode       = 0
+nmap <leader>ne :NERDTreeToggle<CR>
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
+"Snippets options
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -98,34 +123,56 @@ let g:UltiSnipsListSnippets="<c-v>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" statusline options
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" relative line numeration
 set relativenumber
 set number
 
+"Tag file names vim searches in current directory and up until it finds it
+set tags=./tags;/
+
+" syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
+let g:syntastic_c_checkers=['make']
+"Syntastic mapping 
+nnoremap <silent> <leader>sc :SyntasticCheck <CR>
+nnoremap <silent> <leader>sr :SyntasticReset <CR>
 
+"Syntax highlighting
+syntax on
+
+"ZoomWin mapping
+nnoremap <silent> <C-w>w :ZoomWin<CR>
+
+"Default indentation settings
 set autoindent
 set cindent
 set tabstop=2 shiftwidth=2 expandtab
-set number
+"Always show status bar
+set laststatus=2
+"Enabled extended tabline 
+let g:airline#extensions#tabline#enabled = 1
+
+"Disable swap file
 set noswapfile
 
-syntax on
-
+"Autoformatter options
 let g:formatdef_my_custom_c = '"astyle -A7 --mode=c -pcHs".&shiftwidth'
 let g:formatters_c = ['my_custom_c']
 
-let mapleader = "-"
-nmap <leader>ne :NERDTreeToggle<CR>
+"Autoformatter mapping
 nmap <leader>af :Autoformat<CR>
+nnoremap <F3> :Autoformat<CR>
 
+"Vim custom scripts
 function! DelTagOfFile(file)
   let fullpath = a:file
   let cwd = getcwd()
@@ -145,7 +192,6 @@ function! UpdateTags()
   let resp = system(cmd)
 endfunction
 autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
-
 
 function! s:DiffWithSVNCheckedOut()
   if exists('b:svndiffflag')
@@ -185,41 +231,6 @@ endfunction
 com! DiffSaved call s:DiffWithSaved()
 map <F10> :DiffSaved<CR>
 
-set tags=./tags;/
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
-
-""nmap <CR><CR> O<Esc>
-""nmap <CR> o<Esc>
-"if exists('$TMUX')
-  "function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    "let previous_winnr = winnr()
-    "silent! execute "wincmd " . a:wincmd
-    "if previous_winnr == winnr()
-      "call system("tmux select-pane -" . a:tmuxdir)
-      "redraw!
-    "endif
-  "endfunction
-
-  "let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  "let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  "let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  "nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  "nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  "nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  "nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-"else
-  "map <C-h> <C-w>h
-  "map <C-j> <C-w>j
-  "map <C-k> <C-w>k
-  "map <C-l> <C-w>l
-"endif
-
-nnoremap <F3> :Autoformat<CR>
-nnoremap <Leader>p :set invpaste paste? <CR>
-
-
 function! GetVisualSelection()
   " Why is this not a built-in Vim script function?!
   let [lnum1, col1] = getpos("'<")[1:2]
@@ -230,50 +241,21 @@ function! GetVisualSelection()
   return join(lines, "\n")
 endfunction
 
-map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
-"map <F6> :execute "vimgrep /" . call GetVisualSelection()  . "/gj ./**/*.[ch]" <Bar> cw<CR>
-" :vimgrep /word/gj ./**/*.c | cw
-
-set hidden
-set confirm
-set t_Co=256
-let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-let g:multi_cursor_exit_from_visual_mode=0
-
-set fillchars+=vert:│
-"hi! VertSplit ctermfg=fg ctermbg=bg term=NONE
-
-set ignorecase
-set incsearch
-
+"Additional mapping
+"Paste mode togglig for copying big parts of files
+nnoremap <Leader>p :set invpaste paste? <CR>
+"Buffer movement
 nnoremap <Leader>[ :bp<CR>
 nnoremap <Leader>] :bn<CR>
+"Repeat search
 vnoremap // y/<C-R>"<CR>
-nnoremap <leader>b :CtrlPBufTag<CR>
-nnoremap <leader>a :CtrlPTag<CR>
-nnoremap <leader>t :CtrlPBuffer<CR>
-nnoremap <leader>m :CtrlPMRU<CR>
-nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
+"Newline without exiting normal mode
 nnoremap <Leader>o mao<Esc>`a
 nnoremap <Leader>O maO<Esc>`a
+"Center after jump
 nnoremap <c-]> <c-]>z.
 nnoremap <c-o> <c-o>z.
 nnoremap <c-i> <c-i>z.
-nnoremap <n> <n>z.
-nnoremap <N> <N>z.
+"Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
-cnoremap <c-g> <CR>n/<c-p>
-"nnoremap / /\c
-"nnoremap ? ?\c
-filetype plugin on
-"set omnifunc=syntaxcomplete#Complete
-
-"let g:SuperTabDefaultCompletionType = "context"
-"set completeopt-=preview
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
-"let g:SuperTabLongestHighlight = 1
-set completeopt=longest,menuone 
-set completeopt-=preview
-
-let g:move_key_modifier = 'C'
