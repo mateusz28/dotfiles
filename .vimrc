@@ -60,6 +60,7 @@ noremap <F7> :set hlsearch! hlsearch?<CR>
 set ignorecase
 set incsearch
 nnoremap <Leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
+nnoremap <leader>/ :vimgrep //gj ./**/*.c <Bar> cw <c-f>$T/;;;i
 cnoremap <c-g> <CR>n/<c-p>
 nnoremap <n> <n>z.
 nnoremap <N> <N>z.
@@ -84,11 +85,6 @@ set backspace=indent,eol,start
 
 "Set - as default leader character
 let mapleader = "-"
-
-"Autocomplete options
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
-set completeopt=longest,menuone 
-set completeopt-=preview
 
 "Vim move options
 let g:move_key_modifier = 'C'
@@ -138,13 +134,14 @@ set tags=./tags;/
 " syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 let g:syntastic_c_checkers=['make']
 "Syntastic mapping 
 nnoremap <silent> <leader>sc :SyntasticCheck <CR>
 nnoremap <silent> <leader>sr :SyntasticReset <CR>
+nnoremap <silent> <leader>st :SyntasticToggleMode <CR>
 
 "Syntax highlighting
 syntax on
@@ -240,6 +237,13 @@ function! GetVisualSelection()
   let lines[0] = lines[0][col1 - 1:]
   return join(lines, "\n")
 endfunction
+
+"Autocomplete options
+"let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
+imap <c-n> <C-X><C-O>
+let g:SuperTabDefaultCompletionType = "context" 
+set completeopt=longest,menuone 
+set completeopt-=preview
 
 "Additional mapping
 "Paste mode togglig for copying big parts of files

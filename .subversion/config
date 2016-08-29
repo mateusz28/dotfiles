@@ -50,6 +50,7 @@ diff-cmd = /home/mateuszorzol/diffwrap.sh
 ###   accepts the '--diff-program' option.
 # diff3-has-program-arg = [yes | no]
 ### Set merge-tool-cmd to the command used to invoke your external
+merge-tool-cmd = /home/mateuszorzol/merger.sh
 ### merging tool of choice. Subversion will pass 5 arguments to
 ### the specified command: base theirs mine merged wcfile
 # merge-tool-cmd = merge_command
