@@ -6,3 +6,4 @@ ln -s ~/dotfiles/.tmux ~/.tmux
 ln -s ~/dotfiles/.cgdb ~/.cgdb
 ln -s ~/dotfiles/.merger.sh ~/.merger.sh
 ln -s ~/dotfiles/.diffwrap.sh ~/.diffwrap.sh
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig

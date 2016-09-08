@@ -123,6 +123,7 @@ export PATH="/home/mateuszorzol/sublime/opt/sublime_text:$PATH"
 export PATH="/subversion_1.8/bin:$PATH"
 export PATH="$PATH:/home/mateuszorzol/bin/lib:/home/mateuszorzol/bin/bin"
 export SVN_EDITOR='~/bin/vim/bin/vim -c "4,\$!cut -c-5 --complement | xargs svn diff --no-diff-deleted -x --ignore-eol-style" -c "set syntax=diff" +0'
+export EDITOR=vim
 #LD_LIBRARY_PATH="/home/mateuszorzol/opt/gtk/lib"
 #      PATH="/home/mateuszorzol/opt/gtk/bin:$PATH"
 #      export LD_LIBRARY_PATH PATH
