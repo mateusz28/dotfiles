@@ -134,7 +134,7 @@ today() {
 }
 function prompt
 {
-export PS1="\[\033[38;5;13m\]\h\[$(tput sgr0)\]\[\033[38;5;8m\]@\[$(tput sgr0)\]\[\033[38;5;5m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$\[$(tput sgr0)\]"
+  export PS1="\[\033[38;5;13m\]\u@\[\033[38;5;5m\]$(ifconfig | grep eth0 -A 2 | grep 'inet addr:'|  cut -d: -f2 | awk '{ print $1}')\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$\[$(tput sgr0)\]"
 }
 prompt
 
