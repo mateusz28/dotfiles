@@ -132,9 +132,18 @@ today() {
     echo -n "Today's date is: "
     date +"%A, %B %-d, %Y"
 }
+PS_TIME='\[\033[48;5;236m\] \A '
+PS_MACHINE='\[\033[38;5;10m\]\h'
+PS_USER='\[\033[38;5;2m\]\u'
+PS_AT='\[\033[38;5;8m\]@'
+PS_DIR='\[\033[38;5;14m\]\w'
+PS_PROMPT='\$'
+PS_NEWLINE='\n'
+PS_RESET='\[$(tput sgr0)\]'
+
 function prompt
 {
-  export PS1="\[\033[48;5;236m\][\A]\[$(tput sgr0)\]\[\033[48;5;-1m\] \[$(tput sgr0)\]\[\033[38;5;10m\]\h\[$(tput sgr0)\]\[\033[38;5;8m\]@\[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$\[$(tput sgr0)\]"
+  export PS1="$PS_TIME$PS_RESET $PS_MACHINE$PS_AT$PS_USER $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
 }
 prompt
 
