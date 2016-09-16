@@ -132,9 +132,24 @@ today() {
     echo -n "Today's date is: "
     date +"%A, %B %-d, %Y"
 }
+
+IP_ADDR=$(hostname -I | awk '{print $1}')
 PS_TIME='\[\033[48;5;236m\] \A '
-PS_MACHINE='\[\033[38;5;10m\]\h'
-PS_USER='\[\033[38;5;2m\]\u'
+if [ "$IP_ADDR" =  "192.168.11.2" ] ; then
+PS_MACHINE_COLOR="10m"
+PS_USR_COLOR="2m"
+elif [ "$IP_ADDR" =  "192.168.11.5" ] ; then
+PS_MACHINE_COLOR="11m"
+PS_USR_COLOR="3m"
+elif [ "$IP_ADDR" =  "192.168.11.7" ] ; then
+PS_MACHINE_COLOR="13m"
+PS_USR_COLOR="5m"
+else
+PS_MACHINE_COLOR="9m"
+PS_USR_COLOR="1m"
+fi
+PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]\]$IP_ADDR"
+PS_USER="\[\033[38;5;$PS_USR_COLOR\]\u"
 PS_AT='\[\033[38;5;8m\]@'
 PS_DIR='\[\033[38;5;14m\]\w'
 PS_PROMPT='\$'
@@ -143,7 +158,7 @@ PS_RESET='\[$(tput sgr0)\]'
 
 function prompt
 {
-  export PS1="$PS_TIME$PS_RESET $PS_MACHINE$PS_AT$PS_USER $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
+  export PS1="$PS_TIME$PS_RESET $PS_USER$PS_AT$PS_MACHINE $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
 }
 prompt
 
