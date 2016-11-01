@@ -54,6 +54,8 @@ set hidden
 "Enable exit/write confirmation 
 set confirm
 
+"Set - as default leader character
+let mapleader = "-"
 "Search options
 " Press F7 to toggle highlighting on/off, and show current value.
 noremap <F7> :set hlsearch! hlsearch?<CR>
@@ -77,14 +79,10 @@ no <down> <Nop>
 set wildchar=<Tab> wildmenu wildmode=full
 " same as abowe but recognized in a macro
 set wildcharm=<C-Z>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+set wildignore+=*.so,*.swp,*.zip     " MacOSX/Linux
 
 "allow backspace to remove neline and indentation in insert mode
 set backspace=indent,eol,start
-
-"Set - as default leader character
-let mapleader = "-"
 
 "Vim move options
 let g:move_key_modifier = 'C'
