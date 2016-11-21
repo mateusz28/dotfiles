@@ -129,7 +129,7 @@ today() {
 
 IP_ADDR=$(hostname -I | awk '{print $1}')
 PS_TIME='\[\033[48;5;236m\] \A '
-if [ "$IP_ADDR" =  "192.168.11.2" ] ; then
+if [ "$IP_ADDR" =  "192.168.11.12" ] ; then
   PS_MACHINE_COLOR="10m"
   PS_USR_COLOR="2m"
 elif [ "$IP_ADDR" =  "192.168.11.5" ] ; then
@@ -156,10 +156,10 @@ function prompt
 }
 prompt
 
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add ~/.ssh/id_rsa
-fi
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+  #eval `ssh-agent -s`
+  #ssh-add ~/.ssh/id_rsa
+#fi
 
 up(){
   local d=""
