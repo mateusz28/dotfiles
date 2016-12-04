@@ -122,7 +122,7 @@ command_exists () {
     type "$1" &> /dev/null ;
 }
 
-if command_exists hostname ; then
+if command_exists "hostname -I" ; then
     IP_ADDR=$(hostname -I | awk '{print $1}')
 else
     IP_ADDR="\h"
@@ -142,9 +142,9 @@ else
   PS_MACHINE_COLOR="12m"
   PS_USR_COLOR="4m"
 fi
-PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]\]$IP_ADDR"
+PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]$IP_ADDR"
 PS_USER="\[\033[38;5;$PS_USR_COLOR\]\u"
-PS_AT='\[\033[38;5;8m\]@'
+PS_AT="\[\033[38;5;8m\]@"
 PS_DIR='\[\033[38;5;14m\]\w'
 PS_PROMPT='\$'
 PS_NEWLINE='\n'

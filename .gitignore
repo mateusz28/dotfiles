@@ -1,5 +1,4 @@
 .cgdb/readline_history.txt
 .tmux/resurrect/*
 .tmux/resurrect/last
-.vim/bundle/vim-move
-.vim/bundle/vim-snippets
+.vim/bundle/
