@@ -27,7 +27,7 @@
 1476536107
 
 # TUI:
-al
+ar
 q0
 v2
 ov
@@ -36,18 +36,6 @@ l2
 r2
 
 # Left window history (oldest to newest):
-d/fermio/meta-clanton/meta-clanton-bsp/recipes-kernel
-	linux
-1
-d/fermio/meta-clanton/meta-clanton-bsp
-	recipes-core
-3
-d/fermio/meta-clanton
-	..
-0
-d/fermio
-	patches
-2
 d/fermio/patches
 	..
 0
@@ -336,21 +324,21 @@ d/srv/yocto_builds/mo/syncDir
 d/srv/yocto_builds/mo/syncDir/switch
 	Makefile
 3
+d/srv
+	..
+0
+d/
+	var
+34
+d/var
+	..
+0
+d/
+	nonexistent
+20
 d
 
 # Right window history (oldest to newest):
-D/home/mateuszorzol/fermioRepo/image-recepies
-	..
-0
-D/home/mateuszorzol/fermioRepo/yocto/meta-clanton/diff_micrel/b
-	drivers
-1
-D/home/mateuszorzol/fermioRepo
-	build-main
-2
-D/home/mateuszorzol/fermioRepo/build-main
-	..
-0
 D/home/mateuszorzol/fermioRepo
 	patches-kernel
 4
@@ -639,12 +627,23 @@ D/home/mateuszorzol/fermioRepo/syncDir
 D/home/mateuszorzol/fermioRepo/syncDir/switch
 	switch_fs.c
 6
+D/home/mateuszorzol
+	.vifm
+24
+D/home/mateuszorzol/.vifm
+	colors
+1
+D/home/mateuszorzol/.vifm/colors
+	desert.vifm
+9
+D/home/mateuszorzol/.vifm
+	vifmrc
+5
 D
 
 # Command line history (oldest to newest):
 :ls
 :colorscheme zenburn
-:Q
 :help modes
 :help mode
 :view mode
@@ -652,7 +651,6 @@ D
 :vifm-q_
 :view
 :!wget https://raw.githubusercontent.com/vifm/vifm-colors/master/zenburn_1.vifm
-:colorscheme zenburn_1
 :cd
 :!man sshd
 :scp m
@@ -710,7 +708,6 @@ D
 :marks
 :cm
 :mmap
-:qmap
 :nmap
 :history forward
 :vifm-CTRL-i
@@ -733,6 +730,18 @@ D
 :!grep -nri TABLE_DYNAMIC_MAC .
 :grep -nri TABLE_DYNAMIC_MAC .
 :!ncursesw5-config
+:colorscheme zenburn_1
+:colorscheme g80
+:qmap
+:colorscheme desert
+:colorscheme mc-like
+:colorscheme reicheltd-light
+:colorscheme ph
+:colorscheme astrell
+:colorscheme solarized-dark
+:colorscheme Default
+:colorscheme matrix
+:Q
 :q
 
 # Search history (oldest to newest):
@@ -757,71 +766,10 @@ prsyncDown.sh
 # Local filter history (oldest to newest):
 
 # Registers:
-""/srv/.vifm-Trash-1006/004_obj
 
 # Directory stack (oldest to newest):
 
 # Trash content:
-t/home/mateuszorzol/.local/share/vifm/Trash/000_temp
-	/home/mateuszorzol/temp
-t/srv/.vifm-Trash-1006/000_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-stable.git
-	/home/mateuszorzol/fermioRepo/build-main/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-stable.git
-t/srv/.vifm-Trash-1006/000_copyImage.sh
-	/home/mateuszorzol/fermioRepo/patches-kernel/files/copyImage.sh
-t/srv/.vifm-Trash-1006/000_copyKernel.sh
-	/home/mateuszorzol/fermioRepo/patches-kernel/files/copyKernel.sh
-t/srv/.vifm-Trash-1006/000_copyKszPatch.sh
-	/home/mateuszorzol/fermioRepo/patches-kernel/files/copyKszPatch.sh
-t/srv/.vifm-Trash-1006/000_copyModule.sh
-	/home/mateuszorzol/fermioRepo/patches-kernel/files/copyModule.sh
-t/srv/.vifm-Trash-1006/000_image-minimal-development-clanton-20161015160144.rootfs.ext3
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/image-minimal-development-clanton-20161015160144.rootfs.ext3
-t/srv/.vifm-Trash-1006/000_image-minimal-development-clanton-20161015201132.rootfs.ext3
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/image-minimal-development-clanton-20161015201132.rootfs.ext3
-t/srv/.vifm-Trash-1006/000_image-minimal-development-clanton-20161015203747.rootfs.ext3
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/image-minimal-development-clanton-20161015203747.rootfs.ext3
-t/srv/.vifm-Trash-1006/000_image-minimal-development-clanton-20161017064658.rootfs.ext3
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/image-minimal-development-clanton-20161017064658.rootfs.ext3
-t/srv/.vifm-Trash-1006/000_core-image-minimal-initramfs-clanton-20161015160144.rootfs.cpio.gz
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/core-image-minimal-initramfs-clanton-20161015160144.rootfs.cpio.gz
-t/srv/.vifm-Trash-1006/000_core-image-minimal-initramfs-clanton-20161015201132.rootfs.cpio.gz
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/core-image-minimal-initramfs-clanton-20161015201132.rootfs.cpio.gz
-t/srv/.vifm-Trash-1006/000_core-image-minimal-initramfs-clanton-20161015203747.rootfs.cpio.gz
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/core-image-minimal-initramfs-clanton-20161015203747.rootfs.cpio.gz
-t/srv/.vifm-Trash-1006/000_bzImage--3.8-r1-clanton-20161015160144.bin
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/bzImage--3.8-r1-clanton-20161015160144.bin
-t/srv/.vifm-Trash-1006/000_bzImage--3.8-r1-clanton-20161015201132.bin
-	/srv/yocto_builds/mo/build-main/tmp/deploy/images/bzImage--3.8-r1-clanton-20161015201132.bin
-t/srv/.vifm-Trash-1006/000_switch_fs.c~
-	/home/mateuszorzol/fermioRepo/syncDir/switch/switch_fs.c~
-t/srv/.vifm-Trash-1006/000_switch_fs.h~
-	/home/mateuszorzol/fermioRepo/syncDir/switch/switch_fs.h~
-t/srv/.vifm-Trash-1006/000_switch_test.c~
-	/home/mateuszorzol/fermioRepo/syncDir/switch/switch_test.c~
-t/srv/.vifm-Trash-1006/000_switch
-	/home/mateuszorzol/fermioRepo/syncDir/switch/switch
-t/srv/.vifm-Trash-1006/000_TAGS
-	/home/mateuszorzol/fermioRepo/syncDir/switch/TAGS
-t/srv/.vifm-Trash-1006/000_rsyncDown.sh
-	/home/mateuszorzol/fermioRepo/utils/rsyncDown.sh
-t/srv/.vifm-Trash-1006/000_obj
-	/home/mateuszorzol/fermioRepo/syncDir/switch/obj
-t/srv/.vifm-Trash-1006/000_trunk
-	/srv/yocto_builds/mo/syncDir/switch/trunk
-t/srv/.vifm-Trash-1006/000_branches
-	/srv/yocto_builds/mo/syncDir/switch/branches
-t/srv/.vifm-Trash-1006/001_obj
-	/srv/yocto_builds/mo/syncDir/switch/obj
-t/srv/.vifm-Trash-1006/000_.svn
-	/srv/yocto_builds/mo/syncDir/switch/.svn
-t/srv/.vifm-Trash-1006/002_obj
-	/srv/yocto_builds/mo/syncDir/switch/obj
-t/srv/.vifm-Trash-1006/003_obj
-	/srv/yocto_builds/mo/syncDir/switch/obj
-t/srv/.vifm-Trash-1006/000_sw_ksz8795
-	/srv/yocto_builds/mo/syncDir/switch/sw_ksz8795
-t/srv/.vifm-Trash-1006/004_obj
-	/srv/yocto_builds/mo/syncDir/switch/obj
 
 # State:
 f
@@ -830,6 +778,6 @@ i1
 [F
 F
 I1
-].1
+].0
 ]F
 s0

@@ -1,0 +1,86 @@
+﻿Windows CMD:
+diskpart – informacje o dysku  i partycjach
+ipconfig- inforfmacje o sieci
+Linux Bash:
+source ~/.bashrc – odśwież bashrc
+find . -name "*.bak" -type f -delete -usuwa pliki rekurencyjnie
+feh photos
+okular pdf
+Bash keyboard shortcuts
+Alt + b   Back (left) one word
+Alt + f   Forward (right) one word
+Alt + Del Delete the Word before the cursor.
+Alt + Backspace Delete the Word after the cursor.
+Ctrl + w   Cut the Word before the cursor to the clipboard.
+Ctrl + k   Cut the Line after the cursor to the clipboard.
+ctrl + y   Paste the last thing to be cut (yank)
+ctrl + _   Undo
+ALT + .   Last argument of previous command
+Alt+Shift+# comment
+Sublime:
+SHIFT+F4- goto find results
+C GCC:
+   int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 };- array initialization of the same elements
+SVN
+eval 'ssh-agent -s' ssh-add -> zapamiętuje passphrase
+svn propset svn:externals 'folder svn+ssh//blabla' .
+svn merge ^/firmware/trunk fwLogic/
+ svn st -q
+svn propedit svn:ignore . 
+GDB
+handle <name> noprint nostop – don't stop or show signal handler
+set confirm off – turn off confirmation \
+start
+next n
+condition bnum expression
+command breakpoint-number     
+info threads
+thread 
+command breakpoint-number
+VM
+ssh -p 2201 uxsim@127.0.0.1
+VBoxManage startvm uxSim3cte –headless
+$ scp -P 2201  ./#1391_firmwareSimulator/ekofone_posix uxsim@127.0.0.1:/home/uxsim/
+VBoxManage controlvm uxSim3cte poweroff
+ VBoxManage modifyvm uxSim3cte  --vrde on
+$ ssh -X -p 2201 uxsim@127.0.0.1
+VBoxManage controlvm VSERVER poweroff
+
+VBoxManage controlvm VSERVER poweroffVBoxManage controlvm VSERVER poweroffVBoxManage controlvm VSERVER poweroff
+G_DEBUG=fatal_warnings 
+tmux list sessions
+alt + 
+alt -
+alt z d
+alt z x
+alt z c
+alt z ,
+alt z 
+alt+z ctrl+s save sessions
+alt+z ctrl+shift+r restore sessions
+gdb -iex "handle SIGUSR1 nostop noprint" -iex "set confirm off"  
+compgen -ac | grep VB
+tightvncserver -compatiblekbd -geometry 900x700 -depth 16
+find . \( -name "*.h" -o -name "*.c" -o -name "*.mk" \) | xargs grep --color=always -nr -i 'abc'
+Installing application without sudo
+apt-get source PACKAGE
+./configure --prefix=$HOME/myapps
+make
+make install
+srec_cat out_stm32l152.hex -intel -o myBinary.c -C-Array myBinary -INClude
+svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm ->Remove locally deleted files from revision
+rep -nr "stmmac" --color  --include=*.c . 2>/dev/null
+find . -iname stmmac.ko -printf "%T+\t%p\n" | sort
+sed -i '$ d' .ssh/known_host
+readlink -f 
+gf      : open file name under cursor (SUPER)
+ga      : display hex, ascii value of character under cursor
+g] show tag list
+set output-radix 16 GDB print in hex 10 print in dec
+\'. `. move to last edition vim
+less useful  execute bash wcommand on lines
+-----------
+-  sshfs  -
+-----------
+shfs root@192.168.11.164:/ mnt/fermiofs/ -C 
+fusermount -u /home/mateuszorzol/mnt 

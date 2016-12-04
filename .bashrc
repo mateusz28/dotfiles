@@ -122,7 +122,7 @@ if [ -z "$IP_ADDR" ]; then
     IP_ADDR="\h"
 fi
 
-PS_TIME='\[\033[48;5;8m\] \A '
+#PS_TIME='\[\033[48;5;8m\] \A '
 if [ "$IP_ADDR" =  "192.168.11.12" ] ; then
   PS_MACHINE_COLOR="10m"
   PS_USR_COLOR="2m"
@@ -146,7 +146,7 @@ PS_RESET='\[$(tput sgr0)\]'
 
 function prompt
 {
-  export PS1="$PS_TIME$PS_RESET $PS_USER$PS_AT$PS_MACHINE $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
+  export PS1="$PS_TIME$PS_RESET$PS_USER$PS_AT$PS_MACHINE $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
 }
 prompt
 
