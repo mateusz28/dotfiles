@@ -117,14 +117,8 @@ today() {
   echo -n "Today's date is: "
   date +"%A, %B %-d, %Y"
 }
-
-command_exists () {
-    type "$1" &> /dev/null ;
-}
-
-if command_exists "hostname -I" ; then
-    IP_ADDR=$(hostname -I | awk '{print $1}')
-else
+IP_ADDR=$(hostname -I 2>/dev/null| awk '{print $1}')
+if [ -z "$IP_ADDR" ]; then
     IP_ADDR="\h"
 fi
 
