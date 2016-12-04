@@ -113,22 +113,22 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="/home/mateuszorzol/sublime/opt/sublime_text:$PATH"
-export PATH="/subversion_1.8/bin:$PATH"
-export PATH="$PATH:/home/mateuszorzol/bin/lib:/home/mateuszorzol/bin/bin"
-export SVN_EDITOR='~/bin/vim/bin/vim -c "4,\$!cut -c-5 --complement | xargs svn diff --no-diff-deleted -x --ignore-eol-style" -c "set syntax=diff" +0'
-export EDITOR=vim
-#LD_LIBRARY_PATH="/home/mateuszorzol/opt/gtk/lib"
-#      PATH="/home/mateuszorzol/opt/gtk/bin:$PATH"
-#      export LD_LIBRARY_PATH PATH
-
 today() {
   echo -n "Today's date is: "
   date +"%A, %B %-d, %Y"
 }
 
-IP_ADDR=$(hostname -I | awk '{print $1}')
-PS_TIME='\[\033[48;5;236m\] \A '
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
+if command_exists hostname ; then
+    IP_ADDR=$(hostname -I | awk '{print $1}')
+else
+    IP_ADDR="\h"
+fi
+
+PS_TIME='\[\033[48;5;8m\] \A '
 if [ "$IP_ADDR" =  "192.168.11.12" ] ; then
   PS_MACHINE_COLOR="10m"
   PS_USR_COLOR="2m"
@@ -139,8 +139,8 @@ elif [ "$IP_ADDR" =  "192.168.11.7" ] ; then
   PS_MACHINE_COLOR="13m"
   PS_USR_COLOR="5m"
 else
-  PS_MACHINE_COLOR="9m"
-  PS_USR_COLOR="1m"
+  PS_MACHINE_COLOR="12m"
+  PS_USR_COLOR="4m"
 fi
 PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]\]$IP_ADDR"
 PS_USER="\[\033[38;5;$PS_USR_COLOR\]\u"
@@ -156,11 +156,6 @@ function prompt
 }
 prompt
 
-#if [ -z "$SSH_AUTH_SOCK" ] ; then
-  #eval `ssh-agent -s`
-  #ssh-add ~/.ssh/id_rsa
-#fi
-
 up(){
   local d=""
   limit=$1
@@ -174,8 +169,3 @@ up(){
   fi
   cd $d
 }
-#if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-export TERM='screen-256color'
-#else
-#export TERM='xterm-color'
-#fi

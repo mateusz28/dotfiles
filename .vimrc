@@ -31,17 +31,13 @@ filetype plugin indent on    " required
 "Display settings
 set splitright
 " set terminal 256 color version
-set t_Co=256
+set t_Co=16
 " colorscheme settings
-colorscheme lucius
-LuciusBlack
+colorscheme delek
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-" column coloring facility
-set colorcolumn=110
-highlight ColorColumn ctermbg=darkgray
 "Default vertical separator
 set fillchars+=vert:│
 
