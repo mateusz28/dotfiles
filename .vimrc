@@ -23,7 +23,6 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 Plugin 'drn/zoomwin-vim'
-Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -34,8 +33,7 @@ set splitright
 " set terminal 256 color version
 set t_Co=16
 " colorscheme settings
-colorscheme delek
-let g:airline_theme='simple'
+colorscheme darkblue
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.

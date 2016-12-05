@@ -9,7 +9,7 @@
 " If you would like to use another vi clone such Elvis or Vile
 " you will need to change this setting.
 
-/*set vicmd=/home/mateuszorzol/bin/vim/bin/vim*/
+" set vicmd=/home/mateuszorzol/bin/vim/bin/vim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -60,7 +60,7 @@ set noiec
 
 " Selected color scheme
 
-colorscheme matrix
+colorscheme Default
 
 " The FUSE_HOME directory will be used as a root dir for all FUSE mounts.
 " Unless it exists with write/exec permissions set, vifm will attempt to
