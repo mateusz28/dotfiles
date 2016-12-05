@@ -12,5 +12,5 @@
   tool = vimdiff
 [difftool]
   prompt = false
-[difftool "vimdiff"]
-  path = /home/mateuszorzol/bin/vim/bin/vimdiff
+;[difftool "vimdiff"]
+  ;path = /home/mateuszorzol/bin/vim/bin/vimdiff
