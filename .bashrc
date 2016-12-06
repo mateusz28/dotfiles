@@ -138,9 +138,16 @@ else
   PS_MACHINE_COLOR="12m"
   PS_USR_COLOR="4m"
 fi
+
+if [ -z "$INSIDE_VIFM" ]; then
+  PS_VIFM=""
+else
+  PS_VIFM="\[\033[38;5;15m\][VIFM]"
+  unset INSIDE_VIFM
+fi
 PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]$IP_ADDR"
 PS_USER="\[\033[38;5;$PS_USR_COLOR\]\u"
-PS_AT="\[\033[38;5;8m\]@"
+PS_AT="\[\033[38;5;15m\]@"
 PS_DIR='\[\033[38;5;14m\]\w'
 PS_PROMPT='\$'
 PS_NEWLINE='\n'
@@ -148,7 +155,7 @@ PS_RESET='\[$(tput sgr0)\]'
 
 function prompt
 {
-  export PS1="$PS_TIME$PS_RESET$PS_USER$PS_AT$PS_MACHINE $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
+  export PS1="$PS_VIFM$PS_TIME$PS_RESET$PS_USER$PS_AT$PS_MACHINE $PS_DIR$PS_RESET$PS_NEWLINE$PS_PROMPT"
 }
 prompt
 
@@ -165,3 +172,4 @@ up(){
   fi
   cd $d
 }
+export SHELL=/bin/bash

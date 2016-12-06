@@ -1,3 +1,7 @@
 snippet mpr
 mprintf("${1:%s}\r\n"${2});
 endsnippet
+
+snippet kpr
+printk("${1:%s} | %s:%d\r\n"${2},__FILE__, __LINE__);
+endsnippet
