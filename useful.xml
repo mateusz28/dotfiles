@@ -1,5 +1,5 @@
-﻿Windows CMD:
-diskpart – informacje o dysku  i partycjach
+﻿diskpart – informacje o dysku  i partycjach
+Windows CMD:
 ipconfig- inforfmacje o sieci
 Linux Bash:
 source ~/.bashrc – odśwież bashrc
@@ -84,3 +84,19 @@ less useful  execute bash wcommand on lines
 -----------
 shfs root@192.168.11.164:/ mnt/fermiofs/ -C 
 fusermount -u /home/mateuszorzol/mnt 
+telnet ADDRESS PORT | tee -a myoutputfile
+ADDR=192.168.11.182 && ssh-keygen -f "/home/mateuszorzol/.ssh/known_hosts" -R $ADDR && ssh root@$ADDR
+
+echo 1 > /proc/sys/kernel/sysrq &&  echo b > /proc/sysrq-trigger magic linux reboot
+
+#do not ask about authorization ~/.ssh/config
+Host 192.168.0.*
+   StrictHostKeyChecking no
+      UserKnownHostsFile=/dev/null
+
+pgrep search id of process name
+find -mtime -5
+find -name '*.pl' -exec perl -c {} \; -> exec fork of a function on all find results
+find -name '*.c' -exec vim {} + -> add find arguments to command
+grep -v <string>-> remove all lines containg string from stream
+strace and ltrace tools are designed to allow watching system calls and library calls respectively 

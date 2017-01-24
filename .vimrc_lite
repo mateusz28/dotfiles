@@ -1,0 +1,84 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"Display settings
+set splitright
+" set terminal 256 color version
+set t_Co=16
+" colorscheme settings
+colorscheme darkblue
+"Needed to preserve background color
+set t_ut=
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+"enabe project specified vimrc files
+set exrc
+
+"Disable swap file
+set noswapfile
+
+"When next buffer is opened the currently modified one goes into background
+set hidden
+
+"Enable exit/write confirmation 
+set confirm
+
+"Set - as default leader character
+let mapleader = "-"
+"Search options
+set hlsearch
+" Press F7 to toggle highlighting on/off, and show current value.
+noremap <F7> :set hlsearch! hlsearch?<CR>
+set ignorecase
+set incsearch
+nnoremap <leader>/ :vimgrep //gj ./**/*.[ch] <Bar> cw <c-f>$T/;;;i
+cnoremap <c-g> <CR>n/<c-p>
+"Map key for quicksearch in project
+map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
+
+" start wildcard expansion in command mode
+set wildchar=<Tab> wildmenu wildmode=longest,list
+set wildignore+=*.so,*.swp,*.zip     " MacOSX/Linux
+
+"allow backspace to remove neline and indentation in insert mode
+set backspace=indent,eol,start
+
+" statusline options
+set statusline+=%#warningmsg#
+set statusline+=%*
+
+" relative line numeration
+set number
+
+"Tag file names vim searches in current directory and up until it finds it
+set tags=./tags;/
+
+"Syntax highlighting
+syntax on
+
+"Default indentation settings
+set autoindent
+set cindent
+set tabstop=2 shiftwidth=2 expandtab
+
+"Additional mapping
+"Paste mode togglig for copying big parts of files
+nnoremap <Leader>p :set invpaste paste? <CR>
+"Buffer movement
+nnoremap <Leader>[ :bp<CR>
+nnoremap <Leader>] :bn<CR>
+"Repeat search
+vnoremap // y/<C-R>"<CR>
+"Newline without exiting normal mode
+nnoremap <Leader>o mao<Esc>`a
+nnoremap <Leader>O maO<Esc>`a
+"Center after jump
+nnoremap <c-]> <c-]>z.
+nnoremap <c-o> <c-o>z.
+nnoremap <c-i> <c-i>z.
+nnoremap <n> <n>z.
+nnoremap <N> <N>z.
+"Faster and smoother movement
+nnoremap <c-y> 3<c-y>
+nnoremap <c-e> 3<c-e>
