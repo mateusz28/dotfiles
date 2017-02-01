@@ -100,3 +100,11 @@ find -name '*.pl' -exec perl -c {} \; -> exec fork of a function on all find res
 find -name '*.c' -exec vim {} + -> add find arguments to command
 grep -v <string>-> remove all lines containg string from stream
 strace and ltrace tools are designed to allow watching system calls and library calls respectively 
+To disable optimisation for a single function, append
+__attribute__((optimize("0")))
+to the prototype. E.g.
+static int my_function(int arg) __attribute__((optimize("0")));
+
+git add -i Interactive adding for commits
+git reset HEAD Unstage changes
+find . -maxdepth 2 -iname  package.json -exec grep \"version\": /dev/null "{}" \; | sort
