@@ -51,6 +51,8 @@ set noswapfile
 set hidden
 
 "Enable exit/write confirmation 
+"
+set confirm
 set relativenumber
 set number
 
