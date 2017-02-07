@@ -17,7 +17,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
-if v:version >= 740
+if v:version >= 704
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
 endif
