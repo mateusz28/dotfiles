@@ -1,3 +1,0 @@
-pane	0	0	:sh	1	:*	0	:/home/mateuszorzol	1	sh	:
-window	0	0	1	:*	ae5d,80x23,0,0,0
-state	0	

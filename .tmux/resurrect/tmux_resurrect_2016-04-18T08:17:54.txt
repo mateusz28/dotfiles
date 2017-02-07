@@ -1,8 +1,0 @@
-pane	0	1	:sh	1	:*	1	:/home/mateuszorzol/project/#2552_fwUpgrade	1	sh	:
-pane	0	1	:sh	1	:*	2	:/home/mateuszorzol/project/#2552_fwUpgrade	0	sh	:-sh
-pane	0	1	:sh	1	:*	3	:/home/mateuszorzol/project/#2552_fwUpgrade	0	sh	:
-pane	0	2	:sh	0	:-	1	:/home/mateuszorzol	0	sh	:
-pane	0	2	:sh	0	:-	2	:/home/mateuszorzol	1	sh	:
-window	0	1	1	:*	8aff,217x56,0,0{172x56,0,0,0,44x56,173,0[44x28,173,0,3,44x27,173,29,5]}
-window	0	2	0	:-	6733,217x56,0,0{108x56,0,0,1,108x56,109,0,7}
-state	0	

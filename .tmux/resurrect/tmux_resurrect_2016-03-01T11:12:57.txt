@@ -1,4 +1,0 @@
-pane	0	0	:[tmux]	1	:*	0	:/home/mateuszorzol	0	sh	:
-pane	0	0	:[tmux]	1	:*	1	:/home/mateuszorzol	1	sh	:
-window	0	0	1	:*	7101,80x23,0,0{40x23,0,0,0,39x23,41,0,1}
-state	0	
