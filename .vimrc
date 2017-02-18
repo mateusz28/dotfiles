@@ -17,6 +17,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/AutoTag'
 Plugin 'bufkill.vim'
+Plugin 'tpope/vim-unimpaired'
 if v:version >= 704
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
@@ -73,8 +74,6 @@ set laststatus=2
 let mapleader = "-"
 "Search options
 set hlsearch
-" Press F7 to toggle highlighting on/off, and show current value.
-noremap <F7> :set hlsearch! hlsearch?<CR>
 set ignorecase
 set incsearch
 nnoremap <leader>/ :vimgrep //gj ./**/*.[ch] <Bar> cw <c-f>$T/;;;i
@@ -164,14 +163,8 @@ set completeopt-=preview
 "Additional mapping
 "Paste mode togglig for copying big parts of files
 nnoremap <Leader>p :set invpaste paste? <CR>
-"Buffer movement
-nnoremap <Leader>[ :bp<CR>
-nnoremap <Leader>] :bn<CR>
 "Repeat search
 vnoremap // y/<C-R>"<CR>
-"Newline without exiting normal mode
-nnoremap <Leader>o mao<Esc>`a
-nnoremap <Leader>O maO<Esc>`a
 "Center after jump
 nnoremap <c-]> <c-]>z.
 nnoremap <c-o> <c-o>z.

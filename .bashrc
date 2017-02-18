@@ -160,6 +160,15 @@ function prompt
 }
 prompt
 
+function disablecscq
+{
+  stty stop ''
+  stty start ''
+  stty -ixon
+  stty -ixoff
+}
+disablecscq
+
 up(){
   local d=""
   limit=$1

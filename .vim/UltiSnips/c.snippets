@@ -5,3 +5,33 @@ endsnippet
 snippet kpr
 printk("${1:%s} | %s:%d\r\n"${2},__FILE__, __LINE__);
 endsnippet
+
+# for (custom)
+snippet for
+for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) 
+{
+	${5}
+}
+endsnippet	
+
+snippet if
+if (${1:true}) 
+{
+	${0}
+}
+endsnippet
+
+snippet ife
+if (${1:true}) 
+{
+	${2}
+}
+else 
+{
+	${0}
+}
+endsnippet
+
+snippet deb
+DEB("${1:%s}\n"${2});
+endsnippet
