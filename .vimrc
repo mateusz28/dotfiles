@@ -14,16 +14,19 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/AutoTag'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bufkill.vim'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-fugitive'
 if v:version >= 704
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
 endif
 Plugin 'ervandew/supertab'
 Plugin 'drn/zoomwin-vim'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -145,6 +148,8 @@ nnoremap <silent> <C-w>w :ZoomWin<CR>
 
 "Enabled extended tabline 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='molokai'
 
 "Autoformatter options
 let g:formatdef_my_custom_c = '"astyle -A7 --mode=c -pcHs".&shiftwidth'
@@ -174,3 +179,4 @@ nnoremap <N> <N>z.
 "Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
+" set Vim-specific sequences for RGB colors
