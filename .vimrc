@@ -179,4 +179,4 @@ nnoremap <N> <N>z.
 "Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
-" set Vim-specific sequences for RGB colors
+map <leader>- -
