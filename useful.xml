@@ -108,3 +108,7 @@ static int my_function(int arg) __attribute__((optimize("0")));
 git add -i Interactive adding for commits
 git reset HEAD Unstage changes
 find . -maxdepth 2 -iname  package.json -exec grep \"version\": /dev/null "{}" \; | sort
+http://asoftmurmur.com/
+git stash; git stash list; git stash apply
+while true; do app && break; done
+.,$s/\([a-zA-Z_]\+\)/\[\1\] = \"\1\"/cgi substitue for enum strings
