@@ -34,9 +34,9 @@ filetype plugin indent on    " required
 "Display settings
 set splitright
 " set terminal 256 color version
-set t_Co=16
+set t_Co=256
 " colorscheme settings
-colorscheme darkblue
+colorscheme default
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -52,6 +52,9 @@ set noswapfile
 
 "When next buffer is opened the currently modified one goes into background
 set hidden
+
+"Enable mouse 
+set mouse=a
 
 "Enable exit/write confirmation 
 "
