@@ -26,7 +26,6 @@ if v:version >= 704
 endif
 Plugin 'ervandew/supertab'
 Plugin 'drn/zoomwin-vim'
-Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
