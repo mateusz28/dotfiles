@@ -34,9 +34,9 @@ filetype plugin indent on    " required
 "Display settings
 set splitright
 " set terminal 256 color version
-set t_Co=16
+set t_Co=256
 " colorscheme settings
-colorscheme darkblue
+colorscheme default
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -52,6 +52,9 @@ set noswapfile
 
 "When next buffer is opened the currently modified one goes into background
 set hidden
+
+"Enable mouse 
+set mouse=a
 
 "Enable exit/write confirmation 
 "
@@ -148,7 +151,6 @@ nnoremap <silent> <C-w>w :ZoomWin<CR>
 "Enabled extended tabline 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
 
 "Autoformatter options
 let g:formatdef_my_custom_c = '"astyle -A7 --mode=c -pcHs".&shiftwidth'
