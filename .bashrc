@@ -147,7 +147,7 @@ else
 fi
 PS_MACHINE="\[\033[38;5;$PS_MACHINE_COLOR\]$IP_ADDR"
 PS_USER="\[\033[38;5;$PS_USR_COLOR\]\u"
-PS_AT="\[\033[1;30m\]@"
+PS_AT="\[\033[1;37m\]@"
 PS_DIR='\[\033[38;5;14m\]\w'
 PS_PROMPT='\$'
 PS_NEWLINE='\n'
