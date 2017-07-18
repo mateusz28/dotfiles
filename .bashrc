@@ -183,3 +183,5 @@ up(){
   cd $d
 }
 export SHELL=/bin/bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
