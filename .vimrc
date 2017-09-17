@@ -181,4 +181,7 @@ nnoremap <N> <N>z.
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
 nnoremap <c-t> :FZF<cr>
+nmap <leader>gs :Gstatus<CR><C-w>20+
+nmap <leader>gd :Gdiff<CR>
+nnoremap Q <Nop>
 map <leader>- -
