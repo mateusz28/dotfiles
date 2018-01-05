@@ -6,7 +6,7 @@ set splitright
 " set terminal 256 color version
 set t_Co=16
 " colorscheme settings
-colorscheme darkblue
+colorscheme default
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.

@@ -14,3 +14,5 @@
   prompt = false
 ;[difftool "vimdiff"]
   ;path = /home/mateuszorzol/bin/vim/bin/vimdiff
+[gitreview]
+	remote = origin
