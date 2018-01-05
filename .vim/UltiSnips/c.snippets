@@ -8,7 +8,7 @@ endsnippet
 
 # for (custom)
 snippet for
-for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) 
+for (${1:i} = ${2:0}; $1 ${3:< 10}; $1${4:++}) 
 {
 	${5}
 }
@@ -34,4 +34,28 @@ endsnippet
 
 snippet deb
 DEB("${1:%s}\n"${2});
+endsnippet
+
+# typedef enum
+snippet tde
+typedef enum {
+	${2:Data} 
+} ${1:foo}_t;
+endsnippet
+
+snippet tds
+typedef struct ${2:_$1 }{
+	m_${3:Data} 
+} ${1:`vim_snippets#Filename('$1_t', 'name')`};
+endsnippet
+
+snippet tdx
+typedef enum {
+	${2:Data} 
+} ${1:foo}Strings_t;
+
+const char* $1Strings[]={
+	[$2] = "",
+};
+
 endsnippet
