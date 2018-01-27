@@ -185,3 +185,4 @@ up(){
 export SHELL=/bin/bash
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+LS_COLORS="$LS_COLORS:ow=1;33"; export LS_COLORS
