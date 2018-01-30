@@ -113,3 +113,4 @@ git stash; git stash list; git stash apply
 while true; do app && break; done
 .,$s/\([a-zA-Z_]\+\)/\[\1\] = \"\1\"/cgi substitue for enum strings
 tmux link-window -s shared:irc -t 9
+ssh-keygen -t rsa -b 4096 -C mateusz28@gmail.com
