@@ -36,7 +36,9 @@ set splitright
 " set terminal 256 color version
 set t_Co=256
 " colorscheme settings
-colorscheme default
+let g:lucius_style = 'dark'
+let g:lucius_no_term_bg = 1
+colorscheme lucius
 "Needed to preserve background color
 set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.

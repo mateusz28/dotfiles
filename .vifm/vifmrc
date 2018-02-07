@@ -365,7 +365,11 @@ nmap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
 " Toggle wrap setting on ,w key
 nmap ,w :set wrap!<cr>
 
-command! fzf :execute '!fzf 2>&0 %%IU' | normal! gf
+command! fzf : let $FZF_RES = term('fzf 2>&0')
+            \| if $FZF_RES != ''
+            \|     execute "!echo '".$FZF_RES."' %%U"
+            \|     execute 'normal! gf'
+            \| endif
 nnoremap <c-t> :fzf<cr>
 
 " Example of standard two-panel file managers mappings
