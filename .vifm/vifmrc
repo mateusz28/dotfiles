@@ -9,7 +9,7 @@
 " If you would like to use another vi clone such Elvis or Vile
 " you will need to change this setting.
 let $INSIDE_VIFM = 'yes'
-set vicmd=vim
+set vicmd=nvim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 

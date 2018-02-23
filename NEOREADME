@@ -1,0 +1,10 @@
+Neo vim deps:
+* Plug - plugin manager for neovim
+* pip neovim / pip 3 neovim - for python plugins
+* fzf 
+* the-silver-searcher-ag -for looking through files
+* C
+  bear - generate config_commands.json from Makefile
+  clang - C code completion
+  clang-tidy - C lints based on config_commands.json
+  clang-format - auto-fix for C syntax

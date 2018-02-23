@@ -9,7 +9,9 @@
   ui = true
   pager = true
 [diff]
-  tool = vimdiff
+  tool = nvimdiff
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
   prompt = false
 ;[difftool "vimdiff"]

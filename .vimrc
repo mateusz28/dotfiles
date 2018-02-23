@@ -1,35 +1,32 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
+" Specify a directory for plugins
+" " - For Neovim: ~/.local/share/nvim/plugged
+" " - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+"
+" " Make sure you use single quotes
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'vim-scripts/AutoTag'
-Plugin 'vim-airline/vim-airline'
-Plugin 'bufkill.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/fzf'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Chiel92/vim-autoformat'
+Plug 'vim-scripts/AutoTag'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-clang'
 if v:version >= 704
-  Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 endif
-Plugin 'ervandew/supertab'
-Plugin 'drn/zoomwin-vim'
+Plug 'drn/zoomwin-vim'
+Plug 'w0rp/ale'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()            " required
 
 "Display settings
 set splitright
@@ -55,10 +52,10 @@ set noswapfile
 "When next buffer is opened the currently modified one goes into background
 set hidden
 
-"Enable mouse 
+"Enable mouse
 set mouse=a
 
-"Enable exit/write confirmation 
+"Enable exit/write confirmation
 "
 set confirm
 set relativenumber
@@ -89,27 +86,11 @@ cnoremap <c-g> <CR>n/<c-p>
 map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
 
 " start wildcard expansion in command mode
-set wildchar=<Tab> wildmenu wildmode=longest,list
-set wildignore+=*.so,*.swp,*.zip     " MacOSX/Linux
+"set wildchar=<Tab> wildmenu wildmode=longest,list
+set wildignore+=*.so,*.swp,*.zip,*.o     " MacOSX/Linux
 
 "allow backspace to remove neline and indentation in insert mode
 set backspace=indent,eol,start
-
-" ctrl-p options
-let g:ctrlp_map = '<c-p>'
-" start ctrl-p in file mode
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-let g:ctrlp_custom_ignore = { 
-      \'dir':  '\v[\/]\.(git|hg|svn)$',
-      \'file': '\v\.(o|disasm|hex|readelf|ioc|bin|exe|so|dll)$'
-      \}
-" set working path as the current directory
-let g:ctrlp_working_path_mode = 'a'
-nnoremap <leader>b :CtrlPBufTag<CR>
-nnoremap <leader>a :CtrlPTag<CR>
-nnoremap <leader>t :CtrlPBuffer<CR>
-nnoremap <leader>m :CtrlPMRU<CR>
 
 " nerdTree options
 "nerd tree never changes root directory except when decides differnetly
@@ -127,30 +108,12 @@ let g:UltiSnipsEditSplit="vertical"
 
 " statusline options
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-
-" syntastic configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {           
-      \ "mode": "passive",             
-      \ "active_filetypes": ["python"],
-      \ "passive_filetypes": [] }      
-let g:syntastic_c_checkers=['make']
-"Syntastic mapping 
-nnoremap <silent> <leader>sc :SyntasticCheck <CR>
-nnoremap <silent> <leader>sr :SyntasticReset <CR>
-nnoremap <silent> <leader>st :SyntasticToggleMode <CR>
-
 
 "ZoomWin mapping
 nnoremap <silent> <C-w>w :ZoomWin<CR>
 
-"Enabled extended tabline 
+"Enabled extended tabline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
@@ -161,12 +124,48 @@ let g:formatters_c = ['my_custom_c']
 "Autoformatter mapping
 nmap <leader>af :Autoformat<CR>
 
-"Autocomplete options
-"let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
-imap <c-n> <C-X><C-O>
-let g:SuperTabDefaultCompletionType = "context" 
-set completeopt=longest,menuone 
+"Deoplete options
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1"
+let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
+
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+  endif
+
 set completeopt-=preview
+
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+" Asynchronous Lint Engine Options
+let g:ale_pattern_options = {
+\   '.c$': {
+\       'ale_linters': ['clangtidy'],
+\       'ale_fixers': ['clang-format'],
+\   },
+\}
+
+" Fzf options
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 
 "Additional mapping
 "Paste mode togglig for copying big parts of files
@@ -179,14 +178,17 @@ nnoremap <c-o> <c-o>z.
 nnoremap <c-i> <c-i>z.
 nnoremap <n> <n>z.
 nnoremap <N> <N>z.
+"fzf.vim
+nnoremap <c-t> :Files<CR>
+nnoremap <Leader>ag :Ag<CR>
+nnoremap <Leader>at :Tags<CR>
+nnoremap <Leader>ab :Buffers<CR>
+nnoremap <Leader>ah :History<CR>
+
 "Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
-nnoremap <c-t> :FZF<cr>
 nmap <leader>gs :Gstatus<CR><C-w>10+
 nmap <leader>gd :Gdiff<CR>
-nmap <leader>bd :BD<CR>
-nmap <leader>bf :BF<CR>
-nmap <leader>bb :BB<CR>
 nnoremap Q <Nop>
 map <leader>- -
