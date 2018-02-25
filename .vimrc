@@ -19,6 +19,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-jedi'
+Plug 'rbong/galvanize.vim'
 if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -63,6 +65,16 @@ set number
 
 "Tag file names vim searches in current directory and up until it finds it
 set tags=./tags;/
+
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
+" Display tabs and trailing spaces visually
+set list listchars=trail:·,tab:┊\ ,extends:>,precedes:<,nbsp:·
 
 "Syntax highlighting
 syntax on
@@ -145,6 +157,9 @@ let g:ale_pattern_options = {
 \   '.c$': {
 \       'ale_linters': ['clangtidy'],
 \       'ale_fixers': ['clang-format'],
+\   },
+\   '.py$': {
+\       'ale_linters': ['pylint'],
 \   },
 \}
 
