@@ -182,6 +182,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 
+au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping
 "Paste mode togglig for copying big parts of files
 nnoremap <Leader>p :set invpaste paste? <CR>

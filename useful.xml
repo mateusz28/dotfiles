@@ -115,3 +115,4 @@ while true; do app && break; done
 tmux link-window -s shared:irc -t 9
 dd if=/dev/zero of=output.dat  bs=24M  count=1  //creates file of certain size
 ssh-keygen -t rsa -b 4096 -C mateusz28@gmail.com
+nmcli device wifi connect <AP name> password <password>

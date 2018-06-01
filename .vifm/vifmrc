@@ -329,6 +329,8 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " Start shell in current directory
 nnoremap s :shell<cr>
 
+nnoremap ,s :shell!<cr>
+
 " Display sorting dialog
 nnoremap S :sort<cr>
 
@@ -358,9 +360,7 @@ nmap A cw<c-w>
 nmap ,t :!xterm &<cr>
 
 " Opening vim to edit .vifmrc
-nmap ,c :execute ':!vim $MYVIFMRC' | restart<cr>
-" Opening gvim to edit .vifmrc
-nmap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
+nmap ,c :execute ':!nvim ~/.vifm/vifmrc' | restart<cr>
 
 " Toggle wrap setting on ,w key
 nmap ,w :set wrap!<cr>

@@ -12,8 +12,3 @@ fi
 # ------------
 source "/home/matorz/.fzf/shell/key-bindings.bash"
 
-fag(){
-  local line
-  line=`ag --nocolor "$1" | fzf` \
-    && vim $(cut -d':' -f1 <<< "$line") +$(cut -d':' -f2 <<< "$line")
-}
