@@ -17,7 +17,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'rbong/galvanize.vim'
@@ -25,7 +25,6 @@ if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
-Plug 'drn/zoomwin-vim'
 Plug 'w0rp/ale'
 
 call plug#end()            " required
@@ -43,7 +42,7 @@ set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 "Default vertical separator
-set fillchars+=vert:│
+"set fillchars+=vert:│
 
 "enabe project specified vimrc files
 set exrc
@@ -121,9 +120,6 @@ let g:UltiSnipsEditSplit="vertical"
 " statusline options
 set statusline+=%#warningmsg#
 set statusline+=%*
-
-"ZoomWin mapping
-nnoremap <silent> <C-w>w :ZoomWin<CR>
 
 "Enabled extended tabline
 let g:airline#extensions#tabline#enabled = 1
@@ -204,7 +200,7 @@ nnoremap <Leader>ah :History<CR>
 "Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
-nmap <leader>gs :Gstatus<CR><C-w>10+
+nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nnoremap Q <Nop>
 map <leader>- -

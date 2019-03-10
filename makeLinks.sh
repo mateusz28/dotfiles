@@ -7,8 +7,8 @@ ln -s ~/dotfiles/.merger.sh ~/.merger.sh
 ln -s ~/dotfiles/.diffwrap.sh ~/.diffwrap.sh
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/.vifm ~/.vifm
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.fzf/install
-
