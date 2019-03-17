@@ -1,6 +1,6 @@
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mattn/emmet-vim'
+"Plug 'pangloss/vim-javascript'
+"Plug 'mxw/vim-jsx'
+"Plug 'mattn/emmet-vim'
 
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
 let g:ale_linters = {'jsx': ['eslint']}
