@@ -14,6 +14,10 @@
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
   prompt = false
+[merge]
+  tool = nvimdiff
+[mergetool "nvimdiff"]
+  cmd = "nvim -f -c \"Gdiff\" \"$MERGED\""
 ;[difftool "vimdiff"]
   ;path = /home/mateuszorzol/bin/vim/bin/vimdiff
 [gitreview]
