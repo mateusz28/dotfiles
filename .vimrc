@@ -21,6 +21,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'rbong/galvanize.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
