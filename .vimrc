@@ -21,8 +21,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'rbong/galvanize.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -93,14 +91,7 @@ let mapleader = "-"
 set hlsearch
 set ignorecase
 set incsearch
-nnoremap <leader>/ :vimgrep //gj ./**/*.[ch] <Bar> cw <c-f>$T/;;;i
-cnoremap <c-g> <CR>n/<c-p>
-"Map key for quicksearch in project
-map <F5> :execute "vimgrep /" . expand("<cword>") . "/gj ./**/*.[ch]" <Bar> cw<CR>
-
-" start wildcard expansion in command mode
-"set wildchar=<Tab> wildmenu wildmode=longest,list
-set wildignore+=*.so,*.swp,*.zip,*.o     " MacOSX/Linux
+set wildignore+=*.so,*.swp,*.zip,*.o,*.pyc     " MacOSX/Linux
 
 "allow backspace to remove neline and indentation in insert mode
 set backspace=indent,eol,start
@@ -178,7 +169,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
 
 au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping
