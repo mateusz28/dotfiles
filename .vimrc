@@ -24,6 +24,7 @@ Plug 'rbong/galvanize.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-gitgutter'
 if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -172,6 +173,8 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+set updatetime=100
 
 au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping

@@ -727,6 +727,10 @@ hi link VimwikiHeader4 BSpecial
 hi link VimwikiHeader5 BConstant
 hi link VimwikiHeader6 BType
 
+" GitGutter:
+hi GitGutterAdd ctermfg=2 ctermbg=238
+hi GitGutterDelete ctermfg=1 ctermbg=238
+hi GitGutterChange ctermfg=3 ctermbg=238
 
 " ============================================================================
 " Preset Commands:
