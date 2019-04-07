@@ -9,6 +9,10 @@ let g:ale_pattern_options = {
 \       'ale_linters': ['clangtidy', 'clangd'],
 \       'ale_fixers': ['clang-format'],
 \   },
+\   '.h$': {
+\       'ale_linters': ['clangtidy', 'clangd'],
+\       'ale_fixers': ['clang-format'],
+\   },
 \   '.py$': {
 \       'ale_linters': ['pylint'],
 \   },
@@ -28,6 +32,5 @@ nnoremap <c-t> :call fzf#vim#files('', {'down': '40%', 'source': 'git ls-files -
 let g:ale_c_clangd_options = '-log=verbose'
 let g:deoplete#sources#clang#clang_complete_database='./'
 "let g:ale_c_clangformat_options = '-style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: None, KeepEmptyLinesAtTheStartOfBlocks: false}"'
-"let g:ale_sign_error = '✗✗'
-"let g:ale_sign_warning = '∆∆'
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '∆'
