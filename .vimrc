@@ -176,6 +176,8 @@ let g:fzf_colors =
 
 set updatetime=100
 
+set wildoptions=pum
+
 au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping
 "Paste mode togglig for copying big parts of files
