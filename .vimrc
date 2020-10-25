@@ -17,19 +17,22 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-clang'
-Plug 'zchee/deoplete-jedi'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"lug 'zchee/deoplete-clang'
+"lug 'zchee/deoplete-jedi'
 Plug 'rbong/galvanize.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 
 call plug#end()            " required
 
@@ -176,7 +179,6 @@ let g:fzf_colors =
 
 set updatetime=100
 
-set wildoptions=pum
 
 au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping
