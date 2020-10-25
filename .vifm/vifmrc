@@ -181,7 +181,7 @@ command! reload :write | restart
 
 " Pdf
 filetype *.pdf zathura %f,apvlv %f,xpdf %f
-fileview *.pdf pdftotext -nopgbrk %c -
+fileview *.pdf okular %c
 
 " PostScript
 filextype *.ps,*.ps.gz gv %c %i &
@@ -229,7 +229,7 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ gpicview %c,
         \ {View in feh}
         \ feh --draw-filename --draw-actions --scale-down --geometry 1380x768 %c,
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm gwenview %f
 
 " MD5
 filetype *.md5
