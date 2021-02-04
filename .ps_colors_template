@@ -1,0 +1,3 @@
+#change colors and copy this file as ~/dotfiles/.ps_colors
+PS_MACHINE_COLOR="12m"
+PS_USR_COLOR="4m"

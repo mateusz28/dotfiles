@@ -3,3 +3,4 @@
 .tmux/resurrect/last
 .vim/bundle/
 .vifm/vifminfo
+.ps_colors

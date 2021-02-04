@@ -125,19 +125,9 @@ if [ -z "$IP_ADDR" ]; then
 fi
 
 #PS_TIME='\[\033[48;5;8m\] \A '
-if [ "$IP_ADDR" =  "192.168.11.12" ] ; then
-  PS_MACHINE_COLOR="10m"
-  PS_USR_COLOR="2m"
-elif [ "$IP_ADDR" =  "192.168.11.5" ] ; then
-  PS_MACHINE_COLOR="11m"
-  PS_USR_COLOR="3m"
-elif [ "$IP_ADDR" =  "192.168.11.7" ] ; then
-  PS_MACHINE_COLOR="13m"
-  PS_USR_COLOR="5m"
-else
-  PS_MACHINE_COLOR="10m"
-  PS_USR_COLOR="2m"
-fi
+source $HOME/dotfiles/.ps_colors 2> /dev/null
+PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="10m"}
+PS_USR_COLOR=${PS_USR_COLOR:="2m"}
 
 if [ -z "$INSIDE_VIFM" ]; then
   PS_VIFM=""
