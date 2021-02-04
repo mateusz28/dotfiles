@@ -29,7 +29,7 @@ if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 call plug#end()            " required
 
@@ -131,18 +131,6 @@ nmap <leader>af :Autoformat<CR>
 
 set completeopt-=preview
 
-" Set this. Airline will handle the rest.
-let g:airline#extensions#ale#enabled = 1
-" Asynchronous Lint Engine Options
-let g:ale_pattern_options = {
-\   '.c$': {
-\       'ale_linters': ['clangtidy'],
-\       'ale_fixers': ['clang-format'],
-\   },
-\   '.py$': {
-\       'ale_linters': ['pylint'],
-\   },
-\}
 
 " Fzf options
 let g:fzf_history_dir = '~/.local/share/fzf-history'

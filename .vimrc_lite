@@ -12,6 +12,10 @@ set t_ut=
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
 "enabe project specified vimrc files
 set exrc
 
@@ -50,6 +54,7 @@ set statusline+=%*
 
 " relative line numeration
 set number
+set relativenumber
 
 "Tag file names vim searches in current directory and up until it finds it
 set tags=./tags;/
