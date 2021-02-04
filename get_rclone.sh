@@ -1,4 +1,7 @@
-curl https://rclone.org/install.sh | sudo bash
+curl https://rclone.org/install.sh > install.sh
+chmod +x install.sh
+sudo install.sh
+rm install.sh
 echo "Paste config file"
 mkdir -p $HOME/.config/rclone/
-vim $HOME/.config/rclone/rclone.conf
+nvim $HOME/.config/rclone/rclone.conf
