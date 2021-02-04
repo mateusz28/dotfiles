@@ -17,9 +17,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"lug 'zchee/deoplete-clang'
-"lug 'zchee/deoplete-jedi'
 Plug 'rbong/galvanize.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -32,7 +29,6 @@ if v:version >= 704
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
-"Plug 'dense-analysis/ale'
 
 call plug#end()            " required
 
@@ -132,32 +128,8 @@ let g:formatters_c = ['my_custom_c']
 "Autoformatter mapping
 nmap <leader>af :Autoformat<CR>
 
-"Deoplete options
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so.8"
-let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
-
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#custom#var = {}
-  endif
-
 set completeopt-=preview
 
-" Set this. Airline will handle the rest.
-"let g:airline#extensions#ale#enabled = 1
-" Asynchronous Lint Engine Options
-"let g:ale_pattern_options = {
-"\   '.c$': {
-"\       'ale_linters': ['clangtidy'],
-"\       'ale_fixers': ['clang-format'],
-"\   },
-"\   '.py$': {
-"\       'ale_linters': ['pylint'],
-"\   },
-"\}
 
 " Fzf options
 let g:fzf_history_dir = '~/.local/share/fzf-history'
