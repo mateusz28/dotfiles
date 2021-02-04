@@ -1,4 +1,6 @@
 #!/bin/bash
 mkdir -p ~/notes/
+rclone sync ~/notes/ notes:
 NOTES_NAME=$(date +notes_%Y-%m-%d.md)
 vim ~/notes/$NOTES_NAME
+rclone sync  ~/notes/ notes:
