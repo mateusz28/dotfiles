@@ -135,8 +135,8 @@ elif [ "$IP_ADDR" =  "192.168.11.7" ] ; then
   PS_MACHINE_COLOR="13m"
   PS_USR_COLOR="5m"
 else
-  PS_MACHINE_COLOR="12m"
-  PS_USR_COLOR="4m"
+  PS_MACHINE_COLOR="13m"
+  PS_USR_COLOR="5m"
 fi
 
 if [ -z "$INSIDE_VIFM" ]; then
@@ -184,9 +184,10 @@ up(){
 }
 
 export SHELL=/bin/bash
-
+source /usr/share/git/completion/git-prompt.sh
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 LS_COLORS="$LS_COLORS:ow=1;33"; export LS_COLORS
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
 fi
+eval "$(keychain --eval $HOME/.ssh/id_rsa)"

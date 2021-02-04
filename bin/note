@@ -1,0 +1,4 @@
+#!/bin/bash
+mkdir -p ~/notes/
+NOTES_NAME=$(date +notes_%Y-%m-%d.md)
+vim ~/notes/$NOTES_NAME

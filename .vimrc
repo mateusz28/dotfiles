@@ -129,18 +129,6 @@ let g:formatters_c = ['my_custom_c']
 "Autoformatter mapping
 nmap <leader>af :Autoformat<CR>
 
-"Deoplete options
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/x86_64-linux-gnu/libclang-7.so.1"
-let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
-
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-  endif
-
 set completeopt-=preview
 
 " Set this. Airline will handle the rest.
@@ -176,7 +164,6 @@ let g:fzf_colors =
 
 set updatetime=100
 
-set wildoptions=pum
 
 au FileType c setlocal fo-=c fo-=r fo-=o
 "Additional mapping
