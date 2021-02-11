@@ -1,0 +1,7 @@
+#!/bin/bash
+fnote()
+{
+  ag --nobreak --nonumbers --noheading --nofilename . $HOME/notes | fzf -0 -1
+}
+
+fnote $@
