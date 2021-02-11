@@ -1,7 +1,8 @@
 #!/bin/bash
 fnote()
 {
-  ag --nobreak --nonumbers --noheading --nofilename . $HOME/notes | fzf -0 -1
+  [ $# == 0 ] && QUERRY=. || QUERRY=$@
+  ag --nobreak --nonumbers --noheading --nofilename $QUERRY $HOME/notes | fzf -q "!^# " | tr -d '\n' | xclip
 }
 
 fnote $@
