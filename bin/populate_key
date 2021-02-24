@@ -1,4 +1,3 @@
 #!/bin/bash
 sed -i '$ d' ~/.ssh/known_hosts
-scp -o StrictHostKeyChecking=no ~/.ssh/id_rsa.pub $1:authorized_keys
-ssh -o StrictHostKeyChecking=no $1 'mkdir -p .ssh && mv authorized_keys .ssh && chmod 600 .ssh/authorized_keys'; 
+cat ~/.ssh/id_rsa.pub | ssh -o StrictHostKeyChecking=no $1 'read && mkdir -p .ssh && echo "$REPLY" >>.ssh/authorized_keys && chmod 600 .ssh/authorized_keys'; 
