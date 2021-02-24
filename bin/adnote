@@ -1,0 +1,9 @@
+#!/bin/bash
+mkdir -p ~/notes/
+rclone copy notes: ~/notes
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+echo -ne "#Quicknote: "
+read
+echo "#Quicknote: $READ" >> $HOME/notes/$NOTES_NAME
+echo "$@" >> $HOME/notes/$NOTES_NAME
+rclone copy  ~/notes/ notes:
