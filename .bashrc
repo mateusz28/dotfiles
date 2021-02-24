@@ -174,10 +174,10 @@ up(){
 }
 
 export SHELL=/bin/bash
-source /usr/share/git/completion/git-prompt.sh
+source $HOME/dotfiles/bin/git-prompt.sh
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 LS_COLORS="$LS_COLORS:ow=1;33"; export LS_COLORS
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
 fi
-eval "$(keychain --eval $HOME/.ssh/id_rsa)"
+which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
