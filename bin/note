@@ -1,6 +1,7 @@
 #!/bin/bash
-mkdir -p ~/notes/
-rclone copy notes: ~/notes
+#add to $HOME/notes/.nvimrc:
+#autocmd BufWrite * :!rclone copy $HOME/notes/ notes:
+mkdir -p $HOME/notes/
+rclone copy notes: $HOME/notes
 NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
-nvim -c "cd $HOME/notes" $HOME/notes/$NOTES_NAME
-rclone copy  ~/notes/ notes:
+nvim --cmd "cd $HOME/notes" $HOME/notes/$NOTES_NAME
