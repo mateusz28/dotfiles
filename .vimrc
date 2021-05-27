@@ -25,8 +25,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'neoclide/coc-snippets'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+
 if v:version >= 704
-  Plug 'SirVer/ultisnips'
+  "Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
 
@@ -37,6 +44,9 @@ set splitright
 " set terminal 256 color version
 set t_Co=256
 " colorscheme settings
+set background=light
+"colorscheme PaperColor
+"let g:airline_theme='papercolor'
 let g:lucius_style = 'dark'
 let g:lucius_no_term_bg = 1
 colorscheme lucius
@@ -104,14 +114,14 @@ set backspace=indent,eol,start
 let g:NERDTreeChDirMode       = 0
 nmap <leader>ne :NERDTreeToggle<CR>
 
-"Snippets options
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsListSnippets="<c-v>"
+""Snippets options
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsListSnippets="<c-v>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsEditSplit="vertical"
 
 " statusline options
 set statusline+=%#warningmsg#
@@ -150,6 +160,11 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 set updatetime=100
+
+let g:openbrowser_browser_commands = [
+\   {'name': '/usr/bin/brave',
+\    'args': ['{browser}', '{uri}']}
+\]
 
 
 au FileType c setlocal fo-=c fo-=r fo-=o
