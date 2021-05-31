@@ -109,7 +109,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fdfind --type f'
+export FZF_DEFAULT_COMMAND='fd --type f'
 #export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
@@ -117,3 +117,15 @@ fi
 which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
 source ~/.bash_aliases
 setopt appendhistory
+
+source $HOME/dotfiles/.ps_colors 2> /dev/null
+PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="10m"}
+PS_USR_COLOR=${PS_USR_COLOR:="2m"}
+
+local user="%F{$PS_USR_COLOR}%n%f@%F{$PS_MACHINE_COLOR}%m%f"
+PROMPT="${user} ${pwd}$ "
+RPROMPT="${return_code} ${git_branch}"
+
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
