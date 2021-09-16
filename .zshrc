@@ -96,6 +96,13 @@ else
   export EDITOR='nvim'
 fi
 
+if [ -z "$INSIDE_VIFM" ]; then
+  PS_VIFM=""
+else
+  PS_VIFM="[VIFM]"
+  unset INSIDE_VIFM
+fi
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -123,7 +130,7 @@ PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="10m"}
 PS_USR_COLOR=${PS_USR_COLOR:="2m"}
 
 local user="%F{$PS_USR_COLOR}%n%f@%F{$PS_MACHINE_COLOR}%m%f"
-PROMPT="${user} ${pwd}$ "
+PROMPT="${user} ${pwd}${PS_VIFM}$ "
 RPROMPT="${return_code} ${git_branch}"
 
 autoload -Uz bracketed-paste-magic
