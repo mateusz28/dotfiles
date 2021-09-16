@@ -33,7 +33,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
 
 if v:version >= 704
-  "Plug 'SirVer/ultisnips'
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
 
