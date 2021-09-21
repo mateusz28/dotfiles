@@ -31,6 +31,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'aklt/plantuml-syntax'
 Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
+Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 if v:version >= 704
   "Plug 'SirVer/ultisnips'
@@ -193,3 +195,7 @@ nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nnoremap Q <Nop>
 map <leader>- -
+
+let g:mkdp_auto_close=0
+let g:mkdp_refresh_slow=1
+let g:mkdp_markdown_css=fnameescape($HOME).'dotfiles/github-markdown-css/github-markdown.css'
