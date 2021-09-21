@@ -35,7 +35,7 @@ Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 if v:version >= 704
-  "Plug 'SirVer/ultisnips'
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 endif
 
