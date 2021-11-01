@@ -196,6 +196,7 @@ nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nnoremap Q <Nop>
 map <leader>- -
+cnoremap <C-A> <Home>
 
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
