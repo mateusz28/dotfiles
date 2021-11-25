@@ -140,7 +140,7 @@ local ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[103]%}✭%{$reset_color%}"
 
 local ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
 local ZSH_THEME_GIT_PROMPT_SUFFIX="$fg[yellow])%{$reset_color%}"
-PROMPT='%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
+PROMPT='${PS_VIFM}$%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
 RPROMPT=""
 
 autoload -Uz bracketed-paste-magic
