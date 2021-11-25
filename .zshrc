@@ -8,7 +8,7 @@ export ZSH="/home/azajas/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="alanpeabody"
+ZSH_THEME="essembeh"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -130,8 +130,18 @@ PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="10m"}
 PS_USR_COLOR=${PS_USR_COLOR:="2m"}
 
 local user="%F{$PS_USR_COLOR}%n%f@%F{$PS_MACHINE_COLOR}%m%f"
-PROMPT="${user} ${pwd}${PS_VIFM}$ "
-RPROMPT="${return_code} ${git_branch}"
+
+local ZSH_THEME_GIT_PROMPT_ADDED="%{$FG[103]%}✚%{$rset_color%}"
+local ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[103]%}✹%{$reset_color%}"
+local ZSH_THEME_GIT_PROMPT_DELETED="%{$FG[103]%}✖%{$reset_color%}"
+local ZSH_THEME_GIT_PROMPT_RENAMED="%{$FG[103]%}➜%{$reset_color%}"
+local ZSH_THEME_GIT_PROMPT_UNMERGED="%{$FG[103]%}═%{$reset_color%}"
+local ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[103]%}✭%{$reset_color%}"
+
+local ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
+local ZSH_THEME_GIT_PROMPT_SUFFIX="$fg[yellow])%{$reset_color%}"
+PROMPT='%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
+RPROMPT=""
 
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
