@@ -192,7 +192,7 @@ nnoremap <Leader>ah :History<CR>
 "Faster and smoother movement
 nnoremap <c-y> 3<c-y>
 nnoremap <c-e> 3<c-e>
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :Git<CR>
 nmap <leader>gd :Gdiff<CR>
 nnoremap Q <Nop>
 map <leader>- -
