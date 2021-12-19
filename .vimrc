@@ -201,3 +201,8 @@ cnoremap <C-A> <Home>
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
 let g:mkdp_markdown_css=fnameescape($HOME).'dotfiles/github-markdown-css/github-markdown.css'
+
+autocmd VimResized * wincmd =
+inoremap <C-v> <C-r>+
+xnoremap Q :'<,'>:normal @q<CR>
+xnoremap . :norm.<CR>
