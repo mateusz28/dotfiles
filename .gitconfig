@@ -10,10 +10,13 @@
   pager = true
 [diff]
   tool = nvimdiff
+[delta]
+	features = line-numbers decorations
+	line-numbers = true
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
-  prompt = false
+  prompt = true
 [merge]
   tool = nvimdiff
 [mergetool "nvimdiff"]
