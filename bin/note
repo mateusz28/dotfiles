@@ -3,5 +3,6 @@
 #autocmd BufWrite * :!rclone copy $HOME/notes/ notes:
 mkdir -p $HOME/notes/
 rclone copy notes: $HOME/notes
-NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}${SUFFIX}.md)
 nvim --cmd "cd $HOME/notes" $HOME/notes/$NOTES_NAME

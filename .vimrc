@@ -46,7 +46,7 @@ set splitright
 " set terminal 256 color version
 set t_Co=256
 " colorscheme settings
-set background=light
+set background=dark
 "colorscheme PaperColor
 "let g:airline_theme='papercolor'
 let g:lucius_style = 'dark'
