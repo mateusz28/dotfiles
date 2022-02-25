@@ -117,6 +117,7 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS="--preview ' bat {}' --bind ?:toggle-preview --preview-window=:hidden"
 #export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
