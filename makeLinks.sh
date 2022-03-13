@@ -16,7 +16,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-git clone https://github.com/mateusz28/tmux-session-spectrum.git ~/.tmux/plugins/
+git clone https://github.com/mateusz28/tmux-session-spectrum.git  ~/.tmux/plugins/tmux-session-spectrum
 ~/.fzf/install
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
