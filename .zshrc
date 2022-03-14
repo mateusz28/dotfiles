@@ -122,6 +122,9 @@ export FZF_DEFAULT_OPTS="--preview ' bat {}' --bind ?:toggle-preview --preview-w
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
 fi
+if [[ ! "$PATH" == *$HOME/.local/bin ]]; then
+ export PATH="$PATH:$HOME/.local/bin"
+fi
 which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
 source ~/.bash_aliases
 setopt appendhistory

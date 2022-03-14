@@ -4,3 +4,4 @@
 .vim/bundle/
 .vifm/vifminfo
 .ps_colors
+tmux-session-spectrum.conf
