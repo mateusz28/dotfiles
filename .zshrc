@@ -125,6 +125,9 @@ fi
 if [[ $UID != 0 ]]; then
   which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
 fi
+if [[ ! "$PATH" == *$HOME/.local/bin ]]; then
+ export PATH="$PATH:$HOME/.local/bin"
+fi
 source ~/.bash_aliases
 setopt appendhistory
 

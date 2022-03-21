@@ -379,6 +379,7 @@ command! fzfdir : let $FZF_RES = term('fugvifm 2>&0')
             \| endif
 nnoremap <c-t> :fzf<cr>
 nnoremap <c-g> :fzfdir<cr>
+nnoremap <c-x> :!nvr -s --servername /tmp/vifm %f<cr>
 
 " Example of standard two-panel file managers mappings
 nmap <f3> :!less %f<cr>
