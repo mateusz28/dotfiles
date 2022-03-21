@@ -11,6 +11,7 @@ mkdir -p ~/.vim/colors
 cp ~/dotfiles/init.vim  ~/.config/nvim/init.vim
 cp ~/dotfiles/.vim/colors/lucius.vim  ~/.vim/colors/lucius.vim
 [[ -f .ps_colors ]] || cp .ps_colors_template .ps_colors
+[[ -f tmux-session-spectrum.conf ]] || cp tmux-session-spectrum-template.conf tmux-session-spectrum.conf
 #install plug and vifm
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

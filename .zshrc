@@ -80,7 +80,7 @@ plugins=(
     zsh-z
 )
 
-source $ZSH/oh-my-zsh.sh
+  source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -122,13 +122,17 @@ export FZF_DEFAULT_OPTS="--preview ' bat {}' --bind ?:toggle-preview --preview-w
 if [[ ! "$PATH" == *$HOME/dotfiles/bin ]]; then
  export PATH="$PATH:$HOME/dotfiles/bin"
 fi
-which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
+if [[ $UID != 0 ]]; then
+  which keychain > /dev/null && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
+fi
 source ~/.bash_aliases
 setopt appendhistory
 
-source $HOME/dotfiles/.ps_colors 2> /dev/null
-PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="10m"}
-PS_USR_COLOR=${PS_USR_COLOR:="2m"}
+if [[ $UID != 0 ]]; then
+  source $HOME/dotfiles/.ps_colors 2> /dev/null
+fi
+PS_MACHINE_COLOR=${PS_MACHINE_COLOR:="9m"}
+PS_USR_COLOR=${PS_USR_COLOR:="1m"}
 
 local user="%F{$PS_USR_COLOR}%n%f@%F{$PS_MACHINE_COLOR}%m%f"
 
@@ -142,7 +146,8 @@ local ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[103]%}✭%{$reset_color%}"
 local ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
 local ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 
-PROMPT='${PS_VIFM}$%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
+PROMPT_SIGN='%(!.#.$)'
+PROMPT='${PS_VIFM}${PROMPT_SIGN}%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
 RPROMPT=""
 
 autoload -Uz bracketed-paste-magic
