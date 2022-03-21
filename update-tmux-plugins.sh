@@ -1,2 +1,2 @@
 #!/bin/bash
-git -C /home/azajas/.tmux/plugins/tmux-session-spectrum pull origin master
+git -C $HOME/.tmux/plugins/tmux-session-spectrum pull origin master
