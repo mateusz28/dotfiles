@@ -1,0 +1,16 @@
+#!/bin/bash
+fig() {
+  local file
+  local line
+
+  FZFARG="${2} "
+  FILEPATTERN="${1}"
+  read -r file line <<<$(ag -0 --hidden -u --nobreak --noheading -G "${1}" "${2}" | fzf -0 -1  --delimiter : --preview 'bat --color "always" -p {1} -H {2} ' --preview-window '+{2}-5' -e -q "$FZFARG" | awk -F: '{print $1, $2}')
+
+  if [[ -n $file ]]
+  then
+    nvim $file +$line
+  fi
+}
+[ $# -lt 2 ] && echo "Not enough args" && exit 1
+fig "$1" "$2"
