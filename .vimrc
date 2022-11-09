@@ -33,11 +33,9 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-
-if v:version >= 704
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-endif
+Plug 'junegunn/vim-peekaboo'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()            " required
 
@@ -201,8 +199,11 @@ cnoremap <C-A> <Home>
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
 let g:mkdp_markdown_css=fnameescape($HOME).'dotfiles/github-markdown-css/github-markdown.css'
+let g:mkdp_page_title = '${name}'
+let g:mkdp_theme = 'light'
 
 autocmd VimResized * wincmd =
 inoremap <C-v> <C-r>+
 xnoremap Q :'<,'>:normal @q<CR>
 xnoremap . :norm.<CR>
+let g:peekaboo_compact = 1

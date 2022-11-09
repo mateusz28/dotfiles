@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+if [ $# -lt 1 ]; then
+  echo "No script name"
+  exit 1
+fi
+echo creating $1
+
+cat >${1}.sh <<'EOF'
+#!/bin/bash
+# sourcing scripttol
+source $HOME/dotfiles/bin/tools.sh
+# error panic
+set -o errexit -o pipefail -o noclobber
+# enable debug when TRACE=1
+if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
+
+function usage() {
+  if [ -n "$1" ]; then
+    echo  "ERR -> $1\n";
+  fi
+  echo "Usage: $0 [-h help] "
+  echo "  -h, --help   Show this message"
+  echo ""
+  echo "Example: $0 -h"
+  echo "Debug: TRACE=1 $0.sh"
+  exit 1
+}
+
+# parse params
+while [[ "$#" > 0 ]]; do case $1 in
+  #-f|--file) FILE="$2";shift;shift;;
+  #-e|--enable) ENABLE=1;shift;;
+  -h|--help) usage;shift;;
+  *) usage "Unknown parameter passed: $1"; exit 1;;
+esac; done
+
+# verify params
+#if [ -z "$FILE" ]; then usage "File is not set"; fi;
+
+
+EOF
+chmod +x ${1}.sh
+nvim ${1}.sh
