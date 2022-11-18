@@ -3,6 +3,6 @@ LINES=${1:-500}
 docker-compose logs -f --tail $LINES > /tmp/logs-temp.log &
 PID=$!
 echo -e "$PID "
-tail -f -n $LINES /tmp/logs-temp.log | fzf -0 --ansi --tac --tiebreak=end --preview 'bat --theme=ansi --color "always" -p /tmp/logs-temp.log -H $(({n}+1)) -r $(sed "s/^-.*/0/" <<< $(({n}-${FZF_PREVIEW_LINES}+${FZF_PREVIEW_LINES}/2))):'  --preview-window="nohidden,bottom,90%" | xclip
+tail -f -n $LINES /tmp/logs-temp.log | fzf -0 --ansi --tac --tiebreak=end --preview 'bat --theme=ansi --color "always" -p /tmp/logs-temp.log -H $(({n}+1)) -r $(sed "s/^-.*/0/" <<< $(({n}-${FZF_PREVIEW_LINES}+${FZF_PREVIEW_LINES}/2))):'  --preview-window="nohidden,bottom,90%"
 kill $PID
 rm /tmp/logs-temp.log
