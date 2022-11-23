@@ -27,7 +27,7 @@ fshow_single() {
 FZF-EOF"
 }
 
-cd $(git rev-parse --show-cdup)
+cd $(git rev-parse --show-toplevel)
 if [ $# -eq 0 ]; then
   fshow
 else 
