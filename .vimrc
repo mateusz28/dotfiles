@@ -33,7 +33,6 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-Plug 'junegunn/vim-peekaboo'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
