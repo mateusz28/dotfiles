@@ -27,6 +27,11 @@ fshow_single() {
 FZF-EOF"
 }
 
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+is_in_git_repo || { echo "Not in a git dir"; exit 1; }
+
 cd $(git rev-parse --show-toplevel)
 if [ $# -eq 0 ]; then
   fshow
