@@ -1,0 +1,2 @@
+#!/bin/bash
+cat | tee /tmp/logs-temp.log |  fzf -0 --ansi --tac --tiebreak=index --preview 'bat --color "always" -p /tmp/logs-temp.log -H $(({n}+1)) -r $(sed "s/^-.*/0/" <<< $(({n}-${FZF_PREVIEW_LINES}+${FZF_PREVIEW_LINES}/2))):'  --preview-window="nohidden,bottom,60%"

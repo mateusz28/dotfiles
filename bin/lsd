@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -1  "$@" | xargs realpath  | fzf -1 --multi | xargs | xclip

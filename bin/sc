@@ -37,6 +37,8 @@ esac; done
 # verify params
 #if [ -z "$FILE" ]; then usage "File is not set"; fi;
 
+#Ring bell after finish
+tput bel
 
 EOF
 chmod +x ${1}.sh
