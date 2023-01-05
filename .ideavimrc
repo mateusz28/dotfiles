@@ -1,0 +1,10 @@
+set relativenumber
+set number
+
+set hlsearch
+set ignorecase
+set incsearch
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+nnoremap ]c :action GotoNextError<CR>
+nnoremap [c :action GotoPreviousError<CR>

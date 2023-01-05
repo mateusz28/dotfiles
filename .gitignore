@@ -5,3 +5,11 @@
 .vifm/vifminfo
 .ps_colors
 tmux-session-spectrum.conf
+.cgdb/logs
+.vifm/vifminfo.json
+bin/ffstream.sh
+bin/isma-ssh
+bin/sogs-ssh
+bin/voltcraft.sh
+bin/vpn-gp.sh
+bin/walter-ssh

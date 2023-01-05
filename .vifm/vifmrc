@@ -377,7 +377,13 @@ command! fzfdir : let $FZF_RES = term('fugvifm 2>&0')
             \| if $FZF_RES != ''
             \|    execute system('[ -f "$FZF_RES" ] && echo goto || echo cd') fnameescape($FZF_RES)
             \| endif
+
+command! fzfhist : let $FZF_RES = term('vifmhist 2>&0')
+            \| if $FZF_RES != ''
+            \|    execute system('[ -f "$FZF_RES" ] && echo goto || echo cd') fnameescape($FZF_RES)
+            \| endif
 nnoremap <c-t> :fzf<cr>
+nnoremap <c-h> :fzfhist<cr>
 nnoremap <c-g> :fzfdir<cr>
 nnoremap <c-x> :!nvr -s --servername /tmp/vifm %f<cr>
 

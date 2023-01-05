@@ -1,0 +1,5 @@
+#!/bin/bash
+source $HOME/dotfiles/bin/tools.sh 
+eval $(systemctl show --property ActiveState docker)
+[[ $ActiveState == active ]] || { colorecho RED "Docker not active. Exiting 1!"; exit 1; }
+docker rm $( docker ps --format "{{.Names}} {{.Image}} {{.CreatedAt}} {{.Status}}" | fzf | awk '{print $1;}')

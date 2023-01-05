@@ -1,0 +1,2 @@
+#!/bin/bash
+jq -r  ".gtabs[].panes[].ptabs[].history[]|.dir,.file" $HOME/.vifm/vifminfo.json | awk 'NR%2{printf "%s/",$0;next;}1' | awk '!x[$0]++' | fzf --tac --tiebreak=index --preview 'bat --color="always"  {}'
