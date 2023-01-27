@@ -1,0 +1,3 @@
+#!/bin/bash
+answer="$(($@))"
+printf '%d (%#x)\n' "$answer" "$answer"
