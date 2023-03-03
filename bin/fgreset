@@ -4,4 +4,4 @@ if [ -z "$TO_ADD" ]; then
   echo "To add list empty"
   exit 0
 fi
-git add `echo ${TO_ADD}`
+git reset `echo ${TO_ADD}`

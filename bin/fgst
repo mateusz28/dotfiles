@@ -6,11 +6,12 @@ is_in_git_repo() {
 
 fgst() {
   # "Nothing to see here, move along"
+  preview="echo {2} | xargs -I % sh -c 'git diff --color=always  HEAD % | tail -n +5'"
   is_in_git_repo || return
 
   local cmd="${FZF_CTRL_T_COMMAND:-"command git status -s"}"
 
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf -m "$@" | while read -r item; do
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf  --preview-window=nohidden --preview "$preview" -m "$@"| while read -r item; do
     echo "$item" | awk '{print $2}'
   done
   echo
