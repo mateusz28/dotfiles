@@ -1,0 +1,5 @@
+{
+  "suggest.noselect": true,
+  "suggest.floatConfig.shadow": false,
+  "suggest.invalidInsertCharacters" : [" ", "(", "<", "{", "[", "\r", "\n"]
+}

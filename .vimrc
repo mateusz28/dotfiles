@@ -206,3 +206,11 @@ inoremap <C-v> <C-r>+
 xnoremap Q :'<,'>:normal @q<CR>
 xnoremap . :norm.<CR>
 let g:peekaboo_compact = 1
+autocmd FileType * set formatoptions-=cro
+" Vim gutter
+nmap ghp <Plug>(GitGutterPreviewHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+

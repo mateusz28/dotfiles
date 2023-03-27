@@ -1,0 +1,128 @@
+set hidden
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+"set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+set makeprg=make
+
+highlight Pmenu ctermbg=darkgray ctermfg=white
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <C-]> <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+"nnoremap <F6> :make clean<CR>
+"nnoremap <F7> :make<CR>
+tnoremap <Esc> <C-\><C-n>
+nnoremap <F8> :!bear make clean && bear make<CR>
+nnoremap <F9> :!./build.sh<CR>
+nnoremap <Leader>dr :GdbRun<CR>
+nnoremap <Leader>di :GdbInterrupt<CR>
+"nnoremap <F4> :!./build_test.sh<CR>
+"nnoremap <F5> :!ctags -R *<CR>
+nnoremap <F10> :GdbStart gdb -q -iex "set confirm off" -iex "file ./x86-legic-app" -iex "set remote exec-file /home/sogs/legic-driver/x86-legic-app" <cr>
+      \ :file gdb \| :vsplit term://ssh ss -t 'pkill gdb; cd /home/sogs; ./gdb_run.sh' <CR> \|  :sleep 2 <cr> \|
+      \ :echo GdbCustomCommand('target extended-remote 10.28.0.26:4444') \| :file ssh <CR> <c-\><c-n> \| :stopinsert<cr>
+let g:nvimgdb_config_override = 
+      \{
+      \ 'key_eval':       '<f10>',
+      \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
+      \ 'key_step': '<Leader>ds',
+      \ 'key_finish': '<Leader>df',
+      \ 'key_continue': '<Leader>dc',
+      \ 'key_until': '<Leader>du',
+      \ 'key_breakpoint': '<Leader>dx',
+      \}
+let g:ale_pattern_options = {
+\   '.c$': {
+\       'ale_linters': ['clangtidy', 'clangd'],
+\       'ale_fixers': ['clang-format'],
+\   },
+\   '.h$': {
+\       'ale_linters': ['clangtidy', 'clangd'],
+\       'ale_fixers': ['clang-format'],
+\   },
+\   '.py$': {
+\       'ale_linters': ['pylint'],
+\   },
+\}
+"let g:ale_c_parse_compile_commands = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_enter = 1
+"let g:ale_set_balloons = 0
+"let g:ale_set_highlights = 1
+"nmap <F10> <Plug>(ale_fix)
+nmap <Leader>] <Plug>(ale_go_to_definition)
+nmap <Leader>ad <Plug>(ale_go_to_definition)
+nmap <Leader>ai <Plug>(ale_hover)
+nmap <Leader>ar <Plug>(ale_find_references)
+nmap <Leader>ax <Plug>(ale_reset)
+nnoremap <c-t> :call fzf#vim#files('', {'down': '40%', 'source': 'git ls-files --cached'})<CR>
+nmap <Leader>gx :Dox<CR>
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+"let g:ale_c_clangd_options = '-log=verbose'
+"let g:deoplete#sources#clang#clang_complete_database='./'
+"let g:ale_c_clangformat_options = '-style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: None, KeepEmptyLinesAtTheStartOfBlocks: false}"'
+"let g:ale_sign_error = '✗✗'
+"let g:ale_sign_warning = '∆∆'
+"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
