@@ -70,59 +70,13 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-"nnoremap <F6> :make clean<CR>
-"nnoremap <F7> :make<CR>
+nmap <leader>ax :CocRestart<cr>
+
 tnoremap <Esc> <C-\><C-n>
-nnoremap <F8> :!bear make clean && bear make<CR>
-nnoremap <F9> :!./build.sh<CR>
-nnoremap <Leader>dr :GdbRun<CR>
-nnoremap <Leader>di :GdbInterrupt<CR>
-"nnoremap <F4> :!./build_test.sh<CR>
-"nnoremap <F5> :!ctags -R *<CR>
-nnoremap <F10> :GdbStart gdb -q -iex "set confirm off" -iex "file ./x86-legic-app" -iex "set remote exec-file /home/sogs/legic-driver/x86-legic-app" <cr>
-      \ :file gdb \| :vsplit term://ssh ss -t 'pkill gdb; cd /home/sogs; ./gdb_run.sh' <CR> \|  :sleep 2 <cr> \|
-      \ :echo GdbCustomCommand('target extended-remote 10.28.0.26:4444') \| :file ssh <CR> <c-\><c-n> \| :stopinsert<cr>
-let g:nvimgdb_config_override = 
-      \{
-      \ 'key_eval':       '<f10>',
-      \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
-      \ 'key_step': '<Leader>ds',
-      \ 'key_finish': '<Leader>df',
-      \ 'key_continue': '<Leader>dc',
-      \ 'key_until': '<Leader>du',
-      \ 'key_breakpoint': '<Leader>dx',
-      \}
-let g:ale_pattern_options = {
-\   '.c$': {
-\       'ale_linters': ['clangtidy', 'clangd'],
-\       'ale_fixers': ['clang-format'],
-\   },
-\   '.h$': {
-\       'ale_linters': ['clangtidy', 'clangd'],
-\       'ale_fixers': ['clang-format'],
-\   },
-\   '.py$': {
-\       'ale_linters': ['pylint'],
-\   },
-\}
-"let g:ale_c_parse_compile_commands = 1
-"let g:ale_completion_enabled = 1
-"let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_enter = 1
-"let g:ale_set_balloons = 0
-"let g:ale_set_highlights = 1
-"nmap <F10> <Plug>(ale_fix)
-nmap <Leader>] <Plug>(ale_go_to_definition)
-nmap <Leader>ad <Plug>(ale_go_to_definition)
-nmap <Leader>ai <Plug>(ale_hover)
-nmap <Leader>ar <Plug>(ale_find_references)
-nmap <Leader>ax <Plug>(ale_reset)
-nnoremap <c-t> :call fzf#vim#files('', {'down': '40%', 'source': 'git ls-files --cached'})<CR>
-nmap <Leader>gx :Dox<CR>
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-"let g:ale_c_clangd_options = '-log=verbose'
-"let g:deoplete#sources#clang#clang_complete_database='./'
-"let g:ale_c_clangformat_options = '-style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: None, KeepEmptyLinesAtTheStartOfBlocks: false}"'
-"let g:ale_sign_error = '✗✗'
-"let g:ale_sign_warning = '∆∆'
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']

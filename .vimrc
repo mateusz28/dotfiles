@@ -23,7 +23,8 @@ Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'neoclide/coc-snippets'
 Plug 'NLKNguyen/papercolor-theme'
@@ -205,7 +206,6 @@ autocmd VimResized * wincmd =
 inoremap <C-v> <C-r>+
 xnoremap Q :'<,'>:normal @q<CR>
 xnoremap . :norm.<CR>
-let g:peekaboo_compact = 1
 autocmd FileType * set formatoptions-=cro
 " Vim gutter
 nmap ghp <Plug>(GitGutterPreviewHunk)
@@ -213,4 +213,5 @@ nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
-
+nmap <Leader>t :source ~/dotfiles/.nvimrc<CR>
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
