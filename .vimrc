@@ -25,6 +25,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
+Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'neoclide/coc-snippets'
 Plug 'NLKNguyen/papercolor-theme'
@@ -34,7 +35,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-Plug 'SirVer/ultisnips'
+":Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 call plug#end()            " required
@@ -198,7 +199,7 @@ cnoremap <C-A> <Home>
 
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
-let g:mkdp_markdown_css=fnameescape($HOME).'dotfiles/github-markdown-css/github-markdown.css'
+let g:mkdp_markdown_css=printf('%s/dotfiles/markdown-css/markdown.css', $HOME)
 let g:mkdp_page_title = '${name}'
 let g:mkdp_theme = 'light'
 
@@ -215,3 +216,15 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <Leader>t :source ~/dotfiles/.nvimrc<CR>
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+lua <<EOF
+require('tabnine').setup({
+  disable_auto_comment=true,
+  accept_keymap="<Tab>",
+  dismiss_keymap = "<C-]>",
+  debounce_ms = 800,
+  suggestion_color = {gui = "#808080", cterm = 244},
+  exclude_filetypes = {"TelescopePrompt"},
+  log_file_path = nil, -- absolute path to Tabnine log file
+})
+EOF
