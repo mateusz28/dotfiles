@@ -22,7 +22,7 @@ function usage() {
   echo "  -h, --help   Show this message"
   echo ""
   echo "Example: $0 -h"
-  echo "Debug: TRACE=1 $0.sh"
+  echo "Debug: TRACE=1 $0"
   exit 1
 }
 
