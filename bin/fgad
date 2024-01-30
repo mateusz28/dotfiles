@@ -1,7 +1,2 @@
 #!/bin/bash
-TO_ADD=`fgst | xargs`
-if [ -z "$TO_ADD" ]; then
-  echo "To add list empty"
-  exit 0
-fi
-git add `echo ${TO_ADD}`
+fgst | xargs -I % sh -c "git add \"%\""
