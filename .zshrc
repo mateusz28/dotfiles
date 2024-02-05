@@ -164,5 +164,7 @@ bindkey '^F' autosuggest-accept
 function append-last-word { ((++CURSOR)); zle insert-last-word; }
 zle -N append-last-word
 bindkey "^[." append-last-word
+builtin bindkey "^[^H" backward-kill-word
+builtin bindkey "^[^?" backward-kill-word
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
