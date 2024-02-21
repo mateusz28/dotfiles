@@ -7,9 +7,9 @@ fshow() {
   fzf --ansi --no-sort --reverse --preview-window=nohidden --preview "$preview" --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                  xargs -I % sh -c 'git diff-tree --no-commit-id --name-only -r % | 
-                  fzf --reverse --preview-window=nohidden --preview \"git show --color=always % -- \{}\" --bind \"ctrl-m:execute:(echo \{} | 
-                  xargs -I ^ sh -c \\\"git difftool -y %~1 -- ^\\\")\"') << 'FZF-EOF'
+                  xargs -J{} sh -c 'arg=\$0; git diff-tree --no-commit-id --name-only -r \$arg |
+                  fzf --reverse --preview-window=nohidden --preview \"git show --color=always \$arg -- \{}\" --bind \"ctrl-m:execute:(echo \{} |
+                  xargs -I ^ sh -c \\\"git difftool -y \$arg~1 -- ^\\\")\"') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
