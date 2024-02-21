@@ -216,6 +216,11 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <Leader>t :source ~/dotfiles/.nvimrc<CR>
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+func! GutterSetBase(entry)
+  let g:gitgutter_diff_base = a:entry
+  GitGutterAll
+endfunc
+nnoremap <leader>ad :call  fzf#run(fzf#wrap({'source': 'git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"', 'sink': function('GutterSetBase'), 'options':'--ansi  --bind "ctrl-m:become(echo {1})"'}))<CR>
 
 lua <<EOF
 require('tabnine').setup({
