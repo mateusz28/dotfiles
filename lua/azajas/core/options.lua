@@ -18,7 +18,7 @@ opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
 -- cursor line
-opt.cursorline = true -- highlight the current cursor line
+-- opt.cursorline = true -- highlight the current cursor line
 
 -- appearance
 
@@ -32,7 +32,7 @@ opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
 -- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+-- opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 
 -- split windows
 opt.splitright = true -- split vertical window to the right
@@ -40,3 +40,17 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- undodir
+local backups_path = vim.fn.expand("$HOME/.vim/backups")
+vim.cmd("silent !mkdir" .. backups_path .. "  > /dev/null 2>&1")
+opt.undodir = backups_path
+opt.undofile = true
+
+-- ask when closing buffer
+opt.confirm = true
+
+-- case insensitive search
+opt.hlsearch = true
+opt.ignorecase = true
+opt.incsearch = true
