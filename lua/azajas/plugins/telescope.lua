@@ -21,6 +21,11 @@ return {
           },
         },
       },
+      pickers = {
+        git_files = {
+          recurse_submodules = true,
+        },
+      },
     })
 
     telescope.load_extension("fzf")
@@ -36,5 +41,8 @@ return {
     keymap.set("n", "<leader>a?", "<cmd>Telescope help_tags<cr>", { desc = "Find in help tags" })
     keymap.set("n", "<leader>ak", "<cmd>Telescope keys<cr>", { desc = "Find in key maps" })
     keymap.set("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = "Find in git files" })
+    keymap.set("n", "<leader>at", "<cmd>Telescope treesitter<cr>", { desc = "Find in tree sitter" })
+    keymap.set("n", "<leader>at", "<cmd>Telescope treesitter<cr>", { desc = "Find in tree sitter" })
+    keymap.set("n", "<leader>ar", "<cmd>Telescope lsp_references<cr>", { desc = "Find in lsp references" })
   end,
 }

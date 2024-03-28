@@ -47,10 +47,10 @@ return {
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
       opts.desc = "Go to previous diagnostic"
-      keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+      keymap.set("n", "[c", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 
       opts.desc = "Go to next diagnostic"
-      keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+      keymap.set("n", "]c", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
       opts.desc = "Show documentation for what is under cursor"
       keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -67,69 +67,69 @@ return {
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      vim.fn.sign_define(hl, { numhl = hl })
     end
 
     -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["html"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- configure typescript server with plugin
-    lspconfig["tsserver"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["tsserver"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- configure css server
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["cssls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- configure tailwindcss server
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["tailwindcss"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- configure svelte server
-    lspconfig["svelte"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-
-        vim.api.nvim_create_autocmd("BufWritePost", {
-          pattern = { "*.js", "*.ts" },
-          callback = function(ctx)
-            if client.name == "svelte" then
-              client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-            end
-          end,
-        })
-      end,
-    })
+    -- lspconfig["svelte"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = function(client, bufnr)
+    --     on_attach(client, bufnr)
+    --
+    --     vim.api.nvim_create_autocmd("BufWritePost", {
+    --       pattern = { "*.js", "*.ts" },
+    --       callback = function(ctx)
+    --         if client.name == "svelte" then
+    --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+    --         end
+    --       end,
+    --     })
+    --   end,
+    -- })
 
     -- configure prisma orm server
-    lspconfig["prismals"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["prismals"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- configure graphql language server
-    lspconfig["graphql"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    })
+    -- lspconfig["graphql"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+    -- })
 
     -- configure emmet language server
-    lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    })
+    -- lspconfig["emmet_ls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+    -- })
 
     -- configure python server
     lspconfig["pyright"].setup({
@@ -156,6 +156,19 @@ return {
           },
         },
       },
+    })
+
+    --configure clangd
+    lspconfig["clangd"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "cpp", "c", "h", "hpp", "m", "mm" },
+    })
+
+    lspconfig["gopls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "go" },
     })
   end,
 }

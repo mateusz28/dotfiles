@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "azajas.plugins" }, { import = "azajas.plugins.lsp" } }, {
   install = {
-    colorscheme = { "nightfly" },
+    colorscheme = { "lucius" },
   },
   checker = {
     enabled = true,

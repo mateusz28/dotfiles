@@ -27,15 +27,17 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
-        "tsserver",
-        "html",
-        "cssls",
-        "tailwindcss",
-        "svelte",
+        "bashls",
+        "clangd",
+        "gopls",
+        "cmake",
+        "jsonls",
+        "marksman",
+        "pyright",
         "lua_ls",
-        "graphql",
-        "emmet_ls",
-        "prismals",
+        "dockerls",
+        "yamlls",
+        "lua_ls",
         "pyright",
       },
       -- auto-install configured servers (with lspconfig)
@@ -49,6 +51,7 @@ return {
         "isort", -- python formatter
         "black", -- python formatter
         "pylint", -- python linter
+        "clang-format", -- c linter
         "eslint_d", -- js linter
       },
     })

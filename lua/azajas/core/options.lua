@@ -54,3 +54,10 @@ opt.confirm = true
 opt.hlsearch = true
 opt.ignorecase = true
 opt.incsearch = true
+
+-- enabe project specified vimrc files
+opt.exrc = true
+
+vim.api.nvim_create_autocmd("FileType", {
+  command = "set formatoptions-=cro",
+})

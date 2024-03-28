@@ -1,11 +1,13 @@
 return {
   {
-    "bluz71/vim-nightfly-guicolors",
+    "mateusz28/vim-lucius",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
-      vim.g.nightflyTransparent = true
-      vim.cmd([[colorscheme nightfly]])
+      -- vim.g.moonflyTransparent = true
+        vim.cmd([[let g:lucius_no_term_bg = 1]])
+        vim.cmd([[colorscheme lucius]])
+        vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
     end,
   },
   -- {

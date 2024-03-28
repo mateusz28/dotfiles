@@ -23,6 +23,8 @@ return {
         local actions = require("CopilotChat.actions")
         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
       end, { desc = "CopilotChat - Prompt actions" })
+      vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>",
+        { desc = "CopilotChat - Open windows" })
     end,
   },
 }
