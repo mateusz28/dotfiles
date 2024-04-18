@@ -14,6 +14,17 @@ return {
 
     local keymap = vim.keymap -- for conciseness
 
+    local function setup_diags()
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false,
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+      })
+    end
+
+    setup_diags()
+
     local opts = { noremap = true, silent = true }
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr

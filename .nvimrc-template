@@ -1,0 +1,11 @@
+function! BuildSplit()
+  execute 'bot split +resize20 term://./build.sh'
+  nnoremap <silent> <buffer> <ENTER> :bd<CR>
+  execute '$'
+
+endfunction
+
+nmap <silent> <F9> :call BuildSplit()<CR>
+" nmap <F9> :!./build.sh<CR>
+nmap <F10> :!./run.sh<CR>
+set makeprg=./build.sh
