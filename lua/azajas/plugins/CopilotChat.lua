@@ -14,6 +14,8 @@ return {
     config = function()
       require("CopilotChat").setup({})
       -- Show help actions with telescope
+      vim.keymap.set("n", "<leader>cf", ":CopilotChatFixDiagnostic<CR>",
+        { desc = "CopilotChat - Help actions" })
       vim.keymap.set("n", "<leader>ch", function()
         local actions = require("CopilotChat.actions")
         require("CopilotChat.integrations.telescope").pick(actions.help_actions())
@@ -23,7 +25,7 @@ return {
         local actions = require("CopilotChat.actions")
         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
       end, { desc = "CopilotChat - Prompt actions" })
-      vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>",
+      vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>",
         { desc = "CopilotChat - Open windows" })
     end,
   },

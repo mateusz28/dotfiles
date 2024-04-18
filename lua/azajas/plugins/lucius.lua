@@ -5,9 +5,9 @@ return {
     config = function()
       -- load the colorscheme here
       -- vim.g.moonflyTransparent = true
-        vim.cmd([[let g:lucius_no_term_bg = 1]])
-        vim.cmd([[colorscheme lucius]])
-        vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
+        --vim.cmd([[let g:lucius_no_term_bg = 1]])
+        --vim.cmd([[colorscheme lucius]])
+        --vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
     end,
   },
   -- {
