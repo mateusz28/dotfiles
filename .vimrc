@@ -106,7 +106,7 @@ set tabstop=2 shiftwidth=2 expandtab
 set laststatus=2
 
 "Set - as default leader character
-let mapleader = "-"
+let mapleader = " "
 "Search options
 set hlsearch
 set ignorecase
@@ -287,6 +287,8 @@ require("copilot").setup({
 })
 require("CopilotChat").setup {
   debug = true, -- Enable debugging
+  -- lazy.nvim keys
+  -- Show help actions with fzf-lua
   -- See Configuration section for rest
 }
 EOF
