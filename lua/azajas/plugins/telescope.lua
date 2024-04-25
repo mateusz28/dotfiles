@@ -36,8 +36,8 @@ return {
 
     keymap.set("n", "<C-T>", require("telescope").extensions.menufacture.find_files, { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>ah", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    keymap.set("n", "<leader>ag", require("telescope").extensions.menufacture.grep_string, { desc = "Find string in cwd" })
-    keymap.set("n", "<leader>as", require("telescope").extensions.menufacture.live_grep, { desc = "Find string under cursor in cwd" })
+    keymap.set("n", "<leader>as", require("telescope").extensions.menufacture.grep_string, { desc = "Find string under cursor in cwd" })
+    keymap.set("n", "<leader>ag", require("telescope").extensions.menufacture.live_grep, { desc = "Find string in cwd" })
     keymap.set("n", "<leader>ab", "<cmd>Telescope buffers<cr>", { desc = "Find in opened buffers" })
     keymap.set("n", "<leader>a?", "<cmd>Telescope help_tags<cr>", { desc = "Find in help tags" })
     keymap.set("n", "<leader>ak", "<cmd>Telescope keys<cr>", { desc = "Find in key maps" })
