@@ -1,0 +1,17 @@
+# Konsole color changing
+theme-night() {
+  switch-term-color "colors=azajas"
+}
+theme-light() {
+  switch-term-color "colors=azajas-light"
+}
+switch-term-color() {
+  arg="${1:-colors=Tomorrow}"
+  if [[ -z "$TMUX" ]]
+  then
+    konsoleprofile "$arg"
+  else
+    printf '\033Ptmux;\033\033]50;%s\007\033\\' "$arg"
+  fi
+}
+

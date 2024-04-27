@@ -5,8 +5,6 @@ return {
     { "rktjmp/lush.nvim" },
   },
   config = function()
-    --vim.cmd([[let g:lucius_no_term_bg = 1]])
-    --vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
     local zen_themes = {
       "kanagawabones",
       "randombones",

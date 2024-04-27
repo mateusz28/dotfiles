@@ -77,7 +77,6 @@ plugins=(
     colored-man-pages
     zsh-autosuggestions
     zsh-syntax-highlighting
-    zsh-z
 )
 
   source $ZSH/oh-my-zsh.sh
@@ -168,3 +167,8 @@ builtin bindkey "^[^H" backward-kill-word
 builtin bindkey "^[^?" backward-kill-word
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+for file in $HOME/.zsh_ext/*; do 
+  if [ -f "$file" ]; then 
+    source "$file"
+  fi 
+done

@@ -12,27 +12,13 @@ return {
         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
 
-      -- copy default mappings here from defaults in next section
-      -- vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
-      -- vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
-      ---
       -- OR use all default mappings
       api.config.mappings.default_on_attach(bufnr)
 
       -- remove a default
       vim.keymap.del("n", "<C-]>", { buffer = bufnr })
       vim.keymap.del("n", "<C-T>", { buffer = bufnr }) -- unmap <C-t> to open new tab
-
-      -- override a default
-      -- vim.keymap.set("n", "<C-e>", api.tree.reload, opts("Refresh"))
-
-      -- add your mappings
-      -- vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
-      ---
     end
-    -- recommended settings from nvim-tree documentation
-    -- vim.g.loaded_netrw = 1
-    -- vim.g.loaded_netrwPlugin = 1
 
     -- change color for arrows in tree to light blue
     vim.cmd([[ highlight NvimTreeFolderArrowClosed guifg=#3FC5FF ]])
