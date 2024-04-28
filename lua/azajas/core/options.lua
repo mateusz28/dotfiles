@@ -22,7 +22,12 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 -- turn on termguicolors for nightfly colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
+local output = vim.fn.system({ "tmux", "show-environment", "-g", "THEME" })
+local background = "dark"
+if output == "THEME=light\n" then
+	background = "light"
+end
+opt.background = background -- colorschemes that can be light or dark will be made dark
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
@@ -56,5 +61,9 @@ opt.incsearch = true
 opt.exrc = true
 
 vim.api.nvim_create_autocmd("FileType", {
-  command = "set formatoptions-=cro",
+	command = "set formatoptions-=cro",
 })
+
+if os.getenv("theme") == "light" then
+	vim.o.background = "light"
+end

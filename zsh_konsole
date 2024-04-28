@@ -1,17 +1,42 @@
 # Konsole color changing
+if [[ ! -z "$TMUX" ]]
+then
+  tmux set-environment -g THEME night
+fi
 theme-night() {
+  if [[ ! -z "$TMUX" ]]
+  then
+    tmux set-environment -g THEME night
+  fi
   switch-term-color "colors=azajas"
 }
 theme-light() {
+  if [[ ! -z "$TMUX" ]]
+  then
+    tmux set-environment -g THEME light
+  fi
   switch-term-color "colors=azajas-light"
 }
+
 switch-term-color() {
-  arg="${1:-colors=Tomorrow}"
+  arg="${1:-colors=azajas}"
   if [[ -z "$TMUX" ]]
   then
     konsoleprofile "$arg"
   else
     printf '\033Ptmux;\033\033]50;%s\007\033\\' "$arg"
+    tmux source ~/.tmux.conf
   fi
 }
 
+theme-toggle() {
+  if [[ `tmux show-environment -g THEME` == "THEME=night" ]]
+  then
+    theme-light
+  else
+    theme-night
+  fi
+}
+zle -N theme-toggle
+
+bindkey '^h' theme-toggle
