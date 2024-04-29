@@ -1,10 +1,9 @@
 #  Allow escape Sequences
-set-option -g allow-passthrough on
-# Konsole color changing
 if [[ ! -z "$TMUX" ]]
 then
-  tmux set-environment -g THEME night
+  tmux set-option -g allow-passthrough on
 fi
+# Konsole color changing
 theme-night() {
   if [[ ! -z "$TMUX" ]]
   then
