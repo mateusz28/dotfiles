@@ -1,3 +1,5 @@
+#  Allow escape Sequences
+set-option -g allow-passthrough on
 # Konsole color changing
 if [[ ! -z "$TMUX" ]]
 then
