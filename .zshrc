@@ -102,6 +102,8 @@ else
   unset INSIDE_VIFM
 fi
 
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -149,7 +151,7 @@ local ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
 local ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 
 PROMPT_SIGN='%(!.#.$)'
-PROMPT='${PS_VIFM}${PROMPT_SIGN}%{$fg_bold[green]%}%(?.%F{green}√.%F{red}✗)%{$fg_bold[white]%}[%T] ${user}:%{%B$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
+PROMPT='${PS_VIFM}${PROMPT_SIGN}%{$fg[green]%}%(?.%F{green}√.%F{red}✗)%{$fg[white]%}[%T] ${user}:%{$fg[blue]%}%~%{$reset_color%b%}$(zsh_essembeh_gitstatus)%f%(!.#.$) '
 RPROMPT=""
 
 autoload -Uz bracketed-paste-magic
