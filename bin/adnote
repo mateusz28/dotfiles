@@ -2,8 +2,12 @@
 mkdir -p ~/notes/
 echo -ne "#Quicknote: "
 read
-rclone copy notes: ~/notes
-NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+cd $HOME/notes/
+git pull origin main
+[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}${SUFFIX}.md)
 echo "#$REPLY" >> $HOME/notes/$NOTES_NAME
 echo "$@" >> $HOME/notes/$NOTES_NAME
-rclone copy  ~/notes/ notes: &
+git add .
+git commit -m "Update ${NOTES_NAME}"
+git push origin main
