@@ -31,4 +31,4 @@
   lg = !"git lg1"
 [core]
 	editor = nvim
-  autocrlf = true
+  autocrlf = false
