@@ -1,0 +1,4 @@
+if [[ $UID != 0 ]]; then
+  which keychain > /dev/null 2>&1 && eval "$(keychain --eval $HOME/.ssh/id_rsa)"
+  # which keychain > /dev/null 2>&1 && eval "$(keychain --eval /home/azajas/.ssh/id_ed25519)"
+fi
