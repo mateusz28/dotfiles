@@ -1,12 +1,19 @@
 #!/bin/bash
+function pull() {
+  git pull origin main &> /dev/null
+}
+function push() {
+  git add . &> /dev/null
+  git commit -m "Update ${NOTES_NAME}" &> /dev/null
+  git push origin main  &> /dev/null
+}
+
 #add to $HOME/notes/.nvimrc:
 #autocmd BufWritePost * :!git add . && git commit -m 'autocommit' && git pull origin main && git push origin main
 mkdir -p $HOME/notes/
 cd $HOME/notes/
-git pull origin main
+pull &
 [ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
 NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}${SUFFIX}.md)
 nvim --cmd "cd $HOME/notes" $HOME/notes/$NOTES_NAME
-git add .
-git commit -m "Update ${NOTES_NAME}"
-git push origin main
+push &
