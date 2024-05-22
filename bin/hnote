@@ -1,0 +1,30 @@
+#!/bin/zsh --login
+function pull() {
+  git pull origin main &> /dev/null
+}
+function push() {
+  git add . &> /dev/null
+  git commit -m "Update ${NOTES_NAME}" &> /dev/null
+  git push origin main  &> /dev/null
+}
+
+export HISTFILE=~/.zsh_history
+fc -R
+mkdir -p ~/notes/
+cd $HOME/notes/
+pull &
+#[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+COMMANDS=`fc -r -ln 0  | fzf --multi --reverse --height 30`
+if [ -z $COMMANDS ]; then
+  echo "No commands entered"
+  exit 1
+fi
+echo -ne "# Tags: "
+read
+echo "# $REPLY" >> $HOME/notes/$NOTES_NAME
+echo '```' >> $HOME/notes/$NOTES_NAME
+echo "$COMMANDS" >> $HOME/notes/$NOTES_NAME
+echo '```' >> $HOME/notes/$NOTES_NAME
+echo "" >> $HOME/notes/$NOTES_NAME
+push &
