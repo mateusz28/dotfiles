@@ -63,7 +63,15 @@ return {
     keymap.set("n", "<leader>ar", "<cmd>Telescope resume<cr>", { desc = "Change resume" })
     keymap.set("n", "<leader>ad", "<cmd>Telescope diagnostics<cr>", { desc = "Change diagnostics" })
     keymap.set("n", "<leader>an", function()
-    vim.cmd("Telescope live_grep search_dirs=~/notes path_display=hidden disable_coordinates=false")
+      vim.loop.spawn("bash", {
+        args = { "-c", "cd $HOME/notes && git pull origin main" },
+        onexit = function(code, signal)
+          if code ~= 0 then
+            print("Git pull failed with exit code: ", code)
+          end
+        end,
+      })
+      vim.cmd("Telescope live_grep search_dirs=~/notes path_display='hidden' disable_coordinates='false'")
     end, { desc = "Find in notes" })
   end,
 }
