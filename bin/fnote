@@ -4,7 +4,7 @@ fnotef() {
   local line
   FZFARG=""
   [ "$@" == "." ] || FZFARG="$@ "
-  read -r file line <<<$(ag -0 --nobreak --noheading "$@" | fzf -0 -1  --delimiter : --preview 'bat --color "always" -p {1} -H {2} ' --preview-window '+{2}-5' -e -q "$FZFARG" | awk -F: '{print $1, $2}')
+  read -r file line <<<$(ag -0 --nobreak --noheading "$@" | fzf -0 -1  --delimiter : --preview-window=nohidden --preview 'bat --color "always" -p {1} -H {2} ' --preview-window '+{2}-5' -e -q "$FZFARG" | awk -F: '{print $1, $2}')
 
   if [[ -n $file ]]
   then

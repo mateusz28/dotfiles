@@ -31,7 +31,8 @@ return {
       "gr+movement  > String Replace with register",
       "<SPC hm      > Harpon mark",
       "<SPC hp/hn   > Harpon navigate",
-      "<SPC am      > Maximize toggle"
+      "<SPC am      > Maximize toggle",
+      "<number>gan  > Ad note from n lines"
     }
 
     -- Send config to alpha

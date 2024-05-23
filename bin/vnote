@@ -1,4 +1,4 @@
-#!/bin/zsh --login
+#!/bin/bash
 function pull() {
   git pull origin main &> /dev/null
 }
@@ -8,23 +8,14 @@ function push() {
   git push origin main  &> /dev/null
 }
 
-export HISTFILE=~/.zsh_history
-fc -R
 mkdir -p ~/notes/
 cd $HOME/notes/
 pull &
 #[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
 NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
-COMMANDS=`fc -r -ln 0  | fzf --multi --reverse --height 30`
-if [ -z $COMMANDS ]; then
-  echo "No commands entered"
-  exit 1
-fi
-echo -ne "# Tags: "
-read
-echo "# $REPLY" >> $HOME/notes/$NOTES_NAME
-echo '```'bash >> $HOME/notes/$NOTES_NAME
-echo "$COMMANDS" >> $HOME/notes/$NOTES_NAME
+echo "# ${2}" >> $HOME/notes/$NOTES_NAME
+echo '```'${1} >> $HOME/notes/$NOTES_NAME
+echo "${3}" >> $HOME/notes/$NOTES_NAME
 echo '```' >> $HOME/notes/$NOTES_NAME
 echo "" >> $HOME/notes/$NOTES_NAME
 push &
