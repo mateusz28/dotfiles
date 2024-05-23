@@ -6,6 +6,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "molecule-man/telescope-menufacture",
+    "mollerhoj/telescope-recent-files.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -30,6 +31,7 @@ return {
     })
 
     telescope.load_extension("fzf")
+    telescope.load_extension("recent-files")
 
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
@@ -73,5 +75,8 @@ return {
       })
       vim.cmd("Telescope live_grep search_dirs=~/notes path_display='hidden' disable_coordinates='false'")
     end, { desc = "Find in notes" })
+    vim.keymap.set("n", "<leader><leader>", function()
+      require("telescope").extensions["recent-files"].recent_files({})
+    end, { noremap = true, silent = true })
   end,
 }
