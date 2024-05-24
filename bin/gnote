@@ -1,0 +1,31 @@
+#!/bin/bash
+PICTURES_PATH="${HOME}/notes/pictures"
+SCREENSHOT_PATH="${1}"
+SCREENSHOT_NAME=$(basename "$SCREENSHOT_PATH")
+
+function pull() {
+  git pull origin main &> /dev/null
+}
+function push() {
+  git add . &> /dev/null
+  git commit -m "Update ${NOTES_NAME}" &> /dev/null
+  git push origin main  &> /dev/null
+}
+mkdir -p $PICTURES_PATH
+
+INPUT=`kdialog --title "Input dialog" --inputbox "# Enter tag"`
+if [ -z "$INPUT" ]; then
+  echo "You have to enter the tag"
+  exit 1
+fi
+cp "${SCREENSHOT_PATH}" $PICTURES_PATH
+
+mkdir -p ~/notes/
+cd $HOME/notes/
+pull &
+#[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+echo "# $INPUT" >> $HOME/notes/$NOTES_NAME
+echo "![$INPUT](./pictures/$SCREENSHOT_NAME)" >> $HOME/notes/$NOTES_NAME
+echo "" >> $HOME/notes/$NOTES_NAME
+push &

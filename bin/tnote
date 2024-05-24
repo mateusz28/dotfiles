@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Read all input from the pipe into a variable
+INPUT=$(cat)
+
+# Print the variable
+vnote "" "${@}" "$INPUT"
+#echo "# $@"  > /tmp/test

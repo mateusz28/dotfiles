@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Add note
+Comment=Add graphical note
+Type=Application
+Categories=Graphics
+MimeType=image/gif;image/png;image/jpg;
+Keywords=adnote;
+Exec=/bin/bash -c "$HOME/dotfiles/bin/gnote %f"
