@@ -52,7 +52,7 @@ return {
         map("n", "ghb", function()
           gs.blame_line({ full = true })
         end, { desc = "Gitsigns blame line" })
-        map("n", "gtb", gs.toggle_current_line_blame, { desc = "Gitsigns toggle current line blame" })
+        -- map("n", "gtb", gs.toggle_current_line_blame, { desc = "Gitsigns toggle current line blame" })
         map("n", "ghd", gs.diffthis, { desc = "Gitsigns diff this" })
         map("n", "ghD", function()
           gs.diffthis("~")

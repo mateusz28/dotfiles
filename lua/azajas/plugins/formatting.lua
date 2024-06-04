@@ -19,6 +19,8 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         lua = { "stylua" },
+        c = { "clang-format" },
+        cpp = { "clang-format" },
         python = { "isort", "black" },
       },
     })
