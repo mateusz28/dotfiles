@@ -22,6 +22,19 @@ return {
           { "filetype" },
         },
       },
+      tabline = {
+        lualine_a = { "tabs" },
+        lualine_b = {
+          {
+            "filename",
+            path = 3,
+          },
+        },
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
     })
   end,
 }
