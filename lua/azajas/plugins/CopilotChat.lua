@@ -24,6 +24,11 @@ return {
             description = "Writes a short summary.",
             selection = require("CopilotChat.select").visual,
           },
+          Tags = {
+            prompt = "Create 8 short tags describing the following code. At the end list them as comma separated list starting with TAGS:",
+            description = "Creates 8 tags for the code",
+            selection = require("CopilotChat.select").buffer,
+          },
         },
       })
       -- Show help actions with telescope
