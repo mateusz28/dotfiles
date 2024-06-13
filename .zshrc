@@ -165,6 +165,8 @@ bindkey "^[." append-last-word
 builtin bindkey "^[^H" backward-kill-word
 builtin bindkey "^[^?" backward-kill-word
 
+bindkey "^q" push-line
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 for file in $HOME/.zsh_ext/*; do 
   if [ -f "$file" ]; then 
