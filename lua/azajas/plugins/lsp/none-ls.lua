@@ -1,9 +1,10 @@
 return {
   "nvimtools/none-ls.nvim", -- configure formatters & linters
   lazy = true,
-  -- event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
+  event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
   dependencies = {
     "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls-extras.nvim",
   },
   config = function()
     local mason_null_ls = require("mason-null-ls")
@@ -18,9 +19,11 @@ return {
         "stylua", -- lua formatter
         "isort", -- python formatter
         "black", -- python formatter
+        "gopls", -- python formatter
         "pylint", -- python linter
         "clang-format", -- python linter
         "eslint_d", -- js linter
+        "clangd", -- js linter
       },
     })
 
@@ -34,8 +37,13 @@ return {
     -- configure null_ls
     null_ls.setup({
       -- add package.json as identifier for root (for typescript monorepos)
-      root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git",
-        "package.json", "compile_commands.json"),
+      root_dir = null_ls_utils.root_pattern(
+        ".null-ls-root",
+        "Makefile",
+        ".git",
+        "package.json",
+        "compile_commands.json"
+      ),
       -- setup formatters & linters
       sources = {
         --  to disable file types use
@@ -47,10 +55,8 @@ return {
         formatting.isort,
         formatting.black,
         formatting.clang_format,
-        formatting.gopls,
+        formatting.cmake_format,
         diagnostics.pylint,
-        diagnostics.clangd,
-        diagnostics.gopls,
       },
       -- configure format on save
       --[[ on_attach = function(current_client, bufnr)

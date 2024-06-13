@@ -176,6 +176,13 @@ return {
       filetypes = { "cpp", "c", "h", "hpp", "m", "mm" },
     })
 
+    lspconfig["cmake"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      single_file_support = true,
+      filetypes = { "cmake" },
+    })
+
     lspconfig["gopls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
