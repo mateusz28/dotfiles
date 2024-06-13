@@ -3,7 +3,7 @@ return {
   branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-telescope/telescope-fzy-native.nvim",
     "nvim-tree/nvim-web-devicons",
     "molecule-man/telescope-menufacture",
     "mollerhoj/telescope-recent-files.nvim",
@@ -30,7 +30,7 @@ return {
       },
     })
 
-    telescope.load_extension("fzf")
+    telescope.load_extension("fzy_native")
     telescope.load_extension("recent-files")
 
     -- set keymaps
