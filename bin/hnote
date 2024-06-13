@@ -9,12 +9,12 @@ function push() {
 }
 
 export HISTFILE=~/.zsh_history
-fc -R
+fc -RI
 mkdir -p ~/notes/
 cd $HOME/notes/
 pull &
 #[ $# -gt 0 ] && SUFFIX="_$1" || SUFFIX=""
-NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
+NOTES_NAME=$(date +notes_%Y-%m-%d_${HOST}.md)
 COMMANDS=`fc -r -ln 0  | fzf --multi --reverse --height 30`
 if [ -z $COMMANDS ]; then
   echo "No commands entered"

@@ -4,7 +4,7 @@ if [[ ! -z "$TMUX" ]]; then
   if [[ $? == 1 ]]; then
     tmux set-environment -g THEME night
   fi
-  tmux set-option -g allow-passthrough on
+  tmux set-option -g allow-passthrough off
 fi
 # Konsole color changing
 theme-night() {

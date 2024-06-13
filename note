@@ -1,0 +1,19 @@
+gy (coc-type-definition)
+gi (coc-implementation)
+gr (coc-references)
+-rn (coc-rename)
+-f  (coc-format-selected)
+-a  (coc-codeaction-selected)
+-ac  (coc-codeaction)
+-a  (coc-codeaction-selected)
+-qf  (coc-fix-current)
+-ax :CocRestart<cr>
+c-s-p: previous cliboard item
+c-s-n: next cliboard item
+ghp (GitGutterPreviewHunk)
+ghs (GitGutterStageHunk)
+ghu (GitGutterUndoHunk)
+]h (GitGutterNextHunk)
+[h (GitGutterPrevHunk)
+-t :source ~/dotfiles/.nvimrc<CR>
+
