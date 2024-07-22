@@ -13,6 +13,10 @@ return {
     },
     config = function()
       require("CopilotChat").setup({
+        window = {
+          layout = "horizontal",
+        },
+        context = 'buffers',
         prompts = {
           ImproveGrammarInStrings = {
             prompt = "Improve grammar, wording amd spelling in strings in selected code. If possible make it concise.",
@@ -35,12 +39,12 @@ return {
       vim.keymap.set("n", "<leader>cf", ":CopilotChatFixDiagnostic<CR>", { desc = "CopilotChat - Help actions" })
       vim.keymap.set({ "n", "v" }, "<leader>ch", function()
         local actions = require("CopilotChat.actions")
-        require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+        require("CopilotChat.integrations.fzflua").pick(actions.help_actions())
       end, { desc = "CopilotChat - Help actions" })
       -- Show prompts actions with fzf-lua
       vim.keymap.set({ "n", "v" }, "<leader>cp", function()
         local actions = require("CopilotChat.actions")
-        require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+        require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
       end, { desc = "CopilotChat - Prompt actions" })
       vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "CopilotChat - Open windows" })
       vim.keymap.set({ "n" }, "<leader>cq", function()

@@ -31,19 +31,19 @@ return {
 
       -- set keybinds
       opts.desc = "Show LSP references"
-      keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+      keymap.set("n", "gR", "<cmd>Fzf lsp_references<CR>", opts) -- show definition, references
 
       opts.desc = "Go to declaration"
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
       opts.desc = "Show LSP definitions"
-      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+      keymap.set("n", "gd", "<cmd>Fzf lsp_definitions<CR>", opts) -- show lsp definitions
 
       opts.desc = "Show LSP implementations"
-      keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+      keymap.set("n", "gi", "<cmd>Fzf lsp_implementations<CR>", opts) -- show lsp implementations
 
       opts.desc = "Show LSP type definitions"
-      keymap.set("n", "glt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+      keymap.set("n", "glt", "<cmd>Fzf lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
       opts.desc = "See available code actions"
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
@@ -52,7 +52,7 @@ return {
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
       opts.desc = "Show buffer diagnostics"
-      keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+      keymap.set("n", "<leader>D", "<cmd>Fzf diagnostics_document<CR>", opts) -- show  diagnostics for file
 
       opts.desc = "Show line diagnostics"
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -172,7 +172,16 @@ return {
     --configure clangd
     lspconfig["clangd"].setup({
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = function(client, bufnr)
+        if client.name == "clangd" then
+          -- Set up your key mappings here
+          -- For example, to map 'gd' to go to definition:
+          opts.desc = "Switch header and source file"
+          keymap.set("n", "gp",  "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+        end
+        -- Call the general on_attach function for all other setup
+        on_attach(client, bufnr)
+      end,
       filetypes = { "cpp", "c", "h", "hpp", "m", "mm" },
     })
 

@@ -11,15 +11,21 @@ return {
         border = "No",
         preview_border = "No",
       },
+      git = {
+        files = {
+          cmd           = 'git ls-files --exclude-standard --recurse-submodules',
+        }
+      },
       winopts = { preview = { hidden = "hidden" } },
     })
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
     keymap.set("n", "<C-T>", "<cmd>Files<cr>", { desc = "Fuzzy find files in cwd" })
+    keymap.set("n", "<leader><leader>", "<cmd>Buffers<cr>", { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>ah", "<cmd>History<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>ag", "<cmd>Rg<cr><cr>", { desc = "Find string in cwd" })
-    keymap.set("n", "<leader>as", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+    keymap.set("n", "<leader>as", "<cmd>FzfLua grep_cword<cr>", { desc = "Find string under cursor in cwd" })
     keymap.set("n", "<leader>ab", "<cmd>Buffers<cr>", { desc = "Find in opened buffers" })
     keymap.set("n", "<leader>a?", "<cmd>Helptags<cr>", { desc = "Find in help tags" })
     keymap.set("n", "<leader>ak", "<cmd>Fzf keymaps<cr>", { desc = "Find in key maps" })

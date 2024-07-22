@@ -4,6 +4,10 @@ return {
   config = function()
     local lualine = require("lualine")
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+    -- define a function that returns the total number of lines in the current buffer
+    local function buffer_line_count()
+      return tostring(vim.fn.line('$'))
+    end
 
     -- configure lualine with modified theme
     lualine.setup({
@@ -20,6 +24,10 @@ return {
           { "encoding" },
           { "fileformat" },
           { "filetype" },
+        },
+        lualine_y = {
+          { "progress" },
+          buffer_line_count, -- add the custom component here
         },
       },
       tabline = {
