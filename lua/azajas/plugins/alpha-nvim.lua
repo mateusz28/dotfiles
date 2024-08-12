@@ -31,7 +31,7 @@ return {
       "gr+movement  > String Replace with register",
       "<SPC hm      > Harpon mark",
       "<SPC hp/hn   > Harpon navigate",
-      "<SPC am      > Maximize toggle",
+      "<SPC sm      > Maximize toggle",
       "<number>gan  > Ad note from n lines"
     }
 
