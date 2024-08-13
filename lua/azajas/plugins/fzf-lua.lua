@@ -69,5 +69,16 @@ return {
     keymap.set("n", "<leader>ar", "<cmd>Fzf resume<cr>", { desc = "Resume last search" })
     keymap.set("n", "<leader>ac", "<cmd>Fzf colorschemes<cr>", { desc = "Change colorscheme" })
     keymap.set("n", "<leader>ad", "<cmd>Fzf diagnostics_workspace<cr>", { desc = "Find in workspace diagnostics" })
+    keymap.set("n", "<leader>an", function()
+      vim.loop.spawn("bash", {
+        args = { "-c", "cd $HOME/notes && git pull origin main" },
+        onexit = function(code, signal)
+          if code ~= 0 then
+            print("Git pull failed with exit code: ", code)
+          end
+        end,
+      })
+      require('fzf-lua').live_grep({ cwd = '~/notes', winopts = { preview = { hidden = "nohidden" }}})
+    end, { desc = "Find in notes" })
   end,
 }
