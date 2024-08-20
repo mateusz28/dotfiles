@@ -1,0 +1,19 @@
+#/bin/bash 
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+is_in_git_repo || { echo "Not in a git dir"; exit 1; }
+
+cd $(git rev-parse --show-toplevel)
+
+preview="echo {+} | sed 's/^\(.*\)|.*$/\1/;s/^[   ]*//;s/[    ]*$//' | xargs -I % sh -c 'git diff --color=always  -- %; git submodule --quiet foreach git diff --color=always  --  \"%\" | tail -n +4'"
+#preview="echo {s} | cut -d \| -f 1 | xargs --null -I \"%\" sh -c 'echo % '"
+{ git diff --color=always   --compact-summary --stat=1000 --no-commit-id  | sed '$d'  & 
+git submodule --quiet foreach 'git diff HEAD  --compact-summary --stat=1000 --color=always  --no-commit-id 2> /dev/null |  awk "{print  \" \"substr(\$0,2)}"'  | grep -v '\(^Entering\)\|\(insertions\)'  ; } |
+  fzf --ansi --print0 --no-sort --reverse --preview-window=nohidden --preview "$preview" --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (echo {s} | cut -d \| -f 1 |
+                xargs -I % sh -c 'git difftool -y  -- %; git submodule --quiet foreach git difftool -y  -- %') << 'FZF-EOF'
+                {}
+FZF-EOF"
