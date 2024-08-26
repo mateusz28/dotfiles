@@ -13,7 +13,7 @@ PREFIX="${@:-`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/
 # SYN=`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`
 echo "Generating commit message proposals..."
 git diff --cached > /tmp/diffcc && \
-MSG=`vim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!"   /tmp/diffcc && \
+MSG=`nvim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!"   /tmp/diffcc && \
 sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf`
 CMD="git commit -m \"$MSG\""
 echo "Calling: $CMD"
