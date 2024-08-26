@@ -1,0 +1,23 @@
+#!/bin/bash
+PROMPT="Propose 3 different commit messages for this changes. Just list them without any other output."
+DELAY=5
+function check_step(){
+  echo -n "$1  (Y/n)?"; read CONT; [ "$CONT" = "n" ] && exit 0
+}
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+is_in_git_repo || return
+git status -sb
+PREFIX="${@:-`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`}"
+# SYN=`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`
+echo "Generating commit message proposals..."
+git diff --cached > /tmp/diffcc && \
+MSG=`vim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!"   /tmp/diffcc && \
+sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf`
+CMD="git commit -m \"$MSG\""
+echo "Calling: $CMD"
+check_step Continue
+eval "$CMD"
+
+
