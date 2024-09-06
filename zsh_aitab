@@ -1,0 +1,31 @@
+# Define the custom widget
+append_user_input_to_command() {
+  # Capture the current buffer content
+  DELAY=5
+  local current_command=$BUFFER
+  
+  # Use a temporary file to prompt the user for additional input
+  zle -I
+  echo -n "Enter additional prompt: "
+  read user_input < /dev/tty
+  
+  AI_PROMPT="Create oneline bash command I could call directly in zsh terminal. Files in directory for a context: $(ls) Base command (ignore if empty): ${current_command} ${user_input} Please crate couple of propositions, with very short explanation after '#' character to allow me choose one using automated tool. Each proposition should be numbered. 
+  Don't wrap output in backtics or quotes. I would like to paste them directly in terminal"
+
+  # echo $AI_PROMPT
+  AI_MSG=$(nvim -u ~/.config/nvim/init.lua -es +":CopilotChat ${AI_PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!" /tmp/empty &&  sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf | sed 's/#.*//')
+    
+    # Append the user-provided input to the current command
+  awk '{$AI_MSG=$AI_MSG;print}'
+  BUFFER="${AI_MSG}"
+  echo ${user_input} | tmux load-buffer -
+  
+  # Move the cursor to the end of the line
+  CURSOR=$#BUFFER
+}
+
+# Create the widget
+zle -N append_user_input_to_command
+
+# Bind the widget to Ctrl+x followed by a
+bindkey '^Xa' append_user_input_to_command
