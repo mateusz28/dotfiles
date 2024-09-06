@@ -24,6 +24,7 @@ return {
         "clang-format", -- python linter
         "eslint_d", -- js linter
         "clangd", -- js linter
+        "swiftformat", -- swift formatter
       },
     })
 
@@ -56,6 +57,7 @@ return {
         formatting.black,
         formatting.clang_format,
         formatting.cmake_format,
+        formatting.swiftformat,
         diagnostics.pylint,
       },
       -- configure format on save

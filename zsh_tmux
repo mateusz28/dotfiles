@@ -1,0 +1,3 @@
+if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+  tmux attach-session || tmux new-session
+fi
