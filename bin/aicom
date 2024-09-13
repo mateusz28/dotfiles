@@ -13,8 +13,12 @@ PREFIX="${@:-`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/
 # SYN=`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`
 echo "Generating commit message proposals..."
 git diff --cached > /tmp/diffcc && \
-MSG=`nvim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!"   /tmp/diffcc && \
-sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf`
+MSG=$(nvim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!" /tmp/diffcc && \
+sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf)
+
+# Remove any quotes, single quotes, backticks, and leading/trailing whitespace from MSG
+MSG=$(echo "$MSG" | tr -d '\"'\''`' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
 CMD="git commit -m \"$MSG\""
 echo "Calling: $CMD"
 check_step Continue
