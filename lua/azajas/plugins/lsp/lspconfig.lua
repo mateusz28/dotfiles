@@ -177,7 +177,7 @@ return {
           -- Set up your key mappings here
           -- For example, to map 'gd' to go to definition:
           opts.desc = "Switch header and source file"
-          keymap.set("n", "gp",  "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+          keymap.set("n", "gp", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
         end
         -- Call the general on_attach function for all other setup
         on_attach(client, bufnr)
@@ -190,6 +190,22 @@ return {
       on_attach = on_attach,
       single_file_support = true,
       filetypes = { "cmake" },
+    })
+
+    lspconfig["sourcekit"].setup({
+      cmd = { "xcrun", "sourcekit-lsp" },
+      capabilities = capabilities,
+      on_attach = on_attach,
+      single_file_support = true,
+      filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
+      root_dir = lspconfig.util.root_pattern(
+        "buildServer.json",
+        "*.xcodeproj",
+        "*.xcworkspace",
+        "compile_commands.json",
+        "Package.swift",
+        ".git"
+      ),
     })
 
     lspconfig["gopls"].setup({

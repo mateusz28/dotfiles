@@ -16,7 +16,7 @@ return {
         window = {
           layout = "horizontal",
         },
-        context = 'buffers',
+        context = nil,
         prompts = {
           ImproveGrammarInStrings = {
             prompt = "Improve grammar, wording amd spelling in strings in selected code. If possible make it concise.",

@@ -22,6 +22,7 @@ return {
         "gopls", -- python formatter
         "pylint", -- python linter
         "clang-format", -- python linter
+        "swiftlint", -- swift linter
         "eslint_d", -- js linter
         "clangd", -- js linter
         "swiftformat", -- swift formatter
