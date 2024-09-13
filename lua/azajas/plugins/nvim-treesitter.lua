@@ -29,7 +29,6 @@ return {
           "java",
           "go",
           "objc",
-          "swift",
           "cmake",
           "python",
           "make",
