@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    "nvimdev/lspsaga.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
@@ -192,21 +193,24 @@ return {
       filetypes = { "cmake" },
     })
 
-    lspconfig["sourcekit"].setup({
-      cmd = { "xcrun", "sourcekit-lsp" },
-      capabilities = capabilities,
-      on_attach = on_attach,
-      single_file_support = true,
-      filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
-      root_dir = lspconfig.util.root_pattern(
-        "buildServer.json",
-        "*.xcodeproj",
-        "*.xcworkspace",
-        "compile_commands.json",
-        "Package.swift",
-        ".git"
-      ),
-    })
+    local uname = vim.loop.os_uname()
+    if uname.sysname == "Darwin" then
+      lspconfig["sourcekit"].setup({
+        cmd = { "xcrun", "sourcekit-lsp" },
+        capabilities = capabilities,
+        on_attach = on_attach,
+        single_file_support = true,
+        filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
+        root_dir = lspconfig.util.root_pattern(
+          "buildServer.json",
+          "*.xcodeproj",
+          "*.xcworkspace",
+          "compile_commands.json",
+          "Package.swift",
+          ".git"
+        ),
+      })
+    end
 
     lspconfig["gopls"].setup({
       capabilities = capabilities,

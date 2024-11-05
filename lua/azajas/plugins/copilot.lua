@@ -1,7 +1,19 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    event = { "InsertEnter" },
+    keys = {
+      {
+        "<leader>ct",
+        function()
+          if require("copilot.client").is_disabled() then
+            require("copilot.command").enable()
+          else
+            require("copilot.command").disable()
+          end
+        end,
+        desc = "Toggle (Copilot)",
+      },
+    },
     config = function()
       require("copilot").setup({
         panel = {
