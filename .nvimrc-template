@@ -1,8 +1,10 @@
 function! BuildSplit()
-  execute 'bot split +resize20 term://./build.sh'
-  nnoremap <silent> <buffer> <ENTER> :bd<CR>
-  execute '$'
-
+  if bufexists('BuildTerminal')
+    bwipeout BuildTerminal
+  endif
+    execute 'bot split +resize20 term://./build.sh | file BuildTerminal'
+    nnoremap <silent> <buffer> <ENTER> :bd<CR>
+    execute '$'
 endfunction
 
 nmap <silent> <F9> :call BuildSplit()<CR>
