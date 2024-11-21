@@ -77,7 +77,7 @@ return {
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
       -- Keep original tagfunc if tags file exists
       if tags_file_exists() then
-        vim.api.nvim_buf_set_option(bufnr, "tagfunc", "tagfunc")
+        vim.bo[bufnr].tagfunc = ""
       else
         vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
       end
@@ -184,7 +184,14 @@ return {
 
     --configure clangd
     lspconfig["clangd"].setup({
-      capabilities = capabilities,
+      capabilities = {
+        offsetEncoding = { "utf-16" },
+        textDocument = {
+          completion = {
+            editsNearCursor = true,
+          },
+        },
+      },
       on_attach = function(client, bufnr)
         if client.name == "clangd" then
           -- Set up your key mappings here
