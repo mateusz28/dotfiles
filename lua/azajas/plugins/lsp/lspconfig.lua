@@ -77,7 +77,7 @@ return {
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
       -- Keep original tagfunc if tags file exists
       if tags_file_exists() then
-        vim.bo[bufnr].tagfunc = "tagfunc"
+        vim.api.nvim_buf_set_option(bufnr, "tagfunc", "tagfunc")
       else
         vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
       end
