@@ -24,6 +24,12 @@ return {
       })
     end
 
+    local function tags_file_exists()
+      local root_dir = vim.fn.getcwd()
+      local tags_file = root_dir .. "/tags"
+      return vim.fn.filereadable(tags_file) == 1
+    end
+
     setup_diags()
 
     local opts = { noremap = true, silent = true }
@@ -69,6 +75,12 @@ return {
 
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+      -- Keep original tagfunc if tags file exists
+      if tags_file_exists() then
+        vim.bo[bufnr].tagfunc = "tagfunc"
+      else
+        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
