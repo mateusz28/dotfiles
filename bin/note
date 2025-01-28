@@ -13,7 +13,7 @@ function push() {
 mkdir -p $HOME/notes/
 cd $HOME/notes/
 pull &
-[ $# -gt 0 ] && SUFFIX="$1" || SUFFIX="${HOSTNAME}"
-NOTES_NAME=$(date +notes_%Y-%m-%d_${SUFFIX}.md)
-nvim --cmd "cd $HOME/notes" $HOME/notes/$NOTES_NAME
+[ $# -gt 0 ] && SUFFIX="$@" || SUFFIX="${HOSTNAME}"
+NOTES_NAME="$(date +notes_%Y-%m-%d_${SUFFIX}.md)"
+nvim --cmd "cd $HOME/notes" "$HOME/notes/${NOTES_NAME}"
 push &
