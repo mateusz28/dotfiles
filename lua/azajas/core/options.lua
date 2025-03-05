@@ -60,6 +60,10 @@ opt.incsearch = true
 -- enabe project specified vimrc files
 opt.exrc = true
 
+-- list white characters
+opt.listchars = "tab:▏ ,trail:￮,multispace: ,lead:￮,extends:▶,precedes:◀,nbsp:‿"
+vim.cmd([[match ErrorMsg /\s\+$/]])
+
 vim.api.nvim_create_autocmd("FileType", {
 	command = "set formatoptions-=cro",
 })
