@@ -64,6 +64,9 @@ opt.exrc = true
 opt.listchars = "tab:▏ ,trail:￮,multispace: ,lead: ,extends:▶,precedes:◀,nbsp:‿"
 vim.cmd([[match ErrorMsg /\s\+$/]])
 
+-- default width to mark with colorcolumn
+vim.g.default_colorcolumn = "80"
+
 vim.api.nvim_create_autocmd("FileType", {
 	command = "set formatoptions-=cro",
 })

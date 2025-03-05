@@ -5,6 +5,7 @@ local keymap = vim.keymap -- for conciseness
 
 ---------------------
 -- General Keymaps -------------------
+keymap.set("n", "<leader>tq", function() vim.wo.colorcolumn = vim.wo.colorcolumn == "" and vim.g.default_colorcolumn or "" end, { desc = "Toggle colorcolumn highlight" })
 keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "Toggle list characters" })
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
 keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
