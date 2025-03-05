@@ -61,7 +61,7 @@ opt.incsearch = true
 opt.exrc = true
 
 -- list white characters
-opt.listchars = "tab:▏ ,trail:￮,multispace: ,lead:￮,extends:▶,precedes:◀,nbsp:‿"
+opt.listchars = "tab:▏ ,trail:￮,multispace: ,lead: ,extends:▶,precedes:◀,nbsp:‿"
 vim.cmd([[match ErrorMsg /\s\+$/]])
 
 vim.api.nvim_create_autocmd("FileType", {
