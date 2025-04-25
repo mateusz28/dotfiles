@@ -3,6 +3,8 @@ return {
   { "nvimdev/lspsaga.nvim", enabled = false },
   { "mateusz28/vim-lucius", enabled = false },
   --{ "ibhagwan/fzf-lua", enabled = false },
+  { "zbirenbaum/copilot.lua", enabled = true },
+  { "CopilotC-Nvim/CopilotChat.nvim", enabled = true },
   { "mcchrish/zenbones.nvim", enabled = true },
   { "goolord/alpha-nvim", enabled = true },
   { "rmagatti/auto-session", enabled = true },

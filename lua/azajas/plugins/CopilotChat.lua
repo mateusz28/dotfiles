@@ -2,9 +2,8 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    branch = "canary",
+    branch = "main",
     dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     build = "make tiktoken", -- Only on MacOS or Linux

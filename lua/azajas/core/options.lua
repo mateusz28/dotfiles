@@ -4,6 +4,9 @@ local opt = vim.opt -- for conciseness
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
+-- Truncate shortmess to one line
+vim.o.shortmess = vim.o.shortmess .. "T"
+
 -- tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
@@ -59,6 +62,13 @@ opt.incsearch = true
 
 -- enabe project specified vimrc files
 opt.exrc = true
+
+-- list white characters
+opt.listchars = "tab:▏ ,trail:￮,multispace: ,lead: ,extends:▶,precedes:◀,nbsp:‿"
+vim.cmd([[match ErrorMsg /\s\+$/]])
+
+-- default width to mark with colorcolumn
+vim.g.default_colorcolumn = "80"
 
 vim.api.nvim_create_autocmd("FileType", {
 	command = "set formatoptions-=cro",

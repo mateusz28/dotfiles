@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    "nvimdev/lspsaga.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
@@ -21,6 +22,12 @@ return {
         update_in_insert = false,
         underline = true,
       })
+    end
+
+    local function tags_file_exists()
+      local root_dir = vim.fn.getcwd()
+      local tags_file = root_dir .. "/tags"
+      return vim.fn.filereadable(tags_file) == 1
     end
 
     setup_diags()
@@ -68,6 +75,12 @@ return {
 
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+      -- Keep original tagfunc if tags file exists
+      if tags_file_exists() then
+        vim.bo[bufnr].tagfunc = ""
+      else
+        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -171,7 +184,14 @@ return {
 
     --configure clangd
     lspconfig["clangd"].setup({
-      capabilities = capabilities,
+      capabilities = {
+        offsetEncoding = { "utf-16" },
+        textDocument = {
+          completion = {
+            editsNearCursor = true,
+          },
+        },
+      },
       on_attach = function(client, bufnr)
         if client.name == "clangd" then
           -- Set up your key mappings here
@@ -192,21 +212,24 @@ return {
       filetypes = { "cmake" },
     })
 
-    lspconfig["sourcekit"].setup({
-      cmd = { "xcrun", "sourcekit-lsp" },
-      capabilities = capabilities,
-      on_attach = on_attach,
-      single_file_support = true,
-      filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
-      root_dir = lspconfig.util.root_pattern(
-        "buildServer.json",
-        "*.xcodeproj",
-        "*.xcworkspace",
-        "compile_commands.json",
-        "Package.swift",
-        ".git"
-      ),
-    })
+    local uname = vim.loop.os_uname()
+    if uname.sysname == "Darwin" then
+      lspconfig["sourcekit"].setup({
+        cmd = { "xcrun", "sourcekit-lsp" },
+        capabilities = capabilities,
+        on_attach = on_attach,
+        single_file_support = true,
+        filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
+        root_dir = lspconfig.util.root_pattern(
+          "buildServer.json",
+          "*.xcodeproj",
+          "*.xcworkspace",
+          "compile_commands.json",
+          "Package.swift",
+          ".git"
+        ),
+      })
+    end
 
     lspconfig["gopls"].setup({
       capabilities = capabilities,

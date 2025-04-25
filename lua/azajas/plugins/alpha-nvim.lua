@@ -32,7 +32,9 @@ return {
       "<SPC hm      > Harpon mark",
       "<SPC hp/hn   > Harpon navigate",
       "<SPC sm      > Maximize toggle",
-      "<number>gan  > Ad note from n lines"
+      "<number>gan  > Ad note from n lines",
+      "<leader>tc   > Open current note",
+      "<leader>ct   > Copilot toggle"
     }
 
     -- Send config to alpha
