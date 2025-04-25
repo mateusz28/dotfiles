@@ -15,7 +15,7 @@ pull &
 NOTES_NAME=$(date +notes_%Y-%m-%d_${HOSTNAME}.md)
 echo "# ${2}" >> $HOME/notes/$NOTES_NAME
 echo '```'${1} >> $HOME/notes/$NOTES_NAME
-echo "${3}" >> $HOME/notes/$NOTES_NAME
+echo "${@:3}" >> $HOME/notes/$NOTES_NAME
 echo '```' >> $HOME/notes/$NOTES_NAME
 echo "" >> $HOME/notes/$NOTES_NAME
 push &
