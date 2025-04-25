@@ -27,7 +27,6 @@ return {
   { "nvim-treesitter/nvim-treesitter-textobjects", enabled = true },
   { "nvim-tree/nvim-web-devicons", enabled = true },
   { "weirongxu/plantuml-previewer.vim", enabled = true },
-  { "nvim-telescope/telescope.nvim", enabled = true },
   { "szw/vim-maximizer", enabled = true },
   { "folke/which-key.nvim", enabled = true },
   { "neovim/nvim-lspconfig", enabled = true },
