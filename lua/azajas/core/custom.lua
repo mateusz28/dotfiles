@@ -67,3 +67,43 @@ end
 
 -- Map the function to a key combination
 vim.keymap.set("n", "<leader>tc", open_notes, { silent = true, noremap = true, desc = "Open notes" })
+
+local copy_mode_active = false
+local copy_mode_state = {}
+
+vim.keymap.set("n", "<leader>sc", function()
+  if not copy_mode_active then
+    -- Save current settings
+    local win = vim.api.nvim_get_current_win()
+    copy_mode_state = {
+      win = win,
+      winview = vim.fn.winsaveview(),
+      number = vim.wo[win].number,
+      relativenumber = vim.wo[win].relativenumber,
+      signcolumn = vim.wo[win].signcolumn,
+      layout = vim.fn.winlayout()
+    }
+
+    -- Maximize current window
+    vim.cmd("only")
+
+    -- Hide line numbers and sign column
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    vim.wo.signcolumn = "no"
+
+    copy_mode_active = true
+  else
+    -- Restore layout (you may need a plugin for perfect layout restore)
+    -- Here we'll just reopen previous settings
+    local win = vim.api.nvim_get_current_win()
+    vim.wo[win].number = copy_mode_state.number
+    vim.wo[win].relativenumber = copy_mode_state.relativenumber
+    vim.wo[win].signcolumn = copy_mode_state.signcolumn
+
+    -- No reliable native way to restore full window layout without plugin
+    -- So you may manually adjust or use a session plugin if needed
+
+    copy_mode_active = false
+  end
+end, { desc = "Toggle temporary copy mode" })

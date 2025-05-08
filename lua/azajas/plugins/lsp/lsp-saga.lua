@@ -84,7 +84,7 @@ return {
     -- Show cursor diagnostics
     keymap(
       "n",
-      "<leader>sc",
+      "<leader>ss",
       "<cmd>Lspsaga show_cursor_diagnostics<CR>",
       { silent = true, desc = "LspSaga cursor diagnostics" }
     )

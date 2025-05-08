@@ -4,9 +4,7 @@ return {
   event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   ft = { "markdown" },
-  build = function()
-    vim.fn["mkdp#util#install"]()
-  end,
+  build = "cd app && npm install",
   config = function()
     vim.cmd([[let g:mkdp_auto_close=0]])
     vim.cmd([[let g:mkdp_refresh_slow=1]])
