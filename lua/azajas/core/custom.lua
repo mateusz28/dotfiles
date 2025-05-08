@@ -107,3 +107,22 @@ vim.keymap.set("n", "<leader>sc", function()
     copy_mode_active = false
   end
 end, { desc = "Toggle temporary copy mode" })
+
+-- Only proceed if running inside WSL
+if vim.fn.has("wsl") == 1 then
+  local clip = "/mnt/c/Windows/System32/clip.exe" -- Change if your clip.exe is elsewhere
+
+  if vim.fn.executable(clip) == 1 then
+    local group = vim.api.nvim_create_augroup("WSLYank", {})
+
+    vim.api.nvim_create_autocmd("TextYankPost", {
+      group = group,
+      callback = function()
+        -- Only act on yanks using the `*` register
+        if vim.v.event.operator == "y" and vim.v.event.regname == "*" then
+          vim.fn.system(clip, vim.fn.getreg("*"))
+        end
+      end,
+    })
+  end
+end
