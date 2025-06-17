@@ -1,4 +1,4 @@
-if [[ $UID != 0 ]]; then
+if [[ $UID != 0 && $OR_APP_NAME != "Aider" ]]; then
   which keychain > /dev/null 2>&1 && eval "$(keychain -Q --eval $HOME/.ssh/id_rsa)"
   # which keychain > /dev/null 2>&1 && eval "$(keychain --eval /home/azajas/.ssh/id_ed25519)"
 fi

@@ -29,3 +29,10 @@ vim.keymap.set("n", "<leader>td", function()
 end, { silent = true, noremap = true, desc = "Toggle diagnosticts" })
 
 keymap.set("c", "<C-a>", "<Home>", { desc = "Control a returns to home in cmd" }) --  move current buffer to new tab
+keymap.set("t", "<C-a>", "<Home>", { desc = "Control a returns to home in cmd" }) --  move current buffer to new tab
+keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+keymap.set("t" , "<C-w>h", [[<C-\><C-n><C-w>h]], { desc = "switch window in terminal h"})
+keymap.set("t" , "<C-w>j", [[<C-\><C-n><C-w>j]], { desc = "switch window in terminal j"})
+keymap.set("t" , "<C-w>k", [[<C-\><C-n><C-w>k]], { desc = "switch window in terminal k"})
+keymap.set("t" , "<C-w>l", [[<C-\><C-n><C-w>l]], { desc = "switch window in terminal l"})
+keymap.set("t" , "<C-w>q", [[<C-\><C-n><C-W>q]], { desc = "Close terminal"})

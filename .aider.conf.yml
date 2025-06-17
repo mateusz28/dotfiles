@@ -47,6 +47,8 @@ model: gpt-4.1
 ## Set an environment variable (to control API settings, can be used multiple times)
 #set-env: xxx
 ## Specify multiple values like this:
+set-env:
+  - LITELLM_LOCAL_MODEL_COST_MAP='True'
 #set-env:
 #  - xxx
 #  - yyy
@@ -123,7 +125,7 @@ model: gpt-4.1
 # Cache settings:
 
 ## Enable caching of prompts (default: False)
-#cache-prompts: false
+cache-prompts: true
 
 ## Number of times to ping at 5min intervals to keep prompt cache warm (default: 0)
 #cache-keepalive-pings: false
@@ -210,7 +212,7 @@ show-diffs: true
 #git: true
 
 ## Enable/disable adding .aider* to .gitignore (default: True)
-#gitignore: true
+gitignore: false
 
 ## Specify the aider ignore file (default: .aiderignore in git root)
 #aiderignore: .aiderignore
@@ -272,7 +274,7 @@ attribute-author: false
 #  - zzz
 
 ## Enable/disable automatic linting after changes (default: True)
-#auto-lint: true
+auto-lint: false
 
 ## Specify command to run tests
 #test-cmd: xxx
@@ -373,7 +375,7 @@ attribute-author: false
 #  - zzz
 
 ## specify a read-only file (can be used multiple times)
-#read: xxx
+read: CONVENTIONS.md
 ## Specify multiple values like this:
 #read:
 #  - xxx

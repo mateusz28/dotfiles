@@ -173,3 +173,4 @@ for file in $HOME/.zsh_ext/*; do
     source "$file"
   fi 
 done
+export PATH=$PATH:/usr/local/bin
