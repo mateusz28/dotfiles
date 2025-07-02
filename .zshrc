@@ -148,7 +148,7 @@ local ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
 local ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 
 PROMPT_SIGN='%(!.#.$)'
-PROMPT='${PS_VIFM}${PROMPT_SIGN}%{$fg[green]%}%(?.%F{green}√.%F{red}✗)%{$fg[white]%}[%T] ${user}:%{$fg[blue]%}%~%{$reset_color%b%}$(git_prompt_info)%f%(!.#.$) '
+PROMPT='${PS_VIFM}${PROMPT_SIGN}%{$fg[green]%}%(?.%F{green}√.%F{red}✗)%{$fg[default]%}[%T] ${user}:%{$fg[blue]%}%~%{$reset_color%b%}$(git_prompt_info)%f%(!.#.$) '
 RPROMPT=""
 
 autoload -Uz bracketed-paste-magic
