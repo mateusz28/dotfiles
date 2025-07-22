@@ -1,6 +1,7 @@
 return {
   {
     "zbirenbaum/copilot.lua",
+    event = { "BufReadPre", "BufNewFile" },
     keys = {
       {
         "<leader>ct",

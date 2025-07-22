@@ -80,5 +80,74 @@ return {
       })
       require('fzf-lua').live_grep({ cwd = '~/notes', winopts = { preview = { hidden = "nohidden" }}})
     end, { desc = "Find in notes" })
+
+    -- <leader>aa: Add files to aider (multi-select)
+    keymap.set("n", "<leader>aa", function()
+      local aider_api = require("nvim_aider").api
+      require("fzf-lua").files({
+        file_icons = false,
+        git_icons = false,
+        actions = {
+          ["default"] = function(selected)
+            if type(selected) == "string" then
+              selected = { selected }
+            end
+            if #selected == 0 then
+              vim.notify("No files selected", vim.log.levels.WARN)
+              return
+            end
+            local added = 0
+            for _, file in ipairs(selected) do
+              if vim.fn.filereadable(file) == 1 then
+                aider_api.add_file(file)
+                added = added + 1
+              end
+            end
+            if added == 0 then
+              vim.notify("No valid files selected", vim.log.levels.WARN)
+            else
+              vim.notify("Added " .. added .. " file(s) to aider", vim.log.levels.INFO)
+            end
+          end,
+        },
+        multi = true,
+        prompt = "Add files to aider > ",
+      })
+    end, { desc = "Add files to aider (multi-select, API)" })
+
+    -- <leader>aA: Add read-only files to aider (multi-select, ignores .gitignore)
+    keymap.set("n", "<leader>aA", function()
+      require("fzf-lua").files({
+        provider = "files",
+        fd_opts = "--type f --hidden --no-ignore",
+        file_icons = false,
+        git_icons = false,
+        actions = {
+          ["default"] = function(selected)
+            if type(selected) == "string" then
+              selected = { selected }
+            end
+            if #selected == 0 then
+              vim.notify("No files selected", vim.log.levels.WARN)
+              return
+            end
+            local added = 0
+            for _, file in ipairs(selected) do
+              if vim.fn.filereadable(file) == 1 then
+                vim.cmd("Aider add readonly " .. file)
+                added = added + 1
+              end
+            end
+            if added == 0 then
+              vim.notify("No valid files selected", vim.log.levels.WARN)
+            else
+              vim.notify("Added " .. added .. " read-only file(s) to aider", vim.log.levels.INFO)
+            end
+          end,
+        },
+        multi = true,
+        prompt = "Add read-only files to aider (all files) > ",
+      })
+    end, { desc = "Add all read-only files to aider (multi-select, command)" })
   end,
 }

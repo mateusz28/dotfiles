@@ -19,7 +19,7 @@ theme-light() {
   then
     tmux set-environment -g THEME light
   fi
-  switch-term-color "colors=azajas-light"
+  switch-term-color "colors=Breath\ Light"
 }
 
 switch-term-color() {
