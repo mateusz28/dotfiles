@@ -1,2 +1,3 @@
 #!/bin/bash
 fgst | xargs -I % sh -c "git add -- \"%\""
+git status -s

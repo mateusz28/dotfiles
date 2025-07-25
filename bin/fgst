@@ -17,9 +17,9 @@ fgst() {
   '
   is_in_git_repo || return
 
-  local cmd="${FZF_CTRL_T_COMMAND:-"command git status -s"}"
+  local cmd="${FZF_CTRL_T_COMMAND:-"command git -c color.status=always status -s"}"
 
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf  --preview-window=nohidden --preview "$preview" -m "$@"| while read -r item; do
+  eval "$cmd" | FZF_DEFAULT_OPTS="--ansi --height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf  --preview-window=nohidden --preview "$preview" -m "$@"| while read -r item; do
     echo "$item" | cut -c 3-
   done
   echo

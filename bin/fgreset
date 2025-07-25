@@ -8,3 +8,4 @@ fi
 for file in $TO_ADD; do
     git reset -- "$file"
 done
+git status -s

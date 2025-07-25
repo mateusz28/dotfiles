@@ -1,0 +1,11 @@
+# Bind Ctrl-G to insert the current git branch name at the cursor in zsh
+
+zsh_branch_insert() {
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ -n $branch ]]; then
+    LBUFFER+="$branch"
+  fi
+}
+zle -N zsh_branch_insert
+bindkey '^g' zsh_branch_insert
