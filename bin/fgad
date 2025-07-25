@@ -1,2 +1,2 @@
 #!/bin/bash
-fgst | xargs -I % sh -c "git add \"%\""
+fgst | xargs -I % sh -c "git add -- \"%\""

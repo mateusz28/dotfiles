@@ -6,10 +6,5 @@ if [ -z "$TO_ADD" ]; then
 fi
 
 for file in $TO_ADD; do
-  # Only reset if file exists in HEAD or working tree
-  if git cat-file -e "HEAD:$file" 2>/dev/null || [ -e "$file" ]; then
-    git reset "$file"
-  else
-    echo "Skipping '$file': not present in working tree or HEAD"
-  fi
+    git reset -- "$file"
 done
