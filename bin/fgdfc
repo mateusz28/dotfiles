@@ -7,12 +7,12 @@ is_in_git_repo || { echo "Not in a git dir"; exit 1; }
 
 cd $(git rev-parse --show-toplevel)
 
-preview="echo {+} | sed 's/^\(.*\)|.*$/\1/;s/^[   ]*//;s/[    ]*$//' | xargs -I % sh -c 'git diff --color=always HEAD -- \"%\" | tail -n +4'"
+preview="echo {+} | sed -E 's/^\s*(create|delete) mode [0-9]+\s+//; s/\s*[|].*//; s/\s+\((new(\s+\+x)?|gone)\)$//; s/\s*\[[^]]*\]$//; s/\s*$//; s/^\s*//;' | xargs -I % sh -c 'git diff --color=always HEAD -- \"%\" | tail -n +4'"
 #preview="echo {s} | cut -d \| -f 1 | xargs --null -I \"%\" sh -c 'echo % '"
 git diff --color=always   --compact-summary --stat=1000 --no-commit-id  HEAD | sed '$d' |
   fzf --ansi --print0 --no-sort --reverse --preview-window=nohidden --preview "$preview" --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "ctrl-m:execute:
-                (echo {s} | cut -d \| -f 1 |
+                (echo {s} | sed -E 's/^\s*(create|delete) mode [0-9]+\s+//; s/\s*[|].*//; s/\s+\((new(\s+\+x)?|gone)\)$//; s/^\s*//; s/\s*$//' |
                 xargs -I % sh -c 'git difftool -y  HEAD -- %') << 'FZF-EOF'
                 {}
 FZF-EOF"
