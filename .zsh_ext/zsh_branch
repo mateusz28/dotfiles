@@ -1,10 +1,19 @@
 # Bind Ctrl-G to insert the current git branch name at the cursor in zsh
 
+# This function checks if the previous command was 'git push' or 'git pull'
+# If so, it inserts 'origin branch', otherwise just 'branch'
 zsh_branch_insert() {
   local branch
   branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if [[ -n $branch ]]; then
-    LBUFFER+="$branch"
+    # Get the current buffer (what's already typed in the shell)
+    local buffer_content
+    buffer_content="$LBUFFER"
+    if [[ "$buffer_content" == git\ push* || "$buffer_content" == git\ pull* ]]; then
+      LBUFFER+=" origin $branch"
+    else
+      LBUFFER+="$branch"
+    fi
   fi
 }
 zle -N zsh_branch_insert
