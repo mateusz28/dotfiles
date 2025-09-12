@@ -1,5 +1,8 @@
 return {
   "rmagatti/auto-session",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
   config = function()
     local auto_session = require("auto-session")
 
