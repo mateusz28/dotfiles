@@ -1,7 +1,21 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
-  lazy = true,
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
+    -- Only enable textobjects for supported filetypes
+    local disabled_fts = { "help", "dashboard", "alpha", "NvimTree", "neo-tree", "Trouble", "lazy", "mason", "toggleterm", "markdown" }
+    local function is_supported_ft()
+      local ft = vim.bo.filetype
+      for _, dft in ipairs(disabled_fts) do
+        if ft == dft then return false end
+      end
+      return true
+    end
+
+    if not is_supported_ft() then
+      return
+    end
+
     require("nvim-treesitter.configs").setup({
       textobjects = {
         select = {

@@ -16,9 +16,17 @@ return {
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
+          disable = function(lang, buf)
+            local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+            local disabled_fts = { "help", "dashboard", "alpha", "NvimTree", "neo-tree", "Trouble", "lazy", "mason", "toggleterm", "markdown" }
+            return vim.tbl_contains(disabled_fts, ft)
+          end,
         },
         -- enable indentation
-        indent = { enable = false },
+        indent = {
+          enable = false,
+          disable = { "python", "yaml" },
+        },
         -- enable autotagging (w/ nvim-ts-autotag plugin)
         autotag = {
           enable = true,
