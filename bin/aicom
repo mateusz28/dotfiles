@@ -8,13 +8,8 @@ is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 is_in_git_repo || return
-git status -sb
-PREFIX="${@:-`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`}"
-# SYN=`git rev-parse --abbrev-ref HEAD | sed -n 's/.*\(SYN-[0-9]*\).*/\1/p'`
-echo "Generating commit message proposals..."
-git diff --cached > /tmp/diffcc && \
-MSG=$(nvim -u ~/.config/nvim/init.lua -es +":CopilotChat ${PROMPT}"  +":sl ${DELAY}"  +":w! /tmp/messagecc" +":qa!" /tmp/diffcc && \
-sed -n "s/.*\([0-9]\.\)\(.*\)/${PREFIX}\2/p" /tmp/messagecc | fzf)
+
+MSG=$(tgpt "Don't put any introduction like here are or similar or  other comments apart from requested response. Using conventional commit message prefix. Propose 3 commit message names for $(git diff --cached)" | grep  '.*: ' | fzf)
 
 # Remove any quotes, single quotes, backticks, and leading/trailing whitespace from MSG
 MSG=$(echo "$MSG" | tr -d '\"'\''`' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
