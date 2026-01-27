@@ -31,4 +31,5 @@ return {
   { "folke/which-key.nvim", enabled = true },
   { "neovim/nvim-lspconfig", enabled = true },
   { "williamboman/mason.nvim", enabled = true },
+  { "monkoose/neocodeium", enabled = false },
 }
