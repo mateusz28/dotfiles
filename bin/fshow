@@ -32,6 +32,17 @@ fshow_single() {
 FZF-EOF"
 }
 
+fshow_search() {
+  local search_pattern="$1"
+  preview="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | grep -C 3 --color=always \"$search_pattern\"'"
+  
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" \
+      --grep="$search_pattern" --all-match |
+  fzf --ansi --no-sort --reverse --preview-window=nohidden --preview "$preview" --tiebreak=index \
+      --bind=ctrl-s:toggle-sort
+}
+
 is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
@@ -41,10 +52,14 @@ cd $(git rev-parse --show-toplevel)
 if [ $# -eq 0 ]; then
   fshow
 else 
-  if [ -f "$@" ]; then 
+  if [ "$1" = "--search" ] && [ $# -eq 2 ]; then
+    fshow_search "$2"
+  elif [ -f "$@" ]; then 
     fshow_single "$@"
   else
-    echo "No such file $@"
+    echo "Usage: $0 [--search PATTERN] [FILE]"
+    echo "  --search PATTERN  Search through commit messages and file content"
+    echo "  FILE              Show commits for specific file"
     exit 1
   fi
 fi
