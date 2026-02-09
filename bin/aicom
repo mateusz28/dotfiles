@@ -1,6 +1,5 @@
 #!/bin/bash
-PROMPT="Propose 3 different commit messages for this changes. Just list them without any other output."
-DELAY=5
+AICOM_MODEL="opencode/big-pickle"
 function check_step(){
   echo -n "$1  (Y/n)?"; read CONT; [ "$CONT" = "n" ] && exit 0
 }
@@ -9,7 +8,20 @@ is_in_git_repo() {
 }
 is_in_git_repo || return
 
-MSG=$(tgpt "Don't put any introduction like here are or similar or  other comments apart from requested response. Using conventional commit message prefix. Propose 3 commit message names for $(git diff --cached)" | grep  '.*: ' | fzf)
+DIFF_FILE=$(mktemp)
+trap 'rm -f "$DIFF_FILE"' EXIT
+git diff --cached > "$DIFF_FILE"
+
+PROMPT="Output only 3 conventional commit message lines (type: description), no other text. Propose 3 commit messages for the attached staged diff."
+RUN_ARGS=("$PROMPT" -f "$DIFF_FILE")
+[ -n "${AICOM_MODEL:-}" ] && RUN_ARGS=("$PROMPT" -m "$AICOM_MODEL" -f "$DIFF_FILE")
+OPCOUT=$(opencode run "${RUN_ARGS[@]}" 2>&1)
+CANDIDATES=$(echo "$OPCOUT" | grep -oE '(feat|fix|docs|style|refactor|test|chore|perf|ci|build)(\([a-zA-Z0-9_-]+\))?:[^[:cntrl:]]*' | head -5)
+[ -z "$CANDIDATES" ] && CANDIDATES=$(echo "$OPCOUT" | grep -E '^[^#]*: .+' | sed 's/^[[:space:]]*[0-9.]*[[:space:]]*//' | head -5)
+[ -z "$CANDIDATES" ] && CANDIDATES=$(echo "$OPCOUT" | grep -v '^[[:space:]]*$' | grep -v '^#' | sed 's/^[[:space:]]*[-*0-9.]*[[:space:]]*//' | head -5)
+[ -z "$CANDIDATES" ] && { echo "No commit messages parsed. Raw output:"; echo "$OPCOUT" | tail -30; exit 1; }
+MSG=$(echo "$CANDIDATES" | fzf)
+[ -z "$MSG" ] && exit 0
 
 # Remove any quotes, single quotes, backticks, and leading/trailing whitespace from MSG
 MSG=$(echo "$MSG" | tr -d '\"'\''`' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
