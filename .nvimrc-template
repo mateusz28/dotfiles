@@ -1,13 +1,89 @@
+" Enhanced build function with ANSI color support and status indication
 function! BuildSplit()
+  " Clean up any existing build terminal
   if bufexists('BuildTerminal')
-    bwipeout BuildTerminal
+    bwipeout! BuildTerminal
   endif
-    execute 'bot split +resize20 term://./build.sh | file BuildTerminal'
-    nnoremap <silent> <buffer> <ENTER> :bd<CR>
-    execute '$'
+  
+  " Create new terminal split for build
+  execute 'bot split +resize20 term://./build.sh'
+  
+  " Name the buffer for easier identification
+  setlocal buftype=terminal
+  file BuildTerminal
+  
+  " Map Enter to close the terminal buffer
+  nnoremap <silent> <buffer> <ENTER> :bd<CR>
+  
+  " Start at the bottom of the output
+  normal! G
+  
+  " Enable ANSI color rendering for this terminal buffer
+  if exists(':AnsiEnable')
+    AnsiEnable
+  endif
 endfunction
 
+" Autocommand to handle terminal close events and show build status
+augroup BuildStatus
+  autocmd!
+  autocmd TermClose BuildTerminal call g:HandleBuildStatus(v:event.status)
+augroup END
+
+" Function to handle build status indication (global for autocmd access)
+function! g:HandleBuildStatus(exit_code)
+  if a:exit_code == 0
+    " Success - show green message and optionally close terminal
+    echohl SuccessMsg | echom '✓ Build completed successfully' | echohl None
+    
+    " Optional: auto-close terminal on success (comment out if you want it to stay open)
+    " if bufexists('BuildTerminal')
+    "   bwipeout! BuildTerminal
+    " endif
+  else
+    " Failure - show red error message and keep terminal open for inspection
+    echohl ErrorMsg | echom '✗ Build failed with exit code ' . a:exit_code | echohl None
+    
+    " Highlight the terminal window to draw attention
+    if bufexists('BuildTerminal')
+      " Set a red background for the failed build terminal
+      setlocal winhighlight=Normal:ErrorMsg
+    endif
+  endif
+endfunction
+
+" Key mappings
 nmap <silent> <F9> :call BuildSplit()<CR>
+" Alternative direct build (no colors, no status indication)
 " nmap <F9> :!./build.sh<CR>
 nmap <F10> :!./run.sh<CR>
 set makeprg=./build.sh
+
+" Additional utility commands
+command! BuildClean call g:CleanBuildTerminal()
+command! BuildStatus call g:ShowBuildStatus()
+
+" Clean up build terminal manually (global for command access)
+function! g:CleanBuildTerminal()
+  if bufexists('BuildTerminal')
+    bwipeout! BuildTerminal
+    echo 'Build terminal cleaned up'
+  else
+    echo 'No build terminal found'
+  endif
+endfunction
+
+" Show current build status if terminal exists (global for command access)
+function! g:ShowBuildStatus()
+  if bufexists('BuildTerminal')
+    let bufnr = bufnr('BuildTerminal')
+    let job_info = getbufvar(bufnr, 'terminal_job', {})
+    if !empty(job_info)
+      echo 'Build terminal is active'
+    else
+      echo 'Build terminal exists but no active job'
+    endif
+  else
+    echo 'No build terminal found'
+  endif
+endfunction
