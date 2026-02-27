@@ -52,6 +52,18 @@ opt.undofile = true
 
 -- ask when closing buffer
 opt.confirm = true
+opt.sessionoptions = {
+  "blank",
+  "buffers",
+  "curdir",
+  "folds",
+  "help",
+  "localoptions",
+  "tabpages",
+  "terminal",
+  "winpos",
+  "winsize",
+}
 
 -- case insensitive search
 opt.hlsearch = true

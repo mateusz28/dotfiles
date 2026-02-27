@@ -1,19 +1,14 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "nvimdev/lspsaga.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim.keymap
 
     local function setup_diags()
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -32,62 +27,6 @@ return {
 
     setup_diags()
 
-    local opts = { noremap = true, silent = true }
-    local on_attach = function(client, bufnr)
-      opts.buffer = bufnr
-
-      -- set keybinds
-      opts.desc = "Show LSP references"
-      keymap.set("n", "gR", "<cmd>Fzf lsp_references<CR>", opts) -- show definition, references
-
-      opts.desc = "Go to declaration"
-      keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
-
-      opts.desc = "Show LSP definitions"
-      keymap.set("n", "gd", "<cmd>Fzf lsp_definitions<CR>", opts) -- show lsp definitions
-
-      opts.desc = "Show LSP implementations"
-      keymap.set("n", "gi", "<cmd>Fzf lsp_implementations<CR>", opts) -- show lsp implementations
-
-      opts.desc = "Show LSP type definitions"
-      keymap.set("n", "glt", "<cmd>Fzf lsp_type_definitions<CR>", opts) -- show lsp type definitions
-
-      opts.desc = "See available code actions"
-      keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
-      opts.desc = "Smart rename"
-      keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-
-      opts.desc = "Show buffer diagnostics"
-      keymap.set("n", "<leader>D", "<cmd>Fzf diagnostics_document<CR>", opts) -- show  diagnostics for file
-
-      opts.desc = "Show line diagnostics"
-      keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-      opts.desc = "Go to previous diagnostic"
-      keymap.set("n", "[c", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-      opts.desc = "Go to next diagnostic"
-      keymap.set("n", "]c", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-      opts.desc = "Show documentation for what is under cursor"
-      keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-      opts.desc = "Restart LSP"
-      keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-      -- Keep original tagfunc if tags file exists
-      if tags_file_exists() then
-        vim.bo[bufnr].tagfunc = ""
-      else
-        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-      end
-    end
-
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
     vim.diagnostic.config({
       signs = {
         text = {
@@ -99,85 +38,83 @@ return {
       },
     })
 
-    -- configure html server
-    -- lspconfig["html"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
+    local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- configure typescript server with plugin
-    -- lspconfig["tsserver"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-
-    -- configure css server
-    -- lspconfig["cssls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-
-    -- configure tailwindcss server
-    -- lspconfig["tailwindcss"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-
-    -- configure svelte server
-    -- lspconfig["svelte"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = function(client, bufnr)
-    --     on_attach(client, bufnr)
-    --
-    --     vim.api.nvim_create_autocmd("BufWritePost", {
-    --       pattern = { "*.js", "*.ts" },
-    --       callback = function(ctx)
-    --         if client.name == "svelte" then
-    --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-    --         end
-    --       end,
-    --     })
-    --   end,
-    -- })
-
-    -- configure prisma orm server
-    -- lspconfig["prismals"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-
-    -- configure graphql language server
-    -- lspconfig["graphql"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    -- })
-
-    -- configure emmet language server
-    -- lspconfig["emmet_ls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    -- })
-
-    -- configure python server
-    lspconfig["pyright"].setup({
+    vim.lsp.config("*", {
       capabilities = capabilities,
-      on_attach = on_attach,
     })
 
-    -- configure lua server (with special settings)
-    lspconfig["lua_ls"].setup({
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("azajas.lsp", {}),
+      callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then return end
+
+        local opts = { buffer = bufnr, noremap = true, silent = true }
+
+        opts.desc = "Show LSP references"
+        keymap.set("n", "gR", "<cmd>Fzf lsp_references<CR>", opts)
+
+        opts.desc = "Go to declaration"
+        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+        opts.desc = "Show LSP definitions"
+        keymap.set("n", "gd", "<cmd>Fzf lsp_definitions<CR>", opts)
+
+        opts.desc = "Show LSP implementations"
+        keymap.set("n", "gi", "<cmd>Fzf lsp_implementations<CR>", opts)
+
+        opts.desc = "Show LSP type definitions"
+        keymap.set("n", "glt", "<cmd>Fzf lsp_type_definitions<CR>", opts)
+
+        opts.desc = "See available code actions"
+        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+        opts.desc = "Smart rename"
+        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+        opts.desc = "Show buffer diagnostics"
+        keymap.set("n", "<leader>D", "<cmd>Fzf diagnostics_document<CR>", opts)
+
+        opts.desc = "Show line diagnostics"
+        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+        opts.desc = "Go to previous diagnostic"
+        keymap.set("n", "[c", vim.diagnostic.goto_prev, opts)
+
+        opts.desc = "Go to next diagnostic"
+        keymap.set("n", "]c", vim.diagnostic.goto_next, opts)
+
+        opts.desc = "Show documentation for what is under cursor"
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+        opts.desc = "Restart LSP"
+        keymap.set("n", "<leader>rs", "<cmd>lsp restart<CR>", opts)
+
+        if tags_file_exists() then
+          vim.bo[bufnr].tagfunc = ""
+        else
+          vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+        end
+
+        if client.name == "clangd" then
+          opts.desc = "Switch header and source file"
+          keymap.set("n", "gp", "<cmd>LspClangdSwitchSourceHeader<CR>", opts)
+        end
+      end,
+    })
+
+    vim.lsp.config("pyright", {
       capabilities = capabilities,
-      on_attach = on_attach,
-      settings = { -- custom settings for lua
+    })
+
+    vim.lsp.config("lua_ls", {
+      capabilities = capabilities,
+      settings = {
         Lua = {
-          -- make the language server recognize "vim" global
-          diagnostics = {
-            globals = { "vim" },
-          },
+          diagnostics = { globals = { "vim" } },
           workspace = {
-            -- make language server aware of runtime files
             library = {
               [vim.fn.expand("$VIMRUNTIME/lua")] = true,
               [vim.fn.stdpath("config") .. "/lua"] = true,
@@ -187,59 +124,68 @@ return {
       },
     })
 
-    --configure clangd
-    lspconfig["clangd"].setup({
+    vim.lsp.config("clangd", {
       capabilities = {
         offsetEncoding = { "utf-16" },
         textDocument = {
-          completion = {
-            editsNearCursor = true,
-          },
+          completion = { editsNearCursor = true },
         },
       },
-      on_attach = function(client, bufnr)
-        if client.name == "clangd" then
-          -- Set up your key mappings here
-          -- For example, to map 'gd' to go to definition:
-          opts.desc = "Switch header and source file"
-          keymap.set("n", "gp", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+      root_dir = function(bufnr, on_dir)
+        local root = vim.fs.root(bufnr, {
+          ".clangd",
+          ".clang-tidy",
+          ".clang-format",
+          "compile_commands.json",
+          "compile_flags.txt",
+          "configure.ac",
+          ".git",
+        })
+        if root then
+          on_dir(root)
+        else
+          local f = vim.api.nvim_buf_get_name(bufnr)
+          if f and f ~= "" then
+            on_dir(vim.fn.fnamemodify(f, ":p:h"))
+          else
+            on_dir(vim.fn.getcwd())
+          end
         end
-        -- Call the general on_attach function for all other setup
-        on_attach(client, bufnr)
       end,
-      filetypes = { "cpp", "c", "h", "hpp", "m", "mm" },
     })
 
-    lspconfig["cmake"].setup({
+    vim.lsp.config("cmake", {
       capabilities = capabilities,
-      on_attach = on_attach,
-      single_file_support = true,
+      workspace_required = false,
       filetypes = { "cmake" },
     })
 
     local uname = vim.loop.os_uname()
     if uname.sysname == "Darwin" then
-      lspconfig["sourcekit"].setup({
+      vim.lsp.config("sourcekit", {
         cmd = { "xcrun", "sourcekit-lsp" },
         capabilities = capabilities,
-        on_attach = on_attach,
-        single_file_support = true,
+        workspace_required = false,
         filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
-        root_dir = lspconfig.util.root_pattern(
+        root_markers = {
           "buildServer.json",
           "*.xcodeproj",
           "*.xcworkspace",
           "compile_commands.json",
           "Package.swift",
-          ".git"
-        ),
+          ".git",
+        },
       })
     end
 
-    lspconfig["gopls"].setup({
+    vim.lsp.config("gopls", {
       capabilities = capabilities,
-      on_attach = on_attach,
       filetypes = { "go" },
     })
+
+    vim.lsp.enable({ "pyright", "lua_ls", "clangd", "cmake", "gopls" })
+    if uname.sysname == "Darwin" then
+      vim.lsp.enable("sourcekit")
+    end
   end,
 }

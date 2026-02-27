@@ -1,9 +1,6 @@
 #  Allow escape Sequences
-if [[ ! -z "$TMUX" ]]; then
-  tmux show-environment -g THEME > /dev/null 2>&1
-  if [[ $? == 1 ]]; then
-    tmux set-environment -g THEME night
-  fi
+if [[ -n "$TMUX" ]] && [[ -z "$(tmux show-environment -g THEME 2>/dev/null | cut -d= -f2)" ]]; then
+  tmux set-environment -g THEME night
   tmux set-option -g allow-passthrough on
 fi
 # Konsole color changing
