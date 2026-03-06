@@ -72,7 +72,8 @@ return {
     local keymap = vim.keymap -- for conciseness
 
     keymap.set("n", "<leader>ne", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer (reveal current file)" })
-    keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal current file in explorer" })
+    keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFile!<CR>", { desc = "Reveal file in nvim-tree (update root to file's dir)" })
+    keymap.set("n", "<leader>ep", function() require("nvim-tree.api").tree.change_root(vim.fn.getcwd()) end, { desc = "Reset nvim-tree to project root" })
     keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
     keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
     keymap.set("n", "<leader>et", "<cmd>NvimTreeNodeOpenTab<CR>", { desc = "Node open tab" }) -- refresh file explorer
