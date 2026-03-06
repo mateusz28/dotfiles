@@ -22,8 +22,8 @@ fgst() {
   eval "$cmd" | FZF_DEFAULT_OPTS="--ansi --height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf  --preview-window=nohidden --preview "$preview" -m "$@"| while read -r item; do
     status=$(echo "$item" | cut -c 1-2)
     filename=$(echo "$item" | cut -c 3-)
-    if [[ "$status" == "R "* || "$status" == "R?" ]]; then
-      echo "$filename" | sed 's/.*-> *//'
+    if [[ "$status" == R* ]]; then
+      echo "$filename" | sed 's/.*-> //'
     else
       echo "$filename" | sed 's/^[ ]//'
     fi
